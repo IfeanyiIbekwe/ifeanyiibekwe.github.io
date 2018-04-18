@@ -1,0 +1,201 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    
+        max-width: 660px;
+        min-height: 680px;
+        background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+        padding: 32px;
+        border-radius: 10px;
+        box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 0 5em;
+    }
+
+    .deck .card {
+        height: 125px;
+        width: 125px;
+        background: #2e3d49;
+        font-size: 0;
+        color: #ffffff;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+        transition: all .3s;
+    }
+
+.deck .card.open {
+    background: #02b3e4;
+    cursor: default;
+    font-size: 33px;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+    animation: match .3s;
+}
+.deck .card.mismatch {
+    background-color: #F44336;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+.deck .card:hover {
+    background-color: rgba(46, 61, 73, 0.90);
+}
+
+.overlay {
+    background-color: transparent;  /* Hide cards temporarily to avoid multiple clicks */
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+    right: 0;
+    top: 0;
+}
+.timerSpan{
+
+        display: inline-block;
+        margin-left: 40px;
+    }
+}
+ /* Make unmatched cards shake */
+@-webkit-keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes match {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    50% {
+        -webkit-transform: scale(1.2);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@-webkit-keyframes shake {
+    10%, 90% {
+        -webkit-transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+        -webkit-transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+        -webkit-transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+        -webkit-transform: translate3d(4px, 0, 0);
+    }
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+ /* Style Congratulations Modal Popup */
+
+#congratulationsPopupModal{
+display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.PopupModalContents {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}

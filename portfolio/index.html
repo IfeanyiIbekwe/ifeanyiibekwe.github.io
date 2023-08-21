@@ -1,177 +1,130 @@
----
-layout: default
-title: Portfolio for Ifeanyi Ibekwe
----
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio for Ifeanyi Ibekwe</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-	.hideme{
-		display:none;}
-		.content {
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-}
-</style>
+<body>
 
-	<div class="cv">
-		<a href="https://drive.google.com/file/d/1lOOkbjK1h9E5IeKQc_E8hMiXUf6fyxe5/view?usp=sharing" target="_blank" class="download" title="Download CV as PDF" download="Ifeanyi's_CV" target="_blank">Download CV</a>			
-					<h1>Ifeanyi Ibekwe</h1>
-					<address>
-					<strong>Address</strong><br>
-					Dubai<br>
-					United Arab Emirates<br>
-					<abbr title="phone">P:</abbr> (971) 052-7427721<br>
-					<span class="obfuscate">ibekweifeanyi@gmail.com</span>
-					</address>
+    <div class="container mt-4">
+        <a href="https://drive.google.com/file/d/1lOOkbjK1h9E5IeKQc_E8hMiXUf6fyxe5/view?usp=sharing" target="_blank" class="btn btn-primary mb-4" title="Download CV as PDF" download="Ifeanyi's_CV">Download CV</a>
 
-					<h2>Projects</h2>
-		<hr>
+        <h1>Ifeanyi Ibekwe</h1>
+        <address>
+            <strong>Address</strong><br>
+            Dubai<br>
+            United Arab Emirates<br>
+            <abbr title="phone">P:</abbr> (971) 052-7427721<br>
+            <span class="obfuscate">ibekweifeanyi@gmail.com</span>
+        </address>
 
-					
+        <h2>Projects</h2>
+        <hr>
 
+        <div id="myBtnContainer" class="mb-4">
+            <button class="btn btn-secondary" onclick="filterSelection('shopify')">Shopify - Full eCommerce End to End Deployment & Management</button>
+            <button class="btn btn-secondary" onclick="filterSelection('udacity')">F&B Digital Marketing - Paid Social, Paid Search & Display</button>
+            <button class="btn btn-secondary" onclick="filterSelection('wordpress')">WordPress + Website Development + Payment Gateway Integration</button>
+            <button class="btn btn-secondary" onclick="filterSelection('seo')">SEO Audit + Keyword Research & Recommendations</button>
+        </div>
 
-		
+        <div class="row">
+            <!-- Soul Street Card -->
+            <div class="col-md-4 column udacity mb-4">
+                <div class="card">
+                    <img src="https://soul.st/dubai/wp-content/uploads/sites/2/2022/05/photo-87-min-1.jpg" alt="Soul Street" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="https://soul.st" target="_blank">Soul Street</a></h4>
+                    </div>
+                </div>
+            </div>
 
+            <!-- The Penthouse Card -->
+            <div class="col-md-4 column udacity mb-4">
+                <div class="card">
+                    <img src="https://thepenthouse.co/dubai/wp-content/uploads/2023/01/FLN03343-1200x800.jpg" alt="The penthouse" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="https://thepenthouse.co" target="_blank">The Penthouse</a></h4>
+                    </div>
+                </div>
+            </div>
 
-<!--<div class="container">-->
+            <!-- Goose Island Dubai Card -->
+            <div class="col-md-4 column udacity mb-4">
+                <div class="card">
+                    <img src="https://uploads-ssl.webflow.com/53rhagrki0ty/624d7d403ab00ffc99e9297e_1O8A4050-min.jpg" alt="Goose Island" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="https://www.gooseislanddubai.com" target="_blank">Goose Island Dubai</a></h4>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Xsight Future Solutions by MAF Card -->
+            <div class="col-md-4 column seo mb-4">
+                <div class="card">
+                    <img src="https://images.ctfassets.net/53rhagrki0ty/5jKrHXcGATpfXcbyVFX3I7/c807b16e3c9e50be3efbe7a8349988ef/Xsight_Fintech_Solutions_SHAREpay.png?w=2220&q=80&fit=fill&&fm=webp&q=80" alt="Xsight by MAF" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="https://www.xsightfuturesolutions.com/en/" target="_blank">Xsight Future Solutions by MAF</a></h4>
+                    </div>
+                </div>
+            </div>
 
-<!-- MAIN (Center website) -->
+            <!-- Business of Preloved Fashion (BOPF) Card -->
+            <div class="col-md-4 column shopify mb-4">
+                <div class="card">
+                    <img src="https://businessofprelovedfashion.com/cdn/shop/files/20220521_BOPF_CAMPAIGN_SHOOT_PHOTOS_HR-219_2_720x.jpg?v=1657111865" alt="BOPF Dubai" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="http://thebopf.com" target="_blank">Business of Preloved Fashion (BOPF)</a></h4>
+                    </div>
+                </div>
+            </div>
 
-
-
-
-
-
-<div id="myBtnContainer">
- <!--* <button class="btn active" onclick="filterSelection('all')"> Show all</button>*>-->
-  <button class="btn" onclick="filterSelection('shopify')"> Shopify - Full eCommerce End to End Deployment & Management</button>
-  <button class="btn" onclick="filterSelection('udacity')">F&B Digital Marketing - Paid Social , Paid Search & Display</button>
-  <button class="btn" onclick="filterSelection('wordpress')">Wordpress + Website Development  + Payment Gateway Integration</button>
-<button class="btn" onclick="filterSelection('seo')">SEO Audit + Keyword Research & Recommendations</button>
-
-</div>
-
-<!-- Portfolio Gallery Grid -->
-<div class="row">
-  <div class="column udacity">
-    <div class="content">
-      <img src="https://soul.st/dubai/wp-content/uploads/sites/2/2022/05/photo-87-min-1.jpg" alt="Soul Street" style="width:100%">
-   
-	    <h4><a href="https://soul.st"target="_blank" >Soul Street</a></h4>
-      <p></p>
+            <!-- Magpies Sports Academy Card -->
+            <div class="col-md-4 column wordpress mb-4">
+                <div class="card">
+                    <img src="https://magpies1.wpengine.com/wp-content/uploads/2023/05/c07d5f03-9ae1-4d36-8b50-7f89cab3b25d-1400x1050.jpeg" alt="Magpies" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="http://magpiesnetballclubs.com" target="_blank">Magpies Sports Academy</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
- 
 
-	<div class="column udacity">
-    <div class="content">
-      <img src="https://thepenthouse.co/dubai/wp-content/uploads/2023/01/FLN03343-1200x800.jpg" alt="The penthouse" style="width:100%">
-   
-	    <h4><a href="https://thepenthouse.co"target="_blank" >The Penthouse </a></h4>
-      <p></p>
-    </div>
-  </div>
+    <!-- Include Bootstrap & jQuery JS for the functionalities -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!-- Your existing script modified to work with Bootstrap classes -->
+    <script>
+        function filterSelection(c) {
+            var x, i;
+            x = document.querySelectorAll(".column");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].classList.remove("show");
+                if (x[i].classList.contains(c)) {
+                    x[i].classList.add("show");
+                }
+            }
+        }
 
-
-
-  <div class="column udacity">
-    <div class="content">
-	    <img src="https://uploads-ssl.webflow.com/624d765c47e5464aa3b4eb35/624d7d403ab00ffc99e9297e_1O8A4050-min.jpg" alt="Goose Island" style="width:100%">
-	    <h4><a href="https://www.gooseislanddubai.com" target="_blank" >Goose Island Dubai</a></h4>
- 
-      <p></p>
-    </div>
-	
-  </div>
-	 <div class="column seo">
-    <div class="content">
-	    <img src="https://images.ctfassets.net/53rhagrki0ty/5jKrHXcGATpfXcbyVFX3I7/c807b16e3c9e50be3efbe7a8349988ef/Xsight_Fintech_Solutions_SHAREpay.png?w=2220&q=80&fit=fill&&fm=webp&q=80
-" alt="Xsight by MAF" style="width:100%">
-	    <h4><a href="https://www.xsightfuturesolutions.com/en/" target="_blank" >Xsight Future Solutions by MAF</a></h4>
- 
-      <p></p>
-    </div>
-	
-  </div>
-
-  
-
-	<div class="column shopify">
-    <div class="content">
-    <img src="https://businessofprelovedfashion.com/cdn/shop/files/20220521_BOPF_CAMPAIGN_SHOOT_PHOTOS_HR-219_2_720x.jpg?v=1657111865" alt="BOPF Dubai" style="width:100%">
-     	    <h4><a href="http://thebopf.com" target="_blank" >Business of Preloved Fashion (BOPF)</a></h4>
-
-      <p></p>
-    </div>
-  </div>
-
-
-
-
-		<div class=" column wordpress">
-    <div class="content">
-    <img src="https://magpies1.wpengine.com/wp-content/uploads/2023/05/c07d5f03-9ae1-4d36-8b50-7f89cab3b25d-1400x1050.jpeg" alt="Magpies" style="width:100%">
-     	    <h4><a href="http://magpiesnetballclubs.com" target="_blank" >Magpies Sports Academy</a></h4>
-
-      <p></p>
-    </div>
-  </div>
-  
-  </div>
-</div>
-<!-- END GRID -->
-</div>
-
-<!-- END MAIN -->
-</div>
-
-<script>
-filterSelection("all")
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("column");
-  if (c == "all") c = "";
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
-
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  }
-}
-
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);     
-    }
-  }
-  element.className = arr1.join(" ");
-}
-
-
-// Add active class to the current button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-</script>
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].classList.remove("active");
+                this.classList.add("active");
+            });
+        }
+    </script>
 
 </body>
+
+</html>

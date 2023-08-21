@@ -38,14 +38,25 @@ a:hover { text-decoration: underline; }
 </head>
 
 <body>
-<nav>
-	    		<ul>
-	        		<li><a href="/">Home</a></li>
-		        	<li><a href="/about">About</a></li>
-	        		<li><a href="/portfolio">Portfolio</a></li>
-	        		
-	    		</ul>
-			</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Ifeanyi Ibekwe</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/portfolio">Portfolio</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <div class="container mt-4">
         <a href="https://drive.google.com/file/d/1lOOkbjK1h9E5IeKQc_E8hMiXUf6fyxe5/view?usp=sharing" target="_blank" class="btn btn-primary mb-4" title="Download CV as PDF" download="Ifeanyi's_CV">Download CV</a>
 

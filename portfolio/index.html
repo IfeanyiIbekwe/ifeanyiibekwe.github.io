@@ -102,27 +102,30 @@
 
     <!-- Your existing script modified to work with Bootstrap classes -->
     <script>
-        function filterSelection(c) {
-            var x, i;
-            x = document.querySelectorAll(".column");
-            if (c == "all") c = "";
-            for (i = 0; i < x.length; i++) {
-                x[i].classList.remove("show");
-                if (x[i].classList.contains(c)) {
-                    x[i].classList.add("show");
-                }
-            }
+       function filterSelection(c) {
+    var x = document.querySelectorAll(".column");
+    for (var i = 0; i < x.length; i++) {
+        if (c === "all" || x[i].classList.contains(c)) {
+            x[i].style.display = "block"; // Show
+        } else {
+            x[i].style.display = "none"; // Hide
         }
+    }
+}
 
-        var btnContainer = document.getElementById("myBtnContainer");
-        var btns = btnContainer.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].classList.remove("active");
-                this.classList.add("active");
-            });
-        }
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+        var current = document.querySelector(".active");
+        current.classList.remove("active");
+        this.classList.add("active");
+    });
+}
+
+// Initialize to show all on page load
+filterSelection("all");
+
     </script>
 
 </body>

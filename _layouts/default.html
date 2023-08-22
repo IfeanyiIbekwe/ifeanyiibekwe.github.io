@@ -138,16 +138,20 @@ footer { border-top: 1px solid #d5d5d5; font-size: .8em; padding: 25px;}
 
 
 	.whatsapp-floating-icon {
-        position: fixed;
-        bottom: 15px;
-        right: 15px;
-        font-size: 24px;
-        background-color: #25D366;
-        color: white;
-        border-radius: 50%;
-        padding: 10px;
-        z-index: 1000;
-    }
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    font-size: 24px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%; /* This ensures a circular shape */
+    width: 50px;        /* Setting a fixed width */
+    height: 50px;       /* Setting a fixed height */
+    display: flex;      /* Using flexbox for centering */
+    align-items: center;/* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    z-index: 1000;
+}
 </style>
 
  <!-- Include Bootstrap & jQuery JS for the functionalities -->

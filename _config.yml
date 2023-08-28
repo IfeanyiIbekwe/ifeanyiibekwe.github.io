@@ -1,5 +1,7 @@
 name: Ifeanyi Ibekwe, Front End Developer, eCommerce Manager
 markdown: kramdown
-              - name: generate-sitemap
-                uses: cicirello/generate-sitemap@v1.9.1
-            
+
+     name: Generate the sitemap
+      uses: cicirello/generate-sitemap@v1
+      with:
+        base-url-path: https://ifeanyiibekwe.github.io/

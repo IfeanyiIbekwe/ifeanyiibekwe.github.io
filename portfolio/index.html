@@ -83,10 +83,26 @@ a:hover { text-decoration: underline; }
    /* ... Existing CSS ... */
 
 
+/* Animation for the "Drop me a line" button */
 a[title="Drop me a line on WhatsApp"] {
-    animation: bounce 1s infinite;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
+a[title="Drop me a line on WhatsApp"]:hover {
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+    background-color: #666; /* Change background color on hover */
+    border-color: #666;     /* Change border color on hover */
+}
+
+/* WhatsApp Icon Styling */
+.whatsapp-icon {
+    display: none; /* Initially hidden */
+    margin-left: 10px;
+}
+
+a[title="Drop me a line on WhatsApp"]:hover .whatsapp-icon {
+    display: inline-block; /* Show on hover */
+}
 
         /* Reduced font size for success metrics */
         .success-metric {
@@ -97,7 +113,7 @@ a[title="Drop me a line on WhatsApp"] {
 	    .problem-statement {
     font-style: italic;
     color: #555;
-    font-size: 12px ;
+    font-size: 0.8em;
     margin-bottom: 5px;
 }
 
@@ -120,8 +136,10 @@ a[title="Drop me a line on WhatsApp"] {
 
     <div class="container mt-4">
        
-<a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mb-4" title="Drop me a line on WhatsApp">Drop me a line</a>
-
+<a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mb-4" title="Drop me a line on WhatsApp">
+    Drop me a line 
+    <i class="fab fa-whatsapp whatsapp-icon"></i>
+</a>
         <h1>Ifeanyi Ibekwe</h1>
         <address>
             <strong>Address</strong><br>

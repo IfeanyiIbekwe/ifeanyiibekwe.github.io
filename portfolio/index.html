@@ -24,19 +24,19 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     <h2>Highlighted Projects</h2>
     <ul class="nav nav-pills mb-4" id="projectTabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="madinatJumeirah-tab" data-toggle="pill" href="#madinatJumeirah" role="tab" aria-controls="madinatJumeirah" aria-selected="true">Madinat Jumeirah F&B</a>
+            <a class="nav-link active" id="madinatJumeirah-tab" data-toggle="tab" href="#madinatJumeirah" role="tab" aria-controls="madinatJumeirah" aria-selected="true">Madinat Jumeirah F&B</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="agencyManagement-tab" data-toggle="pill" href="#agencyManagement" role="tab" aria-controls="agencyManagement" aria-selected="false">Media Buying & Agency Management</a>
+            <a class="nav-link" id="agencyManagement-tab" data-toggle="tab" href="#agencyManagement" role="tab" aria-controls="agencyManagement" aria-selected="false">Media Buying & Agency Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="fiveHotels-tab" data-toggle="pill" href="#fiveHotels" role="tab" aria-controls="fiveHotels" aria-selected="false">FIVE Hotels & Resorts</a>
+            <a class="nav-link" id="fiveHotels-tab" data-toggle="tab" href="#fiveHotels" role="tab" aria-controls="fiveHotels" aria-selected="false">FIVE Hotels & Resorts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="ecommerce-tab" data-toggle="pill" href="#ecommerce" role="tab" aria-controls="ecommerce" aria-selected="false">eCommerce Success</a>
+            <a class="nav-link" id="ecommerce-tab" data-toggle="tab" href="#ecommerce" role="tab" aria-controls="ecommerce" aria-selected="false">eCommerce Success</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="wordpress-tab" data-toggle="pill" href="#wordpress" role="tab" aria-controls="wordpress" aria-selected="false">WordPress Projects</a>
+            <a class="nav-link" id="wordpress-tab" data-toggle="tab" href="#wordpress" role="tab" aria-controls="wordpress" aria-selected="false">WordPress Projects</a>
         </li>
     </ul>
 
@@ -117,3 +117,11 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
 <!-- Include Bootstrap & jQuery JS for functionality -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#projectTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+</script>

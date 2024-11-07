@@ -10,6 +10,9 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     }
     .card {
         width: 100%;
+        border-radius: 15px; /* Rounded corners for cards */
+        overflow: hidden; /* Ensures image corners are also rounded */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for added depth */
     }
     .card-img-top {
         height: 220px;
@@ -19,27 +22,27 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
 
 <div class="container mt-4">
     <h2>Highlighted Projects</h2>
-    <ul class="nav nav-pills mb-4" id="projectTabs">
+    <ul class="nav nav-pills mb-4" id="projectTabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="pill" href="#madinatJumeirah">Madinat Jumeirah F&B</a>
+            <a class="nav-link active" id="madinatJumeirah-tab" data-toggle="pill" href="#madinatJumeirah" role="tab" aria-controls="madinatJumeirah" aria-selected="true">Madinat Jumeirah F&B</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#agencyManagement">Media Buying & Agency Management</a>
+            <a class="nav-link" id="agencyManagement-tab" data-toggle="pill" href="#agencyManagement" role="tab" aria-controls="agencyManagement" aria-selected="false">Media Buying & Agency Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#fiveHotels">FIVE Hotels & Resorts</a>
+            <a class="nav-link" id="fiveHotels-tab" data-toggle="pill" href="#fiveHotels" role="tab" aria-controls="fiveHotels" aria-selected="false">FIVE Hotels & Resorts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#ecommerce">eCommerce Success</a>
+            <a class="nav-link" id="ecommerce-tab" data-toggle="pill" href="#ecommerce" role="tab" aria-controls="ecommerce" aria-selected="false">eCommerce Success</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#wordpress">WordPress Projects</a>
+            <a class="nav-link" id="wordpress-tab" data-toggle="pill" href="#wordpress" role="tab" aria-controls="wordpress" aria-selected="false">WordPress Projects</a>
         </li>
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content" id="projectTabContent">
         <!-- Madinat Jumeirah Tab -->
-        <div id="madinatJumeirah" class="container tab-pane active">
+        <div class="tab-pane fade show active" id="madinatJumeirah" role="tabpanel" aria-labelledby="madinatJumeirah-tab">
             <div class="row">
                 <!-- Cala Vista Campaign Card -->
                 <div class="col-md-6 mb-4">
@@ -63,7 +66,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
                         <img src="https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/hotels/dubai/jumeirah-al-qasr/restaurant-page/pierchic/jaq_pierchic_hero-image.jpeg" alt="Pierchic Long Dinner Series" class="card-img-top">
                         <div class="card-body">
                             <h4 class="card-title"><a class="size" href="https://jumeirah.com/pierchic" target="_blank">Pierchic Long Dinner Series</a></h4>
-                            <p class="problem-statement">Create high demand for exclusive dining experiences with guest chefs in a unique ambiance.</p>
+                            <p class="problem-statement">Create high demand for exclusive dining experiences featuring guest chefs in a unique ambiance.</p>
                             <ul>
                                 <li>Secured full bookings within days of each event launch.</li>
                                 <li>Implemented targeted digital campaigns and strategic media buys.</li>

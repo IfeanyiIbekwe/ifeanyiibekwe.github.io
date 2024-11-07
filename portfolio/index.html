@@ -1,366 +1,210 @@
----
-layout: default
-title: About Ifeanyi Ibekwe
----
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Ifeanyi "Ify" Ibekwe</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
         .btn-primary {
-    color: #fff;
-    background-color: grey !important;
-    border-color: grey !important;}
-	    
-            a { text-decoration: none; color: #999;  font-weight: 100;font-size: 25px; }
-a:hover { text-decoration: underline; }
-}
-
-	    nav ul, footer ul {
-    font-size: 1em;
-    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-}
-
-	    nav ul li, footer ul li {
-    display: inline;
-    margin-right: 20px;
-
-
-		    
-}
-
-/* ... Your existing styles ... */
-
-    /* Button Hover Effect */
-    #myBtnContainer .btn:hover {
-        transform: scale(1.05); /* Enlarge button */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for elevation effect */
-    }
-
-
- 
-	.size {
+            color: #fff;
+            background-color: grey !important;
+            border-color: grey !important;
+        }
+        .size {
             font-size: 0.7em !important;
-}
-   
-
-        a {
-            text-decoration: none;
-            color: #999;
-            font-weight: 100;
-             font-size: 25px;        
-	}
-
-        a:hover {
-            text-decoration: underline;
         }
-
-        nav ul,
-        footer ul {
-            font-size: 1em;
-            font-family: 'Helvetica', 'Arial', 'Sans-Serif';
-            padding: 0px;
-            list-style: none;
-            font-weight: bold;
+        .card-title {
+            font-size: 1.25em;
         }
-
-        nav ul li,
-        footer ul li {
-            display: inline;
-            margin-right: 20px;
+        .success-metric {
+            font-size: 0.9em;
+            color: green;
         }
-
-        /* Add a hover effect for the cards */
+        .problem-statement {
+            font-style: italic;
+            color: #555;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
         .card:hover {
             transform: scale(1.05);
             transition: transform 0.2s;
         }
-   /* ... Existing CSS ... */
-
-
-/* Animation for the "Drop me a line" button */
-/* Styling for the "Drop me a line" button */
-a[title="Drop me a line on WhatsApp"] {
-    background-color: #25D366 !important; /* WhatsApp green */
-    border-color: #25D366 !important;
-    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-}
-
-a[title="Drop me a line on WhatsApp"]:hover {
-    transform: scale(1.05); /* Slightly enlarge button on hover */
-    background-color: #b2e5b9; /* Light green on hover */
-    border-color: #b2e5b9 !important;     /* Light green border on hover */
-}
-
-/* WhatsApp Icon Styling */
-.whatsapp-icon {
-    display: none; /* Initially hidden */
-    margin-left: 10px;
-}
-
-a[title="Drop me a line on WhatsApp"]:hover .whatsapp-icon {
-    display: inline-block; /* Show on hover */
-}
-
-        /* Reduced font size for success metrics */
-        .success-metric {
-            font-size: 0.8em;
-            color: green;
+        .nav-pills .nav-link {
+            margin-right: 10px;
+            background-color: #f8f9fa;
+            color: #333;
         }
-
-	    .problem-statement {
-    font-style: italic;
-    color: #555;
-    font-size: 0.8em;
-    margin-bottom: 5px;
-}
-
-	    /* Styling for the "Drop me a line" button */
-.btn[title="Drop me a line on WhatsApp"] {
-    background-color: #25D366 !important; /* WhatsApp green */
-    border-color: #25D366 !important;
-    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.btn[title="Drop me a line on WhatsApp"]:hover {
-    transform: scale(1.05); /* Slightly enlarge button on hover */
-    background-color: #b2e5b9 !important; /* Light green on hover */
-    border-color: #b2e5b9 !important;     /* Light green border on hover */
-}
+        .nav-pills .nav-link.active {
+            background-color: grey !important;
+            color: #fff;
+        }
     </style>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ifeanyi Ibekwe</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    
 </head>
-
 <body>
+<div class="container mt-4">
+    <h1>Ifeanyi "Ify" Ibekwe - Digital Marketing & Media Buying Expert</h1>
 
-    <div class="container mt-4">
-       
-<a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mb-4" title="Drop me a line on WhatsApp">
-    Drop me a line 
-    <i class="fab fa-whatsapp whatsapp-icon"></i>
-</a>
-        <h1>Ifeanyi Ibekwe</h1>
-        <address>
-            <strong>Address</strong><br>
-            Dubai<br>
-            United Arab Emirates<br>
-            <abbr title="phone">P:</abbr> (971) 052-7427721<br>
-            <span class="obfuscate">ibekweifeanyi@gmail.com</span>
-        </address>
+    <!-- Navigation for Filtering -->
+    <ul class="nav nav-pills mb-4" id="projectTabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#madinatJumeirah">Madinat Jumeirah F&B</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#agencyManagement">Media Buying & Agency Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#fiveHotels">FIVE Hotels & Resorts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#ecommerce">eCommerce Success</a>
+        </li>
+    </ul>
 
-        <h2>Projects</h2>
-        <hr>
+    <div class="tab-content">
+        <!-- Madinat Jumeirah Tab -->
+        <div id="madinatJumeirah" class="container tab-pane active">
+            <div class="row">
+                <!-- Cala Vista Campaign Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://jumeirah.com/en/images/cala-vista.jpg" alt="Cala Vista" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://jumeirah.com/cala-vista" target="_blank">Cala Vista at Madinat Jumeirah</a></h4>
+                            <p class="problem-statement">Strategic launch campaign to position Cala Vista as a premier dining destination.</p>
+                            <p class="success-metric">Exceeded reservation targets by 25% in the first month through optimized media buying and targeted awareness strategies.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, YouTube, Programmatic Display</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div id="myBtnContainer" class="mb-4">
-            <button class="btn btn-secondary" onclick="filterSelection('shopify')">Shopify</button>
-            <button class="btn btn-secondary" onclick="filterSelection('udacity')">F&B Digital Marketing</button>
-            <button class="btn btn-secondary" onclick="filterSelection('wordpress')">WordPress</button>
-            <button class="btn btn-secondary" onclick="filterSelection('seo')">SEO</button>
-	  <button class="btn btn-secondary" onclick="filterSelection('gmb')">Google My Business Listings</button>
-	 <button class="btn btn-secondary" onclick="filterSelection('lead')">Lead Generation</button>
-	 <button class="btn btn-secondary" onclick="filterSelection('five')">Luxury Hospitality Digital Marketing</button>
+                <!-- Shimmers Campaign Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://jumeirah.com/en/images/shimmers.jpg" alt="Shimmers" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://jumeirah.com/shimmers" target="_blank">Shimmers at Madinat Jumeirah</a></h4>
+                            <p class="problem-statement">Awareness and conversion campaign for seasonal reopening, balancing brand-building and performance objectives.</p>
+                            <p class="success-metric">Achieved 6% conversion rate on Meta, surpassing target by 2%.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Display Network, Paid Search, YouTube</p>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Pierchic Long Dinner Series -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://jumeirah.com/en/images/pierchic.jpg" alt="Pierchic Long Dinner Series" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://jumeirah.com/pierchic" target="_blank">Pierchic Long Dinner Series</a></h4>
+                            <p class="problem-statement">Create high demand for exclusive dining experiences featuring guest chefs.</p>
+                            <p class="success-metric">Drove full bookings within days of each event announcement through targeted campaigns and partnerships.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, Programmatic Display, SEO</p>
+                        </div>
+                    </div>
+                </div>
 
-        </div>
+                <!-- Rockfish Chef's Table Experience Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://jumeirah.com/en/images/rockfish.jpg" alt="Rockfish Chef's Table" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://jumeirah.com/rockfish" target="_blank">Rockfish Chef's Table</a></h4>
+                            <p class="problem-statement">Promote an immersive 6-course Chef's Table dining experience to drive awareness and exclusivity.</p>
+                            <p class="success-metric">Achieved 4% conversion rate on Meta, targeting high-value audiences, securing full bookings for each seating.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, Programmatic, Email Campaigns</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row">
-<a href="#fivehotels">
-		<!-- FIVE Hotels & Resorts Card -->
-<div class="col-md-4 column five mb-4">
-    <div class="card">
-        <img src="https://palmjumeirah.fivehotelsandresorts.com/media/4862/luxe-sea-view.jpg" alt="Soul Street" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://cdn.shopify.com/s/files/1/0541/3715/9849/files/download_3e3e035d-a2bf-4af6-89c7-de4cbcac738c.png?v=1693465590" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://www.fivehotelsandresorts.com/" target="_blank">FIVE Hotels & Resorts</a></h4>
+                <!-- Balloons at the Palace Activation -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://www.jumeirah.com/en/stay/dubai/jumeirah-al-qasr/experiences/balloons-at-the-palace" alt="Balloons at the Palace" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://www.jumeirah.com/en/stay/dubai/jumeirah-al-qasr/experiences/balloons-at-the-palace" target="_blank">Balloons at the Palace</a></h4>
+                            <p class="problem-statement">Special activation designed to enhance guest experience and drive traffic during the festive season.</p>
+                            <p class="success-metric">Achieved a 4% conversion rate and significant footfall through dynamic digital ads and targeted social media campaigns.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Display Network, Programmatic Ads</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="problem-statement">Increase direct bookings on brand.com, to reduce dependence on OTA's and save on commissions.</p>
-            <p class="success-metric">Achieved over 60% of revenue from direct bookings (more than 10X the industry average). Implemented eCommerce strategy to achieve exponential growth across brand channels (140% growth YOY).</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> Facebook Ads, Google Ads, Google Analytics</p>
         </div>
+
+        <!-- Media Buying & Agency Management Tab -->
+        <div id="agencyManagement" class="container tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://jumeirah.com/en/images/digital-strategy.jpg" alt="Media Buying & Agency Management" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title">Media Buying & Agency Management for Jumeirah Group</h4>
+                            <p class="problem-statement">Oversee full-funnel media buying strategies and manage agency relationships to streamline F&B campaigns.</p>
+                            <p class="success-metric">Achieved significant cost efficiencies and improved campaign performance across 20+ restaurants through collaboration with top-tier agencies and data-driven optimizations.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Display Network, YouTube, CRM, Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIVE Hotels & Resorts Tab -->
+        <div id="fiveHotels" class="container tab-pane fade">
+            <div class="row">
+                <!-- Campaign Planning & Execution for FIVE Hotels -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://palmjumeirah.fivehotelsandresorts.com/media/4862/luxe-sea-view.jpg" alt="FIVE Hotels F&B Campaigns" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title">Campaign Planning & Execution Across FIVE Hotels</h4>
+                            <p class="problem-statement">Led digital campaigns for F&B venues across three hotels, two in Dubai and one in Zurich.</p>
+                            <p class="success-metric">Achieved over 60% direct booking growth and improved brand visibility by implementing targeted, cross-channel campaigns.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, Programmatic, Analytics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WordPress Website Implementation with Payment Gateway Integration -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://magpiesnetballclubs.com/wp-content/uploads/2023/05/imageedit_6_2114735316.png" alt="Website Implementation with Payment Gateway" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title">WordPress Implementation with Payment Gateway</h4>
+                            <p class="problem-statement">Developed and executed WordPress sites with integrated payment gateways for seamless customer transactions.</p>
+                            <p class="success-metric">Delivered secure payment solutions, including BNPL (Buy Now, Pay Later), for a streamlined, customer-centric online experience.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> WordPress, Payment Gateway APIs, BNPL Solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- eCommerce Success Tab -->
+        <div id="ecommerce" class="container tab-pane fade">
+            <div class="row">
+                <!-- Business of Preloved Fashion (BOPF) Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://businessofprelovedfashion.com/cdn/shop/files/20220521_BOPF_CAMPAIGN_SHOOT_PHOTOS_HR-219_2_720x.jpg?v=1657111865" alt="BOPF Dubai" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="http://thebopf.com" target="_blank">Business of Preloved Fashion (BOPF)</a></h4>
+                            <p class="problem-statement">Deliver a fully functioning eCommerce website and drive sales with minimal budget.</p>
+                            <p class="success-metric">Generated over 5M AED in revenue through innovative eCommerce strategies on a lean budget.</p>
+                            <p class="card-text"><strong>Key Tools:</strong> Shopify, Google Ads, Facebook Ads, Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<!-- Soul Street Card -->
-<div class="col-md-4 column udacity mb-4">
-    <div class="card">
-        <img src="https://soul.st/dubai/wp-content/uploads/sites/2/2022/05/photo-87-min-1.jpg" alt="Soul Street" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://palmjumeirah.fivehotelsandresorts.com/media/8864/soul-st.png" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://soul.st" target="_blank">Soul Street</a></h4>
-            </div>
-            <p class="problem-statement">Drive bookings and increase footfall during weekly events.</p>
-            <p class="success-metric">Implementation, optimization and reporting on all digital marketing campaigns for F&B venues, achieving 30% growth in bookings/revenue YOY.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> Facebook Ads, SevenRooms, Google Analytics</p>
-        </div>
-    </div>
-</div>
-
-<!-- FIVE Jumeirah Village Card -->
-<div class="col-md-4 column lead mb-4">
-    <div class="card">
-        <img src="https://images.squarespace-cdn.com/content/v1/604098b5e851e1398369ba00/1614846493337-8KDXJ2050LF1N72E6IWZ/FIVEJumeirahVillage_4BEDPenthouse+%285%29..jpg" alt="FIVE Jumeirah Village" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://cdn.shopify.com/s/files/1/0541/3715/9849/files/download_3e3e035d-a2bf-4af6-89c7-de4cbcac738c.png?v=1693465590" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://investment.fivehotelsandresorts.com/" target="_blank">FIVE Jumeirah Village</a></h4>
-            </div>
-            <p class="problem-statement">Need for a digital platform to generate leads for Real Estate.</p>
-            <p class="success-metric">Built the website and executed successful lead generation campaigns, creating a healthy funnel for the Real Estate team.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> HTML, Facebook Ads, Google Analytics</p>
-        </div>
-    </div>
-</div>
-
-<!-- The Penthouse Card -->
-<div class="col-md-4 column udacity mb-4">
-    <div class="card">
-        <img src="https://thepenthouse.co/dubai/wp-content/uploads/2023/01/FLN03343-1200x800.jpg" alt="The penthouse" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://palmjumeirah.fivehotelsandresorts.com/media/8860/penthouse.png" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://thepenthouse.co" target="_blank">The Penthouse</a></h4>
-            </div>
-            <p class="problem-statement">Drive bookings and increase footfall during weekly events.</p>
-            <p class="success-metric">Increased direct bookings by 25% with targeted ads.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> Facebook Ads, SevenRooms, Google Analytics</p>
-        </div>
-    </div>
-</div>
-
-<!-- Goose Island Dubai Card -->
-<div class="col-md-4 column udacity mb-4">
-    <div class="card">
-        <img src="https://jumeirahvillage.fivehotelsandresorts.com/media/9354/goose-island-brand.jpg" alt="Goose Island" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://jumeirahvillage.fivehotelsandresorts.com/media/7111/goose-island-full-colour-logo.png" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://www.gooseislanddubai.com" target="_blank">Goose Island Dubai</a></h4>
-            </div>
-            <p class="problem-statement">Drive bookings and increase footfall during weekly events.</p>
-            <p class="success-metric">Responsible for digital launch strategy, achieving 60% increase in weekly bookings over the course of 6 months post-launch.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> Facebook Ads, SevenRooms, Google Analytics</p>
-        </div>
-    </div>
-</div>
-
-<!-- Xsight Future Solutions by MAF Card -->
-<div class="col-md-4 column seo mb-4">
-    <div class="card">
-        <img src="https://images.ctfassets.net/53rhagrki0ty/5jKrHXcGATpfXcbyVFX3I7/c807b16e3c9e50be3efbe7a8349988ef/Xsight_Fintech_Solutions_SHAREpay.png?w=2220&q=80&fit=fill&&fm=webp&q=80" alt="Xsight by MAF" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://cdn.shopify.com/s/files/1/0541/3715/9849/files/1690205631477.jpg?v=1693465808" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://www.xsightfuturesolutions.com/en/" target="_blank">Xsight Future Solutions by MAF</a></h4>
-            </div>
-            <p class="problem-statement">On-page SEO including keyword research & strategy, Meta Descriptions, and further recommendations.</p>
-            <p class="success-metric">Delivered comprehensive strategy for On-page SEO.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> SEM Rush, Google Key Word Planner</p>
-        </div>
-    </div>
-</div>
-
-<!-- Business of Preloved Fashion (BOPF) Card -->
-<div class="col-md-4 column shopify mb-4">
-    <div class="card">
-        <img src="https://businessofprelovedfashion.com/cdn/shop/files/20220521_BOPF_CAMPAIGN_SHOOT_PHOTOS_HR-219_2_720x.jpg?v=1657111865" alt="BOPF Dubai" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://businessofprelovedfashion.com/cdn/shop/files/Black_logo-jpeg-01_54616b3a-277d-49b3-aa69-db986238bf6e_200x.jpg" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="http://thebopf.com" target="_blank">Business of Preloved Fashion (BOPF)</a></h4>
-            </div>
-            <p class="problem-statement">Deliver a fully functioning eCommerce website and drive sales.</p>
-            <p class="success-metric">Reached 1.5M AED in annual revenue on a budget of 60K AED.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> Shopify, Google Ads, HTML, Liquid, Facebook Ads, SevenRooms, Google Analytics</p>
-        </div>
-    </div>
-</div>
-
-<!-- Google My Business Card for The Mansion Night Club -->
-<div class="col-md-4 column gmb mb-4">
-    <div class="card">
-        <img src="https://jumeirahvillage.fivehotelsandresorts.com/media/7814/1f3ce470-6a64-4c2d-85bb-8e699b0de5fd.jpg" alt="The Mansion Night Club" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://jumeirahvillage.fivehotelsandresorts.com/media/7921/mansion-logo-01.png" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="https://www.google.com/maps/place/The+Mansion+-+Bar+%26+Nightclub+at+FIVE+Jumeirah+Village/@25.054416,55.2072475,15z/data=!4m6!3m5!1s0x3e5f6de97f656c7f:0x4e19b66709ba4e7e!8m2!3d25.054416!4d55.2072475!16s%2Fg%2F11sx3qnqqr?entry=ttu" target="_blank">The Mansion Night Club FIVE Jumeirah Village</a></h4>
-            </div>
-            <p class="problem-statement">List & verify venue on Google</p>
-            <p class="success-metric">Verified listing on Google My Business in time for Club opening</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> Google My Business</p>
-        </div>
-    </div>
-</div>
-
-<!-- Magpies Sports Academy Card -->
-<div class="col-md-4 column wordpress mb-4">
-    <div class="card">
-        <img src="https://magpies1.wpengine.com/wp-content/uploads/2023/05/c07d5f03-9ae1-4d36-8b50-7f89cab3b25d-1400x1050.jpeg" alt="Magpies" class="card-img-top">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://magpiesnetballclubs.com/wp-content/uploads/2023/05/imageedit_6_2114735316.png" class="img-fluid mr-2" style="max-width: 60px; max-height: 40px;">
-                <h4 class="card-title mb-0"><a class ="size" href="http://magpiesnetballclubs.com" target="_blank">Magpies Sports Academy</a></h4>
-            </div>
-            <p class="problem-statement">Build a website and integrate payment gateway for traditional card processing as well as BNPL.</p>
-            <p class="success-metric">Delivered payment gateway integration and website updates, 70% cheaper than agencies.</p>
-            <p class="card-text" style="font-size: 0.8em;"><strong>Key Tools:</strong> HTML, WordPress</p>
-        </div>
-    </div>
-</div>
-</div>
-
-    <!-- Include Bootstrap & jQuery JS for the functionalities -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Your existing script modified to work with Bootstrap classes -->
-    <script>
-       function filterSelection(c) {
-    var x = document.querySelectorAll(".column");
-    for (var i = 0; i < x.length; i++) {
-        if (c === "all" || x[i].classList.contains(c)) {
-            x[i].style.display = "block"; // Show
-        } else {
-            x[i].style.display = "none"; // Hide
-        }
-    }
-}
-
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function() {
-        var current = document.querySelector(".active");
-        if (current) {
-            current.classList.remove("active");
-        }
-        this.classList.add("active");
-        var category = this.getAttribute("onclick").split("'")[1];
-        filterSelection(category);
-    });
-}
-
-// Initialize to show all on page load
-filterSelection("all");
-    </script>
+<!-- Include Bootstrap & jQuery JS for functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-
 </html>
-
-

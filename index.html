@@ -7,16 +7,24 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     <div class="card-body d-flex flex-column flex-md-row align-items-center">
         <div class="flex-grow-1 order-1 order-md-0">
             <h1 class="card-title">Ifeanyi “Ify” Ibekwe: Driving Growth with Strategic Digital Marketing</h1>
-            <p class="card-text" id="full-text">
-                Specializing in luxury hospitality, F&B, and retail, I bring a proven track record of delivering transformative results through innovative digital strategies. At Madinat Jumeirah Resort, I’ve spearheaded campaigns that increased reservations by 20% and led high-impact openings like <strong>Cala Vista</strong> at Mina A’Salam. My entrepreneurial venture, <a href="http://thebopf.com/" target="_blank"><em>The Business of Preloved Fashion</em> (BOPF)</a>, has generated over 5M AED in revenue, underscoring my ability to drive growth across both corporate and startup environments.
-                <br><br>
-                <span class="more-text">
-                    With expertise in SEO, media buying, and creating compelling content that resonates with luxury audiences, I’m dedicated to elevating brand visibility and achieving measurable results. From high-profile projects at <a href="https://ifeanyiibekwe.github.io/portfolio/" target="_blank">FIVE Hotels and Resorts</a> to tactical campaigns like Balloons at the Palace for Jumeirah Al Qasr, my approach is data-driven and results-focused.
-                    <br><br>
-                    <strong>Ready to elevate your brand?</strong> Let’s connect and explore strategies tailored to your success.
-                </span>
-            </p>
-            <button class="btn btn-secondary d-block d-md-none" id="read-more-btn" onclick="toggleReadMore()">Read More</button>
+            
+            <!-- Content Section -->
+            <div class="content-preview">
+                <p class="card-text">
+                    Specializing in luxury hospitality, F&B, and retail, I bring a proven track record of delivering transformative results through innovative digital strategies. At Madinat Jumeirah Resort, I’ve spearheaded campaigns that increased reservations by 20% and led high-impact openings like <strong>Cala Vista</strong> at Mina A’Salam. My entrepreneurial venture, <a href="http://thebopf.com/" target="_blank"><em>The Business of Preloved Fashion</em> (BOPF)</a>, has generated over 5M AED in revenue, underscoring my ability to drive growth across both corporate and startup environments.
+                </p>
+                <div class="collapsible-content">
+                    <p>
+                        With expertise in SEO, media buying, and creating compelling content that resonates with luxury audiences, I’m dedicated to elevating brand visibility and achieving measurable results. From high-profile projects at <a href="https://ifeanyiibekwe.github.io/portfolio/" target="_blank">FIVE Hotels and Resorts</a> to tactical campaigns like Balloons at the Palace for Jumeirah Al Qasr, my approach is data-driven and results-focused.
+                        <br><br>
+                        <strong>Ready to elevate your brand?</strong> Let’s connect and explore strategies tailored to your success.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sticky Read More Button -->
+            <button class="btn btn-secondary read-more-btn d-block d-md-none" onclick="toggleReadMore()">Read More</button>
+            
             <a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mt-3" style="background-color: #25D366; border-color: #25D366;" title="Drop me a line on WhatsApp"> Drop me a line 
                 <i class="fab fa-whatsapp whatsapp-icon"></i>
             </a>
@@ -26,60 +34,61 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
 </div>
 
 <style>
-    /* Styling for the text truncation */
-    .more-text {
+    /* Styling for collapsible content */
+    .content-preview {
+        position: relative;
+        max-height: 200px;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+    .content-preview.expanded {
+        max-height: 1000px; /* Enough to show the full content */
+    }
+    .collapsible-content {
         display: none;
     }
-
-    /* Animation for the "Drop me a line" button */
-    a[title="Drop me a line on WhatsApp"] {
-        background-color: #25D366 !important;
-        border-color: #25D366 !important;
-        transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    .content-preview.expanded .collapsible-content {
+        display: block;
     }
 
-    a[title="Drop me a line on WhatsApp"]:hover {
-        transform: scale(1.05);
-        background-color: #b2e5b9;
-        border-color: #b2e5b9 !important;
+    /* Fading effect for the preview text */
+    .content-preview::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 100%);
     }
 
-    /* WhatsApp Icon Styling */
-    .whatsapp-icon {
+    /* Sticky button for mobile */
+    .read-more-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .read-more-btn.expanded {
         display: none;
-        margin-left: 10px;
-    }
-
-    a[title="Drop me a line on WhatsApp"]:hover .whatsapp-icon {
-        display: inline-block;
-    }
-
-    img {
-        vertical-align: middle;
-        border-style: none;
-        padding: 20px;
-    }
-
-    .card-title {
-        margin-bottom: 1.75rem;
-    }
-
-    h1 {
-        font-size: 2em !important;
     }
 </style>
 
 <script>
     function toggleReadMore() {
-        const moreText = document.querySelector('.more-text');
-        const btn = document.getElementById('read-more-btn');
+        const content = document.querySelector('.content-preview');
+        const button = document.querySelector('.read-more-btn');
 
-        if (moreText.style.display === 'none' || moreText.style.display === '') {
-            moreText.style.display = 'inline';
-            btn.textContent = 'Read Less';
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            button.textContent = 'Read More';
         } else {
-            moreText.style.display = 'none';
-            btn.textContent = 'Read More';
+            content.classList.add('expanded');
+            button.textContent = 'Read Less';
         }
     }
 </script>

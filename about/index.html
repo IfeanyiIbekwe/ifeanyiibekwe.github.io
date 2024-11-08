@@ -3,15 +3,14 @@ layout: default
 title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving Sales and Growth through Performance Marketing Strategies
 ---
 
-
-     <div class="blurb card">
+<div class="blurb card">
     <div class="card-body d-flex flex-column align-items-start justify-content-start">
         <!-- Text Content Container -->
         <div class="text-container">
             <h2 class="card-title">About Ify</h2>
 
             <!-- Main content area with collapsible functionality -->
-            <div class="content-preview" id="content-preview">
+            <div class="content-preview" id="content-preview-about">
                 <p class="card-text">
                     Every journey begins with a spark. For me, that spark was ignited over a decade ago when I first set foot in Dubai—a city that has shaped both my personal and professional journey. It’s here that I’ve blended my passions for digital strategy, fashion, and building high-performing teams.
                     <br><br>
@@ -28,7 +27,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
             </div>
 
             <!-- Read More Button for Mobile -->
-            <button class="btn read-more-btn d-block d-md-none" onclick="toggleReadMore()" id="read-more-btn">Read More</button>
+            <button class="btn read-more-btn d-block d-md-none" onclick="toggleReadMoreAbout()" id="read-more-btn-about">Read More</button>
             
             <a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mt-4" style="background-color: #1E3A8A; border-color: #1E3A8A;" title="Drop me a line on WhatsApp"> 
                 Drop me a line <i class="fab fa-whatsapp whatsapp-icon"></i>
@@ -36,3 +35,90 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         </div>
     </div>
 </div>
+
+<style>
+    .blurb {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        padding: 10px;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .text-container {
+        flex: 1;
+        max-width: 100%;
+    }
+
+    .card-title {
+        text-align: left;
+        font-size: 2.2em;
+        font-weight: bold;
+    }
+
+    @media (max-width: 576px) {
+        .card-title {
+            font-size: 1.8em;
+        }
+    }
+
+    .card-text {
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .content-preview {
+        max-height: none;
+        overflow: visible;
+        transition: max-height 0.5s ease-out;
+    }
+
+    @media (max-width: 576px) {
+        .content-preview {
+            max-height: 220px;
+            overflow: hidden;
+        }
+        .content-preview.expanded {
+            max-height: 2000px;
+        }
+    }
+
+    .read-more-btn {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #FFD700;
+        border-color: #FFD700;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        z-index: 1000;
+    }
+
+    .read-more-btn:hover {
+        background-color: #FFC300;
+        transform: scale(1.05);
+    }
+</style>
+
+<script>
+    function toggleReadMoreAbout() {
+        const content = document.querySelector('#content-preview-about');
+        const button = document.getElementById('read-more-btn-about');
+
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            button.textContent = 'Read More';
+        } else {
+            content.classList.add('expanded');
+            button.textContent = 'Read Less';
+            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+</script>

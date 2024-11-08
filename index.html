@@ -4,11 +4,11 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
 ---
 
 <div class="blurb card">
-    <div class="card-body d-flex flex-column flex-md-row align-items-start">
-        <div class="flex-grow-1 order-1 order-md-0">
-            <!-- Left-aligned header -->
-            <h1 class="card-title">Ifeanyi “Ify” Ibekwe: Driving Growth with Strategic Digital Marketing</h1>
-            
+    <div class="card-body d-flex flex-column flex-md-row align-items-center">
+        <!-- Left-aligned heading -->
+        <h1 class="card-title left-aligned-title">Ifeanyi “Ify” Ibekwe: Driving Growth with Strategic Digital Marketing</h1>
+        
+        <div class="flex-grow-1 order-1 order-md-0 text-center">
             <!-- Content Section -->
             <div class="content-preview" id="content-preview">
                 <p class="card-text">
@@ -23,7 +23,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
                 </div>
             </div>
 
-            <!-- Sticky Read More Button for mobile -->
+            <!-- Sticky Read More Button for mobile only -->
             <button class="btn read-more-btn d-block d-md-none" onclick="toggleReadMore()" id="read-more-btn">Read More</button>
             
             <a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mt-4" style="background-color: #1E3A8A; border-color: #1E3A8A;" title="Drop me a line on WhatsApp"> 
@@ -41,18 +41,21 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         font-size: 16px;
         line-height: 1.6;
         padding: 20px;
+        text-align: center;
     }
 
-    /* Left-aligned header */
-    .card-title {
+    /* Left-aligned heading */
+    .left-aligned-title {
+        text-align: left;
+        width: 100%;
         font-size: 2em;
         margin-bottom: 1.5rem;
-        text-align: left;
+        padding-left: 15px;
     }
 
     /* Adjust header size for mobile */
     @media (max-width: 576px) {
-        .card-title {
+        .left-aligned-title {
             font-size: 1.5em;
         }
     }
@@ -60,6 +63,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     /* Ensure full content is visible on desktop */
     .content-preview {
         overflow: visible;
+        max-height: none; /* No height restrictions for desktop */
     }
 
     /* Collapsible content for mobile only */
@@ -100,11 +104,6 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         background-color: #FFC300;
         transform: translateX(-50%) scale(1.05);
     }
-
-    /* Spacing adjustments */
-    .card-body {
-        padding: 20px;
-    }
 </style>
 
 <script>
@@ -118,7 +117,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         } else {
             content.classList.add('expanded');
             button.textContent = 'Read Less';
-
+            
             // Smooth scroll to expanded content
             content.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }

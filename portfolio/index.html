@@ -40,9 +40,23 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         font-size: 16px;
         line-height: 1.5;
     }
+    
+    /* Adjusting heading sizes for better responsiveness */
     .card-title {
-        font-size: 2em !important;
         font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-weight: bold;
+        font-size: 1.8em; /* Default size */
+        margin-bottom: 1.75rem;
+    }
+    @media (max-width: 768px) {
+        .card-title {
+            font-size: 1.5em; /* Smaller size on tablets */
+        }
+    }
+    @media (max-width: 576px) {
+        .card-title {
+            font-size: 1.3em; /* Even smaller size on mobile */
+        }
     }
 
     /* Styling for collapsible content */
@@ -53,11 +67,11 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         transition: max-height 0.5s ease;
     }
     .content-preview.expanded {
-        max-height: 1000px; /* Enough to show the full content */
+        max-height: none; /* Allow full content to be displayed */
     }
     .collapsible-content {
         display: none;
-        font-family: inherit; /* Ensure the same font as the parent */
+        font-family: inherit;
     }
     .content-preview.expanded .collapsible-content {
         display: block;
@@ -72,6 +86,10 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         right: 0;
         height: 30px;
         background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 100%);
+        transition: opacity 0.5s ease;
+    }
+    .content-preview.expanded::after {
+        opacity: 0;
     }
 
     /* Sticky button for mobile */
@@ -81,19 +99,16 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         left: 50%;
         transform: translateX(-50%);
         z-index: 1000;
-        background-color: #FFC107; /* Gold color */
+        background-color: #FFC107;
         border-color: #FFC107;
         color: #000;
         padding: 10px 20px;
         border-radius: 20px;
     }
-    .read-more-btn.expanded {
-        display: none;
-    }
 
     /* Ensure button doesn't cover footer */
     footer {
-        margin-bottom: 80px; /* Extra space for button */
+        margin-bottom: 80px;
     }
 </style>
 
@@ -108,6 +123,11 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         } else {
             content.classList.add('expanded');
             button.textContent = 'Read Less';
+        }
+
+        // Scroll to top of the expanded content to improve UX
+        if (content.classList.contains('expanded')) {
+            content.scrollIntoView({ behavior: 'smooth' });
         }
     }
 </script>

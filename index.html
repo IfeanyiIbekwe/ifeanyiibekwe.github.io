@@ -13,7 +13,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         <!-- Text Content Container -->
         <div class="text-container">
             <!-- Left-aligned heading -->
-            <h1 class="card-title">Ifeanyi “Ify” Ibekwe: Driving Growth with Strategic Digital Marketing</h1>
+            <h2 class="card-title">Ifeanyi “Ify” Ibekwe: Driving Growth with Strategic Digital Marketing</h2>
             
             <!-- Main content area -->
             <div class="content-preview" id="content-preview">
@@ -39,7 +39,6 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     /* Global font settings */
     .blurb {
         font-family: 'Helvetica Neue', Arial, sans-serif;
-        font-size: 16px;
         line-height: 1.6;
         padding: 10px;
     }
@@ -61,7 +60,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     /* Image styling */
     .profile-image {
         flex-shrink: 0;
-        width: 80%; /* Adjusted for mobile width */
+        width: 100%; /* Full width on mobile */
         height: auto;
         border-radius: 10px;
         margin: 0 auto 15px; /* Centered on mobile */
@@ -74,29 +73,30 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         }
     }
 
-    /* Text container to utilize more width on mobile */
-    .text-container {
-        flex: 1;
-        max-width: 95%;
-        margin: 0 auto;
-    }
-
     /* Heading styling */
     .card-title {
         text-align: left;
-        font-size: 2em;
+        font-size: 2.2em;
+        font-weight: bold;
         margin-bottom: 15px;
     }
 
     @media (max-width: 576px) {
         .card-title {
-            font-size: 1.5em;
+            font-size: 1.8em; /* Smaller font on mobile */
         }
     }
 
-    /* Left-align all paragraph text */
+    /* Paragraph text styling */
     .card-text {
         text-align: left;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 576px) {
+        .card-text {
+            font-size: 0.9rem; /* Reduced font size on mobile */
+        }
     }
 
     /* Content preview adjustments */

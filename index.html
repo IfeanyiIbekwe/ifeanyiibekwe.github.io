@@ -19,17 +19,13 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
             <div class="content-preview" id="content-preview">
                 <p class="card-text">
                     Specializing in luxury hospitality, F&B, and retail, I bring a proven track record of delivering transformative results through innovative digital strategies. At Madinat Jumeirah Resort, I’ve spearheaded campaigns that increased reservations by 20% and led high-impact openings like <strong>Cala Vista</strong> at Mina A’Salam. My entrepreneurial venture, <a href="http://thebopf.com/" target="_blank"><em>The Business of Preloved Fashion</em> (BOPF)</a>, has generated over 5M AED in revenue, underscoring my ability to drive growth across both corporate and startup environments.
+                    With expertise in SEO, media buying, and creating compelling content that resonates with luxury audiences, I’m dedicated to elevating brand visibility and achieving measurable results.
+                    <br><br>
+                    <strong>Ready to elevate your brand?</strong> Let’s connect and explore strategies tailored to your success.
                 </p>
-                <div class="collapsible-content">
-                    <p>
-                        With expertise in SEO, media buying, and creating compelling content that resonates with luxury audiences, I’m dedicated to elevating brand visibility and achieving measurable results. From high-profile projects at <a href="https://ifeanyiibekwe.github.io/portfolio/" target="_blank">FIVE Hotels and Resorts</a> to tactical campaigns like Balloons at the Palace for Jumeirah Al Qasr, my approach is data-driven and results-focused.
-                        <br><br>
-                        <strong>Ready to elevate your brand?</strong> Let’s connect and explore strategies tailored to your success.
-                    </p>
-                </div>
             </div>
 
-            <!-- Sticky Read More Button for mobile only -->
+            <!-- Read More Button for Mobile -->
             <button class="btn read-more-btn d-block d-md-none" onclick="toggleReadMore()" id="read-more-btn">Read More</button>
             
             <a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mt-4" style="background-color: #1E3A8A; border-color: #1E3A8A;" title="Drop me a line on WhatsApp"> 
@@ -98,34 +94,27 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     /* Content preview adjustments */
     .content-preview {
         max-width: 100%;
+        overflow: visible;
     }
 
     /* Ensure full content is visible on desktop */
     @media (min-width: 577px) {
         .content-preview {
-            max-height: none;
-            overflow: visible;
+            max-height: none !important;
+            overflow: visible !important;
         }
     }
 
     /* Collapsible content for mobile only */
     @media (max-width: 576px) {
         .content-preview {
-            max-height: 180px;
+            max-height: 150px;
             overflow: hidden;
             transition: max-height 0.5s ease-out;
         }
         .content-preview.expanded {
             max-height: 1000px;
         }
-    }
-
-    .collapsible-content {
-        display: none;
-    }
-
-    .content-preview.expanded .collapsible-content {
-        display: block;
     }
 
     /* Sticky Read More Button for Mobile */
@@ -141,11 +130,6 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         border-radius: 20px;
         font-weight: bold;
         z-index: 1000;
-    }
-
-    .read-more-btn:hover {
-        background-color: #FFC300;
-        transform: translateX(-50%) scale(1.05);
     }
 </style>
 

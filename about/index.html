@@ -2,7 +2,6 @@
 layout: default
 title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving Sales and Growth through Performance Marketing Strategies
 ---
-
 <div class="blurb card">
     <div class="card-body d-flex flex-column align-items-start justify-content-start">
         <!-- Text Content Container -->
@@ -14,9 +13,9 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
                 <p class="card-text">
                     Every journey begins with a spark. For me, that spark was ignited over a decade ago when I first set foot in Dubai—a city that has shaped both my personal and professional journey. It’s here that I’ve blended my passions for digital strategy, fashion, and building high-performing teams.
                     <br><br>
-                    My career took flight at <strong>FIVE Hotels and Resorts</strong>, where I drove digital strategies that went beyond just increasing bookings—they created unforgettable guest experiences. A standout campaign resulted in a 35% surge in direct bookings during peak seasons. 
+                    My career took flight at <strong>FIVE Hotels and Resorts</strong>, where I drove digital strategies that went beyond just increasing bookings—they created unforgettable guest experiences. A standout campaign resulted in a 35% surge in direct bookings during peak seasons.
                     <br><br>
-                    It was while leading growth at FIVE that I took a leap of faith and co-founded <a href="http://thebopf.com/" target="_blank"><em>The Business of Preloved Fashion (BOPF)</em></a> in 2021. In just a few years, BOPF has generated over 5M AED in revenue, proving that sustainable fashion can thrive in a luxury market.
+                    It was while leading growth at FIVE that I took a leap of faith and co-founded <a href="http://thebopf.com/" target="_blank"><em>The Business of Preloved Fashion</em></a> (BOPF) in 2021. In just a few years, BOPF has generated over 5M AED in revenue, proving that sustainable fashion can thrive in a luxury market.
                     <br><br>
                     The journey continued at <strong>Madinat Jumeirah Resort</strong>, where I spearheaded digital initiatives that brought new concepts like <strong>Cala Vista</strong> to life, driving a 20% increase in reservations. Each project was an opportunity to reimagine how digital marketing can connect with people on a deeper level.
                     <br><br>
@@ -71,6 +70,11 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         font-size: 1rem;
     }
 
+    .card-text a {
+        font-size: inherit;
+        font-style: italic;
+    }
+
     .content-preview {
         max-height: none;
         overflow: visible;
@@ -79,11 +83,11 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
 
     @media (max-width: 576px) {
         .content-preview {
-            max-height: 220px;
+            max-height: 400px; /* Adjusted to show more content */
             overflow: hidden;
         }
         .content-preview.expanded {
-            max-height: 2000px;
+            max-height: 3000px;
         }
     }
 
@@ -118,7 +122,9 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         } else {
             content.classList.add('expanded');
             button.textContent = 'Read Less';
-            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+                button.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
     }
 </script>

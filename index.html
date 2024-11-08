@@ -8,7 +8,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         <img class="lazy mb-4 mb-md-0 mr-md-4" loading="lazy" 
              src="https://cdn.shopify.com/s/files/1/0541/3715/9849/files/08875de0-7ead-416d-bde0-8e2af380686c.jpg?v=1692692038" 
              alt="Ifeanyi Ibekwe's photo" 
-             style="width:250px; height:auto; border-radius: 10px;">
+             class="profile-image">
 
         <!-- Text Content Container -->
         <div class="text-container">
@@ -41,7 +41,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
         font-family: 'Helvetica Neue', Arial, sans-serif;
         font-size: 16px;
         line-height: 1.6;
-        padding: 10px; /* Reduced padding */
+        padding: 10px;
     }
 
     /* Flexbox layout for image and text alignment */
@@ -59,18 +59,25 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
     }
 
     /* Image styling */
-    img.lazy {
+    .profile-image {
         flex-shrink: 0;
-        width: 250px;
+        width: 80%; /* Adjusted for mobile width */
         height: auto;
         border-radius: 10px;
-        margin-right: 15px;
+        margin: 0 auto 15px; /* Centered on mobile */
+    }
+
+    @media (min-width: 768px) {
+        .profile-image {
+            width: 250px; /* Fixed size on desktop */
+            margin-right: 15px;
+        }
     }
 
     /* Text container to utilize more width on mobile */
     .text-container {
         flex: 1;
-        max-width: 95%; /* Adjusted for wider content on mobile */
+        max-width: 95%;
         margin: 0 auto;
     }
 
@@ -114,7 +121,7 @@ title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving S
             transition: max-height 0.5s ease-out;
         }
         .content-preview.expanded {
-            max-height: 2000px; /* Ensure full text is shown when expanded */
+            max-height: 2000px;
         }
     }
 

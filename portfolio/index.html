@@ -3,131 +3,198 @@ layout: default
 title: Ifeanyi "Ify" Ibekwe, E-Commerce and Digital Marketing Expert | Driving Sales and Growth through Performance Marketing Strategies
 ---
 
-<div class="blurb card">
-    <div class="card-body d-flex flex-column flex-md-row align-items-center">
-        <div class="flex-grow-1 order-1 order-md-0">
-            <h1 class="card-title">Ifeanyi “Ify” Ibekwe: Driving Growth with Strategic Digital Marketing</h1>
-            
-            <!-- Content Section -->
-            <div class="content-preview">
-                <p class="card-text">
-                    Specializing in luxury hospitality, F&B, and retail, I bring a proven track record of delivering transformative results through innovative digital strategies. At Madinat Jumeirah Resort, I’ve spearheaded campaigns that increased reservations by 20% and led high-impact openings like <strong>Cala Vista</strong> at Mina A’Salam. My entrepreneurial venture, <a href="http://thebopf.com/" target="_blank"><em>The Business of Preloved Fashion</em> (BOPF)</a>, has generated over 5M AED in revenue, underscoring my ability to drive growth across both corporate and startup environments.
-                </p>
-                <div class="collapsible-content">
-                    <p>
-                        With expertise in SEO, media buying, and creating compelling content that resonates with luxury audiences, I’m dedicated to elevating brand visibility and achieving measurable results. From high-profile projects at <a href="/portfolio/" target="_blank">FIVE Hotels and Resorts</a> to tactical campaigns like Balloons at the Palace for Jumeirah Al Qasr, my approach is data-driven and results-focused.
-                        <br><br>
-                        <strong>Ready to elevate your brand?</strong> Let’s connect and explore strategies tailored to your success.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Sticky Read More Button -->
-            <button class="btn btn-secondary read-more-btn d-block d-md-none" onclick="toggleReadMore()">Read More</button>
-            
-            <a href="https://wa.me/9710527427721" target="_blank" class="btn btn-primary mt-3" style="background-color: #25D366; border-color: #25D366;" title="Drop me a line on WhatsApp"> Drop me a line 
-                <i class="fab fa-whatsapp whatsapp-icon"></i>
-            </a>
-        </div>
-        <img class="mb-3 mb-md-0 ml-md-3 order-0 order-md-1" src="https://cdn.shopify.com/s/files/1/0541/3715/9849/files/08875de0-7ead-416d-bde0-8e2af380686c.jpg?v=1692692038" alt="Ifeanyi Ibekwe's photo" style="width:320px; height:auto; border: 0px solid #ddd; border-radius: 3px;">
-    </div>
-</div>
-
 <style>
-    /* Uniform font styling */
-    .blurb {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        font-size: 16px;
-        line-height: 1.5;
+    .card-body ul {
+        list-style-type: disc;
+        padding-left: 20px;
     }
-    
-    /* Adjusting heading sizes for better responsiveness */
-    .card-title {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        font-weight: bold;
-        font-size: 1.8em; /* Default size */
-        margin-bottom: 1.75rem;
+    .card {
+        width: 100%;
+        border-radius: 15px; /* Rounded corners for cards */
+        overflow: hidden; /* Ensures image corners are also rounded */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for added depth */
     }
-    @media (max-width: 768px) {
-        .card-title {
-            font-size: 1.5em; /* Smaller size on tablets */
-        }
-    }
-    @media (max-width: 576px) {
-        .card-title {
-            font-size: 1.3em; /* Even smaller size on mobile */
-        }
-    }
-
-    /* Styling for collapsible content */
-    .content-preview {
-        position: relative;
-        max-height: 200px;
-        overflow: hidden;
-        transition: max-height 0.5s ease;
-    }
-    .content-preview.expanded {
-        max-height: none; /* Allow full content to be displayed */
-    }
-    .collapsible-content {
-        display: none;
-        font-family: inherit;
-    }
-    .content-preview.expanded .collapsible-content {
-        display: block;
-    }
-
-    /* Fading effect for the preview text */
-    .content-preview::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 30px;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 100%);
-        transition: opacity 0.5s ease;
-    }
-    .content-preview.expanded::after {
-        opacity: 0;
-    }
-
-    /* Sticky button for mobile */
-    .read-more-btn {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        background-color: #FFC107;
-        border-color: #FFC107;
-        color: #000;
-        padding: 10px 20px;
-        border-radius: 20px;
-    }
-
-    /* Ensure button doesn't cover footer */
-    footer {
-        margin-bottom: 80px;
+    .card-img-top {
+        height: 220px;
+        object-fit: cover;
     }
 </style>
 
+<div class="container mt-4">
+    <h2>Highlighted Projects</h2>
+    <ul class="nav nav-pills mb-4" id="projectTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="madinatJumeirah-tab" data-toggle="tab" href="#madinatJumeirah" role="tab" aria-controls="madinatJumeirah" aria-selected="true">Madinat Jumeirah F&B</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="agencyManagement-tab" data-toggle="tab" href="#agencyManagement" role="tab" aria-controls="agencyManagement" aria-selected="false">Media Buying & Agency Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="fiveHotels-tab" data-toggle="tab" href="#fiveHotels" role="tab" aria-controls="fiveHotels" aria-selected="false">FIVE Hotels & Resorts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="ecommerce-tab" data-toggle="tab" href="#ecommerce" role="tab" aria-controls="ecommerce" aria-selected="false">eCommerce Success</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="wordpress-tab" data-toggle="tab" href="#wordpress" role="tab" aria-controls="wordpress" aria-selected="false">WordPress Projects</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="projectTabContent">
+        <!-- Madinat Jumeirah Tab -->
+        <div class="tab-pane fade show active" id="madinatJumeirah" role="tabpanel" aria-labelledby="madinatJumeirah-tab">
+            <div class="row">
+                <!-- Cala Vista Campaign Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/hotels/dubai/jumeirah-mina-al-salam/restaurant-page/cala-vista/mas_cala-vista_hero-image.jpeg" alt="Cala Vista" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://jumeirah.com/cala-vista" target="_blank">Cala Vista at Madinat Jumeirah</a></h4>
+                            <ul>
+                                <li>Exceeded revenue targets and ensured month-on-month growth in restaurant covers.</li>
+                                <li>Engaged HNWIs and culinary enthusiasts, establishing Cala Vista with high awareness and low cost per cover.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, YouTube, Programmatic Display</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pierchic Long Dinner Series -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/hotels/dubai/jumeirah-al-qasr/restaurant-page/pierchic/jaq_pierchic_hero-image.jpeg" alt="Pierchic Long Dinner Series" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://jumeirah.com/pierchic" target="_blank">Pierchic Long Dinner Series</a></h4>
+                            <ul>
+                                <li>Achieved 100% booking capacity soon after each event announcement, surpassing reservation targets.</li>
+                                <li>Positioned Pierchic Long Dinner Series as an exclusive culinary experience with strong retention among target audiences.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, Programmatic Display, SEO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Balloons at the Palace Activation -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/hotels/dubai/jumeirah-al-qasr/restaurant-page/balloons-at-the-palace/balloons-at-the-palace--experience-hero-web-main.png" alt="Balloons at the Palace" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://www.jumeirah.com/en/stay/dubai/jumeirah-al-qasr/experiences/balloons-at-the-palace" target="_blank">Balloons at the Palace</a></h4>
+                            <ul>
+                                <li>Achieved a 4% conversion rate, driving high footfall and engagement through targeted ads.</li>
+                                <li>Enhanced brand presence among HNWIs, meeting cost efficiency targets.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Display Network, Programmatic Ads</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Big Brunch Series -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://britishmums.com/dubai/wp-content/uploads/2024/02/IMG_7098.jpeg" alt="Big Brunch Series" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="https://www.jumeirah.com/en/stay/dubai/jumeirah-al-qasr/experiences/big-brunch-series" target="_blank">Big Brunch Series</a></h4>
+                            <ul>
+                                <li>Exceeded conversion and reservation targets for each brunch, achieving 85%+ booking rate per event.</li>
+                                <li>Enhanced visibility and loyalty among HNWIs and culinary enthusiasts, setting new benchmarks in engagement.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, Programmatic, CRM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Buying & Agency Management Tab -->
+        <div class="tab-pane fade" id="agencyManagement" role="tabpanel" aria-labelledby="agencyManagement-tab">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://jumeirah.com/en/images/digital-strategy.jpg" alt="Media Buying & Agency Management" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title">Media Buying & Agency Management for Jumeirah Group</h4>
+                            <ul>
+                                <li>Oversaw full-funnel media buying across 20+ restaurants, enhancing media efficiency and lowering costs per cover.</li>
+                                <li>Collaborated with top-tier agencies to meet KPIs for reservations, awareness, and cost efficiency, delivering impactful campaigns for all restaurants.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Display Network, YouTube, CRM, Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIVE Hotels & Resorts Tab -->
+        <div class="tab-pane fade" id="fiveHotels" role="tabpanel" aria-labelledby="fiveHotels-tab">
+            <div class="row">
+                <!-- Campaign Planning & Execution for FIVE Hotels -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://palmjumeirah.fivehotelsandresorts.com/media/4862/luxe-sea-view.jpg" alt="FIVE Hotels F&B Campaigns" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title">Campaign Planning & Execution Across FIVE Hotels</h4>
+                            <ul>
+                                <li>Increased direct bookings by over 60%, meeting YOY revenue goals across F&B venues in Dubai and Zurich.</li>
+                                <li>Led cross-channel campaigns, positioning venues as top choices among HNWIs and culinary enthusiasts.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Meta Ads, Google Ads, Programmatic, Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- eCommerce Success Tab -->
+        <div class="tab-pane fade" id="ecommerce" role="tabpanel" aria-labelledby="ecommerce-tab">
+            <div class="row">
+                <!-- Business of Preloved Fashion (BOPF) Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://businessofprelovedfashion.com/cdn/shop/files/20220521_BOPF_CAMPAIGN_SHOOT_PHOTOS_HR-219_2_720x.jpg?v=1657111865" alt="BOPF Dubai" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"><a class="size" href="http://thebopf.com" target="_blank">Business of Preloved Fashion (BOPF)</a></h4>
+                            <ul>
+                                <li>Generated over 5M AED in revenue on a lean budget through optimized eCommerce strategies.</li>
+                                <li>Built a fully optimized site with high engagement, attracting a target audience in luxury resale.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> Shopify, Google Ads, Facebook Ads, Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WordPress Projects Tab -->
+        <div class="tab-pane fade" id="wordpress" role="tabpanel" aria-labelledby="wordpress-tab">
+            <div class="row">
+                <!-- WordPress Website Implementation with Payment Gateway Integration -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://magpiesnetballclubs.com/wp-content/uploads/2023/05/imageedit_6_2114735316.png" alt="Website Implementation with Payment Gateway" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title">WordPress Implementation with Payment Gateway</h4>
+                            <ul>
+                                <li>Executed full WordPress sites with payment gateways, creating seamless customer experiences.</li>
+                                <li>Integrated BNPL (Buy Now, Pay Later) options, enhancing flexibility and customer satisfaction.</li>
+                            </ul>
+                            <p class="card-text"><strong>Key Tools:</strong> WordPress, Payment Gateway APIs, BNPL Solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap & jQuery JS for functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    function toggleReadMore() {
-        const content = document.querySelector('.content-preview');
-        const button = document.querySelector('.read-more-btn');
-
-        if (content.classList.contains('expanded')) {
-            content.classList.remove('expanded');
-            button.textContent = 'Read More';
-        } else {
-            content.classList.add('expanded');
-            button.textContent = 'Read Less';
-        }
-
-        // Scroll to top of the expanded content to improve UX
-        if (content.classList.contains('expanded')) {
-            content.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
+    $(document).ready(function(){
+        $('#projectTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
 </script>

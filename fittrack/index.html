@@ -21,6 +21,7 @@
     --good: #0ca30c;
     --good-text: #006300;
     --warning: #fab219;
+    --warning-text: #8a6100;
     --critical: #d03b3b;
   }
   @media (prefers-color-scheme: dark) {
@@ -39,6 +40,7 @@
       --good: #0ca30c;
       --good-text: #0ca30c;
       --warning: #fab219;
+      --warning-text: #fab219;
       --critical: #d03b3b;
     }
   }
@@ -207,6 +209,37 @@
 
   .note { font-size: 12px; color: var(--muted); line-height: 1.5; margin-top: 10px; }
   hr.sep { border: none; border-top: 1px solid var(--grid); margin: 14px 0; }
+
+  /* ---- status pills ---- */
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
+  }
+  .pill .ico { font-size: 13px; }
+  .pill.good { color: var(--good-text); background: rgba(12,163,12,0.12); }
+  .pill.warn { color: var(--warning-text); background: rgba(250,178,25,0.16); }
+  .pill.bad  { color: var(--critical); background: rgba(208,59,59,0.12); }
+
+  /* ---- food autocomplete ---- */
+  .ac-wrap { position: relative; flex: 1; min-width: 0; }
+  .ac-list {
+    position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; max-height: 260px; overflow-y: auto; z-index: 20;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.16); display: none;
+  }
+  .ac-list.open { display: block; }
+  .ac-item {
+    width: 100%; text-align: left; background: none; border: none;
+    padding: 9px 12px; font-size: 14px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+    border-bottom: 1px solid var(--grid); color: var(--text-primary);
+  }
+  .ac-item:last-child { border-bottom: none; }
+  .ac-item:hover, .ac-item:focus { background: var(--series-1-wash); outline: none; }
+  .ac-item .fn { min-width: 0; }
+  .ac-item .fs { display: block; font-size: 11px; color: var(--muted); }
+  .ac-item .fk { color: var(--text-secondary); font-size: 13px; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -264,6 +297,7 @@
       <div class="value" id="hero-remaining">—</div>
       <div class="sub" id="hero-math"></div>
       <div class="meter"><div class="fill" id="hero-meter" style="width:0%"></div></div>
+      <div style="margin-top:14px"><span class="pill" id="hero-status"></span></div>
     </div>
 
     <div class="tiles">
@@ -276,10 +310,14 @@
       <h2>Log food</h2>
       <div class="chips" id="food-chips"></div>
       <form class="row" id="food-form">
-        <input type="text" id="food-name" placeholder="What did you eat?" required>
+        <div class="ac-wrap">
+          <input type="text" id="food-name" placeholder="Search food… e.g. jollof" required autocomplete="off">
+          <div class="ac-list" id="food-ac"></div>
+        </div>
         <input type="number" id="food-kcal" placeholder="kcal" min="1" max="5000" required style="max-width:90px">
         <button class="primary" type="submit">Add</button>
       </form>
+      <p class="note" style="margin-top:8px">Start typing to search ~150 common foods (values from public nutrition data). Tap a match to fill in the calories, then adjust for your portion size if needed.</p>
       <ul class="entries" id="food-list"></ul>
     </div>
 
@@ -309,10 +347,11 @@
 
     <div class="card">
       <h2>Weight</h2>
-      <form class="row" id="weight-form" style="margin-bottom:14px;">
+      <form class="row" id="weight-form" style="margin-bottom:12px;">
         <input type="number" id="weight-input" step="0.1" min="30" max="300" placeholder="Today's weight (kg)">
         <button class="primary" type="submit">Log</button>
       </form>
+      <div style="margin-bottom:12px"><span class="pill" id="plan-pill"></span></div>
       <div class="legend">
         <span class="key"><span class="swatch" style="background:var(--series-1)"></span>Actual</span>
         <span class="key"><span class="swatch" style="background:var(--baseline)"></span>Plan</span>
@@ -322,6 +361,10 @@
 
     <div class="card">
       <h2>Last 14 days — calories eaten vs budget</h2>
+      <div class="legend">
+        <span class="key"><span class="swatch" style="background:var(--good);height:10px;width:10px;border-radius:3px"></span>Under budget ✓</span>
+        <span class="key"><span class="swatch" style="background:var(--critical);height:10px;width:10px;border-radius:3px"></span>Over budget ✕</span>
+      </div>
       <div class="chart-wrap" id="cal-chart"></div>
       <div class="note" id="cal-summary"></div>
     </div>
@@ -471,6 +514,97 @@ const QUICK_FOODS = [
   ['Salad + protein', 400], ['Protein shake', 200], ['Coffee w/ milk', 50],
 ];
 
+/* Searchable food database — approximate kcal per typical serving,
+   compiled from public nutrition data (USDA FoodData Central and
+   published nutrition tables for West African dishes). */
+const FOOD_DB = [
+  // Nigerian / West African
+  ['Jollof rice', 300, '1 cup'], ['Fried rice (Nigerian)', 330, '1 cup'],
+  ['White rice (boiled)', 205, '1 cup'], ['Rice & beans', 280, '1 cup'],
+  ['Rice & stew', 420, '1 cup + stew'], ['Ofada rice & sauce', 450, '1 plate'],
+  ['Eba (garri)', 330, '1 cup'], ['Pounded yam', 400, '1 cup'],
+  ['Amala', 350, '1 cup'], ['Fufu', 330, '1 cup'], ['Semovita/semolina', 320, '1 cup'],
+  ['Tuwo shinkafa', 300, '1 cup'],
+  ['Egusi soup', 400, '1 serving'], ['Ogbono soup', 300, '1 serving'],
+  ['Efo riro', 250, '1 serving'], ['Okra soup', 150, '1 serving'],
+  ['Vegetable soup', 200, '1 serving'], ['Banga soup', 350, '1 serving'],
+  ['Afang soup', 280, '1 serving'], ['Oha soup', 300, '1 serving'],
+  ['Pepper soup (goat/fish)', 180, '1 bowl'], ['Nsala (white soup)', 250, '1 serving'],
+  ['Moi moi', 250, '1 wrap'], ['Akara', 75, '1 ball'], ['Okpa', 300, '1 wrap'],
+  ['Ewa agoyin & bread', 550, '1 plate'], ['Beans porridge', 300, '1 cup'],
+  ['Yam porridge (asaro)', 300, '1 cup'], ['Boiled yam', 160, '2 slices'],
+  ['Fried yam', 330, '6 pieces'], ['Fried plantain (dodo)', 350, '1 cup'],
+  ['Boiled plantain', 180, '1 medium'], ['Boli (roasted plantain)', 150, '1 medium'],
+  ['Plantain chips', 250, '1 small bag'], ['Suya (beef)', 250, '1 skewer'],
+  ['Kilishi', 130, '1 pack (30g)'], ['Asun (spicy goat)', 300, '1 serving'],
+  ['Nkwobi', 450, '1 serving'], ['Isi ewu', 500, '1 serving'],
+  ['Abacha (African salad)', 400, '1 plate'], ['Shawarma (chicken)', 500, '1 wrap'],
+  ['Meat pie', 350, '1 pie'], ['Sausage roll (Gala)', 200, '1 roll'],
+  ['Puff puff', 85, '1 ball'], ['Chin chin', 250, '½ cup'],
+  ['Buns', 220, '1 piece'], ['Egg roll (Nigerian)', 280, '1 piece'],
+  ['Indomie (1 pack, cooked)', 350, '70g pack'], ['Indomie + egg', 440, '1 pack + egg'],
+  ['Spaghetti jollof', 320, '1 cup'], ['Bread & akara', 480, '2 slices + 3 balls'],
+  ['Agege bread', 210, '3 slices'], ['Bread & butter', 240, '2 slices'],
+  ['Custard (prepared)', 170, '1 cup'], ['Pap (ogi/akamu)', 110, '1 cup'],
+  ['Golden Morn', 190, '1 cup prepared'], ['Zobo drink', 50, '1 cup unsweetened'],
+  ['Kunu drink', 130, '1 cup'], ['Chapman', 220, '1 glass'],
+  ['Malt drink', 180, '33cl bottle'], ['Stew (tomato, with oil)', 150, '1 ladle'],
+  // proteins
+  ['Boiled egg', 78, '1 egg'], ['Fried egg', 95, '1 egg'],
+  ['Scrambled eggs (2)', 200, '2 eggs'], ['Grilled chicken breast', 165, '100g'],
+  ['Grilled chicken thigh', 180, '1 thigh'], ['Fried chicken', 320, '1 piece'],
+  ['Turkey (fried)', 280, '1 wing'], ['Goat meat', 150, '1 portion'],
+  ['Beef (stewed)', 200, '2 pieces'], ['Fried fish (titus/mackerel)', 300, '1 medium'],
+  ['Grilled fish', 250, '1 medium'], ['Croaker fish (grilled)', 280, '1 medium'],
+  ['Stockfish', 100, '1 piece'], ['Salmon fillet', 350, '150g'],
+  ['Tuna (canned in water)', 120, '1 small tin'], ['Sardines (canned)', 190, '1 tin'],
+  ['Sausage', 150, '1 link'], ['Bacon', 90, '2 rashers'],
+  ['Corned beef', 220, '½ tin'], ['Snail (boiled)', 90, '2 large'],
+  ['Ponmo (cow skin)', 45, '2 pieces'],
+  // international mains
+  ['Cheeseburger', 550, '1 burger'], ['Chicken burger', 500, '1 burger'],
+  ['Pizza', 285, '1 slice'], ['French fries', 365, 'medium serving'],
+  ['Chicken wrap', 450, '1 wrap'], ['Club sandwich', 550, '1 sandwich'],
+  ['Tuna sandwich', 400, '1 sandwich'], ['Caesar salad + chicken', 470, '1 bowl'],
+  ['Garden salad (no dressing)', 60, '1 bowl'], ['Salad dressing', 120, '2 tbsp'],
+  ['Steak', 450, '200g'], ['Chicken curry', 400, '1 serving'],
+  ['Chinese fried rice', 520, '1 plate'], ['Noodles (stir-fried)', 550, '1 plate'],
+  ['Spaghetti bolognese', 500, '1 plate'], ['Burrito', 600, '1 burrito'],
+  ['Pancakes', 180, '2 medium'], ['Waffle', 220, '1 waffle'],
+  ['Toast with butter', 120, '1 slice'], ['Croissant', 270, '1 piece'],
+  ['Bagel + cream cheese', 360, '1 bagel'], ['Oatmeal (cooked)', 160, '1 cup'],
+  ['Cereal with milk', 250, '1 bowl'], ['Granola', 240, '½ cup'],
+  ['Greek yogurt', 150, '1 cup'], ['Peanut butter', 95, '1 tbsp'],
+  // fruits & sides
+  ['Banana', 105, '1 medium'], ['Apple', 95, '1 medium'],
+  ['Orange', 62, '1 medium'], ['Mango', 200, '1 whole'],
+  ['Pineapple', 82, '1 cup chunks'], ['Watermelon', 85, '1 big slice'],
+  ['Pawpaw (papaya)', 60, '1 cup'], ['Grapes', 60, '1 cup'],
+  ['Avocado', 160, '½ fruit'], ['Groundnuts (peanuts)', 170, '1 handful'],
+  ['Cashew nuts', 160, '1 handful'], ['Coconut', 100, '1 small piece'],
+  ['Boiled corn', 130, '1 cob'], ['Roasted corn', 120, '1 cob'],
+  ['Cucumber', 16, '1 whole'], ['Carrot', 25, '1 medium'],
+  // drinks
+  ['Coca-Cola (can)', 140, '33cl'], ['Coca-Cola (50cl)', 210, '50cl bottle'],
+  ['Fanta/Sprite (50cl)', 220, '50cl bottle'], ['Fruit juice', 110, '1 cup'],
+  ['Smoothie', 250, '1 cup'], ['Beer (60cl bottle)', 220, '60cl'],
+  ['Stout (small)', 160, '33cl'], ['Wine', 125, '1 glass'],
+  ['Spirits (shot)', 97, '1 shot'], ['Latte', 190, 'medium'],
+  ['Cappuccino', 120, 'medium'], ['Black coffee', 5, '1 cup'],
+  ['Tea with milk & sugar', 60, '1 cup'], ['Milo/Bournvita (made)', 180, '1 cup'],
+  ['Milkshake', 400, 'medium'], ['Energy drink', 110, '25cl can'],
+  ['Yogurt drink', 170, '1 bottle'], ['Soda water / diet drinks', 0, 'any'],
+  ['Water', 0, 'any'],
+  // snacks & sweets
+  ['Chocolate bar', 240, '1 bar (45g)'], ['Biscuits', 150, '3 pieces'],
+  ['Digestive biscuits', 140, '2 pieces'], ['Potato chips (crisps)', 160, '1 small bag'],
+  ['Popcorn (buttered)', 140, '1 cup'], ['Popcorn (plain)', 55, '1 cup'],
+  ['Ice cream', 140, '1 scoop'], ['Cake', 350, '1 slice'],
+  ['Doughnut', 250, '1 piece'], ['Cookies', 160, '2 pieces'],
+  ['Protein bar', 200, '1 bar'], ['Protein shake', 200, '1 scoop + water'],
+  ['Sweets/candy', 25, '1 piece'], ['Honey', 64, '1 tbsp'], ['Sugar', 16, '1 cube'],
+];
+
 /* ================= navigation ================= */
 function show(screen) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -540,6 +674,18 @@ function renderToday() {
   fill.style.width = pct + '%';
   fill.className = 'fill' + (remaining < 0 ? ' over' : pct > 85 ? ' warn' : '');
 
+  const pill = $('hero-status');
+  if (remaining < 0) {
+    pill.className = 'pill bad';
+    pill.innerHTML = '<span class="ico">✕</span>Over budget by ' + fmt(-remaining) + ' kcal — a workout can win it back';
+  } else if (pct > 85) {
+    pill.className = 'pill warn';
+    pill.innerHTML = '<span class="ico">⚠</span>Getting close — ' + fmt(remaining) + ' kcal left';
+  } else {
+    pill.className = 'pill good';
+    pill.innerHTML = '<span class="ico">✓</span>On track — keep it up';
+  }
+
   $('t-eaten').textContent = fmt(eaten);
   $('t-burned').textContent = fmt(burned);
   $('t-budget').textContent = fmt(budget);
@@ -595,11 +741,56 @@ function initToday() {
     chips.appendChild(b);
   });
 
+  // food autocomplete over FOOD_DB
+  const acList = $('food-ac');
+  const nameInput = $('food-name');
+  function closeAc() { acList.classList.remove('open'); acList.innerHTML = ''; }
+  function searchFoods(q) {
+    q = q.trim().toLowerCase();
+    if (q.length < 2) return [];
+    const starts = [], contains = [];
+    for (const f of FOOD_DB) {
+      const n = f[0].toLowerCase();
+      if (n.startsWith(q)) starts.push(f);
+      else if (n.includes(q)) contains.push(f);
+      if (starts.length >= 8) break;
+    }
+    return starts.concat(contains).slice(0, 8);
+  }
+  nameInput.addEventListener('input', () => {
+    const matches = searchFoods(nameInput.value);
+    if (!matches.length) { closeAc(); return; }
+    acList.innerHTML = '';
+    matches.forEach(([n, k, serv]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'ac-item';
+      b.innerHTML = `<span class="fn">${n}<span class="fs">${serv}</span></span><span class="fk">${k} kcal</span>`;
+      b.addEventListener('pointerdown', ev => {
+        ev.preventDefault(); // fire before the input loses focus
+        nameInput.value = n;
+        $('food-kcal').value = k;
+        closeAc();
+        $('food-kcal').focus();
+      });
+      acList.appendChild(b);
+    });
+    acList.classList.add('open');
+  });
+  nameInput.addEventListener('blur', () => setTimeout(closeAc, 150));
+  nameInput.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAc();
+    if (e.key === 'Enter' && acList.classList.contains('open') && !$('food-kcal').value) {
+      e.preventDefault();
+      acList.querySelector('.ac-item').dispatchEvent(new Event('pointerdown'));
+    }
+  });
+
   $('food-form').addEventListener('submit', e => {
     e.preventDefault();
     const name = $('food-name').value.trim();
     const kcal = +$('food-kcal').value;
     if (!name || !kcal) return;
+    closeAc();
     day(todayKey()).food.push({ id: uid(), name, kcal });
     $('food-name').value = ''; $('food-kcal').value = '';
     save(); renderToday();
@@ -642,6 +833,27 @@ function renderProgress() {
   $('p-pace').textContent = daysLeft > 0 && togo > 0
     ? (togo / (daysLeft / 7)).toFixed(2) + ' kg/wk needed' : 'until target';
 
+  // plan-vs-actual status: where the straight line to goal says you should be today
+  const totalDays = Math.max(1, daysBetween(p.startDate, p.targetDate));
+  const elapsed = Math.min(totalDays, Math.max(0, daysBetween(p.startDate, todayKey())));
+  const planToday = p.startWeight - (p.startWeight - p.goalWeight) * (elapsed / totalDays);
+  const diff = w - planToday;
+  const pill = $('plan-pill');
+  if (togo <= 0) {
+    pill.className = 'pill good';
+    pill.innerHTML = '<span class="ico">🎉</span>Goal reached!';
+  } else if (diff <= 0.2) {
+    pill.className = 'pill good';
+    pill.innerHTML = '<span class="ico">✓</span>' +
+      (diff <= -0.2 ? Math.abs(diff).toFixed(1) + ' kg ahead of plan' : 'Right on plan');
+  } else if (diff <= 1.5) {
+    pill.className = 'pill warn';
+    pill.innerHTML = '<span class="ico">⚠</span>' + diff.toFixed(1) + ' kg behind plan — small push needed';
+  } else {
+    pill.className = 'pill bad';
+    pill.innerHTML = '<span class="ico">✕</span>' + diff.toFixed(1) + ' kg behind plan';
+  }
+
   drawWeightChart();
   drawCalChart();
   renderWeightTable();
@@ -670,9 +882,11 @@ function renderWeightTable() {
     const prev = rows[i + 1];
     const diff = prev ? r.kg - prev.kg : null;
     const tr = document.createElement('tr');
-    const chg = diff === null ? '—' : (diff > 0 ? '+' : '') + diff.toFixed(1);
+    const chg = diff === null ? '—' : (diff > 0 ? '↑ +' : diff < 0 ? '↓ ' : '') + diff.toFixed(1);
+    const chgColor = diff === null || diff === 0 ? 'var(--text-secondary)'
+      : diff < 0 ? 'var(--good-text)' : 'var(--critical)';
     tr.innerHTML = `<td>${fmtDate(r.date)}</td><td class="num">${r.kg.toFixed(1)} kg</td>` +
-      `<td class="num" style="color:${diff !== null && diff < 0 ? 'var(--good-text)' : 'var(--text-secondary)'}">${chg}</td>`;
+      `<td class="num" style="color:${chgColor}">${chg}</td>`;
     const td = document.createElement('td');
     td.style.textAlign = 'right';
     const del = document.createElement('button');
@@ -805,7 +1019,8 @@ function drawCalChart() {
       const y = Y(d.eaten), h = Y(0) - y;
       const r = Math.min(4, h); // 4px rounded data-end, square at baseline
       const path = `M${(cx - barW / 2).toFixed(1)},${Y(0).toFixed(1)} V${(y + r).toFixed(1)} Q${(cx - barW / 2).toFixed(1)},${y.toFixed(1)} ${(cx - barW / 2 + r).toFixed(1)},${y.toFixed(1)} H${(cx + barW / 2 - r).toFixed(1)} Q${(cx + barW / 2).toFixed(1)},${y.toFixed(1)} ${(cx + barW / 2).toFixed(1)},${(y + r).toFixed(1)} V${Y(0).toFixed(1)} Z`;
-      svg.appendChild(el('path', { d: path, fill: css('--series-1'), 'data-tip': `${fmtDate(d.key)}|${fmt(d.eaten)} kcal eaten` + (d.burned ? `, ${fmt(d.burned)} burned` : ''), style: 'cursor:pointer' }));
+      const over = d.eaten > budget;
+      svg.appendChild(el('path', { d: path, fill: css(over ? '--critical' : '--good'), 'data-tip': `${fmtDate(d.key)}|${fmt(d.eaten)} kcal eaten` + (d.burned ? `, ${fmt(d.burned)} burned` : '') + (over ? ` — ${fmt(d.eaten - budget)} over ✕` : ' — under ✓'), style: 'cursor:pointer' }));
     }
     if (i % 2 === 0) {
       const t = el('text', { x: cx, y: H - 6, 'text-anchor': 'middle', 'font-size': 9, fill: css('--muted') });

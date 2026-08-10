@@ -372,7 +372,7 @@
         <input type="number" id="food-kcal" placeholder="kcal" min="1" max="5000" required style="max-width:90px">
         <button class="primary" type="submit">Add</button>
       </form>
-      <p class="note" style="margin-top:8px">Start typing to search ~150 common foods (values from public nutrition data). Tap a match to fill in the calories, then adjust for your portion size if needed.</p>
+      <p class="note" style="margin-top:8px">Start typing to search ~250 foods — Nigerian staples, salads, fish &amp; seafood, international mains, and more (values from public nutrition data). Tap a match to fill in the calories, then adjust for your portion size if needed.</p>
       <div style="margin-top:10px">
         <button class="ghost" type="button" id="photo-btn">📷 Estimate calories from a photo</button>
         <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none">
@@ -974,7 +974,9 @@ const QUICK_FOODS = [
 
 /* Searchable food database — approximate kcal per typical serving,
    compiled from public nutrition data (USDA FoodData Central and
-   published nutrition tables for West African dishes). */
+   published nutrition tables). Covers Nigerian / West African staples
+   plus international dishes: salads, fish & seafood, grills, pasta,
+   Asian, Mexican, Middle Eastern, soups, sides, and desserts. */
 const FOOD_DB = [
   // Nigerian / West African
   ['Jollof rice', 300, '1 cup'], ['Fried rice (Nigerian)', 330, '1 cup'],
@@ -1061,6 +1063,69 @@ const FOOD_DB = [
   ['Doughnut', 250, '1 piece'], ['Cookies', 160, '2 pieces'],
   ['Protein bar', 200, '1 bar'], ['Protein shake', 200, '1 scoop + water'],
   ['Sweets/candy', 25, '1 piece'], ['Honey', 64, '1 tbsp'], ['Sugar', 16, '1 cube'],
+  // salads & bowls
+  ['Greek salad', 320, '1 bowl w/ feta & dressing'], ['Cobb salad', 500, '1 bowl'],
+  ['Niçoise salad', 450, '1 bowl'], ['Caprese salad', 350, '1 plate'],
+  ['Chicken salad (with mayo)', 400, '1 bowl'], ['Quinoa salad', 420, '1 bowl'],
+  ['Poke bowl', 550, '1 bowl'], ['Buddha bowl', 600, '1 bowl'],
+  ['Tabbouleh', 180, '1 cup'], ['Coleslaw', 150, '1 side'],
+  ['Potato salad', 250, '1 cup'], ['Side salad (no dressing)', 40, '1 side'],
+  ['Vinaigrette dressing', 60, '1 tbsp'], ['Ranch/Caesar dressing', 75, '1 tbsp'],
+  // fish & seafood
+  ['Sea bass (grilled)', 250, '1 fillet (150g)'], ['Cod (baked)', 160, '1 fillet (150g)'],
+  ['Tilapia (grilled)', 190, '1 fillet (150g)'], ['Halibut', 220, '1 fillet (150g)'],
+  ['Tuna steak', 220, '150g'], ['Smoked salmon', 100, '2 slices (50g)'],
+  ['Prawns / shrimp (grilled)', 120, '100g'], ['Calamari (fried)', 350, '1 serving'],
+  ['Fish & chips', 840, '1 portion'], ['Sushi rolls', 300, '6 pieces'],
+  ['Sashimi', 150, '6 pieces'], ['Lobster (steamed)', 130, '1 tail'],
+  ['Crab meat', 100, '100g'], ['Mussels (steamed)', 170, '1 bowl'],
+  ['Octopus (grilled)', 180, '1 serving'],
+  // international mains & breakfast
+  ['Roast chicken', 300, '1 quarter, skin on'], ['Chicken tikka', 280, '1 serving'],
+  ['Butter chicken (no rice)', 450, '1 serving'], ['Lamb chops', 400, '2 chops'],
+  ['Pork chop (grilled)', 300, '1 chop'], ['Beef kebab', 250, '1 skewer'],
+  ['Meatballs in tomato sauce', 350, '4 meatballs'], ['Roast beef', 180, '3 slices'],
+  ['Duck breast', 350, '1 breast'], ['Turkey breast (sliced)', 110, '3 slices'],
+  ['Grilled halloumi', 250, '3 slices'], ['Omelette (3 eggs)', 350, 'with a little oil'],
+  ['Eggs Benedict', 600, '2 eggs'], ['Full English breakfast', 850, '1 plate'],
+  ['Avocado toast', 300, '1 slice'], ['Shakshuka', 350, '1 pan, 2 eggs'],
+  ['Overnight oats', 350, '1 jar'], ['Chia pudding', 250, '1 cup'],
+  // pasta, grains & potatoes
+  ['Pasta with tomato sauce', 400, '1 plate'], ['Spaghetti carbonara', 600, '1 plate'],
+  ['Lasagna', 450, '1 slice'], ['Mac and cheese', 500, '1 cup'],
+  ['Risotto', 450, '1 plate'], ['Couscous (cooked)', 175, '1 cup'],
+  ['Quinoa (cooked)', 220, '1 cup'], ['Brown rice (cooked)', 215, '1 cup'],
+  ['Mashed potatoes', 240, '1 cup'], ['Baked potato', 160, '1 medium, plain'],
+  ['Sweet potato (baked)', 180, '1 medium'], ['Roast potatoes', 300, '1 serving'],
+  // asian, mexican & middle eastern
+  ['Pad thai', 700, '1 plate'], ['Ramen', 550, '1 bowl'],
+  ['Pho', 450, '1 bowl'], ['Chicken teriyaki with rice', 600, '1 plate'],
+  ['Spring rolls (fried)', 140, '2 rolls'], ['Dumplings', 300, '6 pieces'],
+  ['Chicken & vegetable stir-fry', 400, '1 plate'], ['Thai green curry (no rice)', 350, '1 serving'],
+  ['Tacos', 400, '2 tacos'], ['Quesadilla', 500, '1 whole'],
+  ['Guacamole', 50, '2 tbsp'], ['Hummus', 70, '2 tbsp'],
+  ['Falafel', 170, '3 balls'], ['Falafel wrap', 550, '1 wrap'],
+  ['Kebab wrap (doner)', 700, '1 wrap'],
+  // soups
+  ['Chicken soup', 150, '1 bowl'], ['Tomato soup', 180, '1 bowl'],
+  ['Lentil soup', 230, '1 bowl'], ['Minestrone', 150, '1 bowl'],
+  ['Miso soup', 60, '1 bowl'],
+  // veg, sides & dairy
+  ['Steamed broccoli', 55, '1 cup'], ['Mixed vegetables (steamed)', 80, '1 cup'],
+  ['Grilled asparagus', 40, '6 spears'], ['Green beans', 45, '1 cup'],
+  ['Sautéed spinach', 90, '1 cup, in oil'], ['Rice cakes', 35, '1 cake'],
+  ['Crackers', 70, '4 crackers'], ['Cheese (cheddar)', 110, '1 slice (28g)'],
+  ['Cottage cheese', 110, '½ cup'], ['Feta cheese', 80, '30g'],
+  ['Olive oil', 120, '1 tbsp'], ['Butter', 100, '1 tbsp'],
+  // desserts & extra drinks
+  ['Fruit salad', 80, '1 cup'], ['Dark chocolate', 110, '2 squares'],
+  ['Cheesecake', 400, '1 slice'], ['Brownie', 250, '1 square'],
+  ['Apple pie', 300, '1 slice'], ['Tiramisu', 450, '1 serving'],
+  ['Gelato', 160, '1 scoop'], ['Banana bread', 230, '1 slice'],
+  ['Muffin', 400, '1 large'], ['Croissant (chocolate)', 300, '1 piece'],
+  ['Green tea', 0, '1 cup, plain'], ['Kombucha', 35, '1 cup'],
+  ['Coconut water', 45, '1 cup'], ['Gin & tonic', 170, '1 glass'],
+  ['Mojito', 220, '1 glass'], ['Prosecco', 80, '1 glass'],
 ];
 
 /* ================= navigation ================= */

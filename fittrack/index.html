@@ -81,6 +81,7 @@
   .hero { text-align: center; padding: 22px 16px; }
   .hero .label { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
   .hero .value { font-size: 52px; font-weight: 650; line-height: 1.05; letter-spacing: -0.02em; }
+  .hero .value .unit { font-size: 22px; font-weight: 500; color: var(--text-secondary); margin-left: 2px; }
   .hero .value.over { color: var(--critical); }
   .hero .sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
@@ -293,7 +294,7 @@
     <div id="budget-banner"></div>
 
     <div class="card hero">
-      <div class="label">Calories remaining today</div>
+      <div class="label" id="hero-label">You can still eat</div>
       <div class="value" id="hero-remaining">—</div>
       <div class="sub" id="hero-math"></div>
       <div class="meter"><div class="fill" id="hero-meter" style="width:0%"></div></div>
@@ -665,9 +666,15 @@ function renderToday() {
   const burned = sumKcal(d.workouts);
   const remaining = budget - eaten + burned;
 
-  $('hero-remaining').textContent = fmt(remaining);
+  if (remaining >= 0) {
+    $('hero-label').textContent = 'You can still eat';
+    $('hero-remaining').innerHTML = fmt(remaining) + '<span class="unit">kcal</span>';
+  } else {
+    $('hero-label').textContent = "You've eaten over budget by";
+    $('hero-remaining').innerHTML = fmt(-remaining) + '<span class="unit">kcal</span>';
+  }
   $('hero-remaining').classList.toggle('over', remaining < 0);
-  $('hero-math').textContent = `${fmt(budget)} budget − ${fmt(eaten)} eaten + ${fmt(burned)} exercise`;
+  $('hero-math').textContent = `daily budget ${fmt(budget)} − food eaten ${fmt(eaten)} + earned back by exercise ${fmt(burned)}`;
 
   const pct = Math.min(100, (eaten / Math.max(1, budget + burned)) * 100);
   const fill = $('hero-meter');

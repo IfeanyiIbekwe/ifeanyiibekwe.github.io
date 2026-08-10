@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#2a78d6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="FitTrack">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>FitTrack — Calorie &amp; Workout Tracker</title>
 <style>
   :root {
@@ -220,6 +228,18 @@
   .pill.good { color: var(--good-text); background: rgba(12,163,12,0.12); }
   .pill.warn { color: var(--warning-text); background: rgba(250,178,25,0.16); }
   .pill.bad  { color: var(--critical); background: rgba(208,59,59,0.12); }
+  .pill.info { color: var(--series-1); background: var(--series-1-wash); }
+
+  /* ---- weekly review ---- */
+  .review-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--grid); font-size: 14px; }
+  .review-row:last-of-type { border-bottom: none; }
+  .review-row .rv { font-weight: 650; font-variant-numeric: tabular-nums; }
+
+  /* ---- guide ---- */
+  .guide h3 { font-size: 15px; font-weight: 650; margin: 2px 0 8px; }
+  .guide p, .guide li { font-size: 14px; line-height: 1.55; color: var(--text-primary); }
+  .guide ul, .guide ol { padding-left: 20px; margin: 6px 0; }
+  .guide .sub2 { font-size: 13px; font-weight: 650; color: var(--text-secondary); margin: 10px 0 4px; }
 
   /* ---- food autocomplete ---- */
   .ac-wrap { position: relative; flex: 1; min-width: 0; }
@@ -299,6 +319,7 @@
       <div class="sub" id="hero-math"></div>
       <div class="meter"><div class="fill" id="hero-meter" style="width:0%"></div></div>
       <div style="margin-top:14px"><span class="pill" id="hero-status"></span></div>
+      <div style="margin-top:8px"><span class="pill info" id="if-pill" style="display:none"></span></div>
     </div>
 
     <div class="tiles">
@@ -334,12 +355,23 @@
           <button class="primary" type="submit">Add</button>
         </div>
       </form>
+      <hr class="sep">
+      <form class="row" id="steps-form">
+        <input type="number" id="steps-input" placeholder="Today's steps (from Health app)" min="100" max="100000">
+        <button class="primary" type="submit">Add</button>
+      </form>
+      <p class="note" style="margin-top:8px">Copy your step count from the iPhone Health app once a day — it converts to calories burned. (Automatic sync isn't possible for a purely in-browser app.)</p>
       <ul class="entries" id="workout-list"></ul>
     </div>
   </section>
 
   <!-- ============ PROGRESS ============ -->
   <section class="screen" id="screen-progress">
+    <div class="card">
+      <h2>This week's review</h2>
+      <div id="weekly-review"></div>
+    </div>
+
     <div class="tiles">
       <div class="tile"><div class="label">Lost so far</div><div class="value" id="p-lost">—</div><div class="delta good" id="p-lost-d"></div></div>
       <div class="tile"><div class="label">To go</div><div class="value" id="p-togo">—</div><div class="delta">kg to goal</div></div>
@@ -405,6 +437,13 @@
       </div>
       <label class="field"><span>Daily calorie budget (leave blank to auto-calculate from goal)</span>
         <input type="number" id="st-budget" min="800" max="6000" placeholder="auto"></label>
+      <div class="grid2">
+        <label class="field"><span>Eating window opens (fasting)</span>
+          <input type="time" id="st-if-start"></label>
+        <label class="field"><span>Eating window closes</span>
+          <input type="time" id="st-if-end"></label>
+      </div>
+      <p class="note" style="margin:-4px 0 12px">Optional intermittent fasting: e.g. 12:00 to 20:00 for a 16:8 fast. Leave both blank to turn it off.</p>
       <div class="note" id="st-preview" style="margin-bottom:12px;"></div>
       <button class="primary" style="width:100%" id="st-save">Save changes</button>
     </div>
@@ -423,11 +462,60 @@
     <p class="note">Estimates use the Mifflin-St Jeor equation and MET values; they are approximations, not medical advice. Very-low-calorie diets should be supervised by a doctor.</p>
   </section>
 
+  <!-- ============ GUIDE ============ -->
+  <section class="screen guide" id="screen-guide">
+    <div class="card">
+      <h2>Strength plan — 3 days a week</h2>
+      <p>In a big calorie deficit, lifting is what makes the weight you lose <strong>fat instead of muscle</strong>. Three short full-body sessions a week is enough. Rest at least a day between sessions.</p>
+      <div class="sub2">Day A</div>
+      <ul>
+        <li>Goblet squat — 3 × 10</li>
+        <li>Push-ups (knees if needed) — 3 × as many as you can</li>
+        <li>One-arm dumbbell row — 3 × 10 each side</li>
+        <li>Plank — 3 × 30 seconds</li>
+      </ul>
+      <div class="sub2">Day B</div>
+      <ul>
+        <li>Romanian deadlift (dumbbells) — 3 × 8</li>
+        <li>Overhead press — 3 × 10</li>
+        <li>Walking lunges — 3 × 10 each leg</li>
+        <li>Dead bug — 3 × 10 each side</li>
+      </ul>
+      <div class="sub2">Day C</div>
+      <ul>
+        <li>Squat or leg press — 3 × 10</li>
+        <li>Incline push-up or bench press — 3 × 10</li>
+        <li>Lat pulldown or band pull-down — 3 × 10</li>
+        <li>Farmer's carry — 3 × 30 metres</li>
+      </ul>
+      <p class="note">Progress by adding a rep each session; when you hit 12s, add weight and drop back to 8–10. Log each session under "Strength training" on the Today tab.</p>
+    </div>
+
+    <div class="card">
+      <h2>Intermittent fasting</h2>
+      <p>Fasting doesn't burn extra calories by itself — it works by <strong>shrinking the hours you can eat</strong>, which makes staying under budget easier (no late-night snacking). A common starting point is <strong>16:8</strong>: eat between 12:00 and 20:00, water/black coffee/zobo (unsweetened) outside it.</p>
+      <p>Set your window in <strong>Settings</strong> and the Today screen will show whether you're fasting or free to eat. If you train hard, keep protein high inside the window.</p>
+    </div>
+
+    <div class="card">
+      <h2>Habits that decide the outcome</h2>
+      <ol>
+        <li><strong>Log everything, especially oil.</strong> A ladle of stew or fried-food oil can hide 200+ kcal. When unsure, round up.</li>
+        <li><strong>Protein at every meal</strong> — aim ~1.6 g per kg of goal weight (~120 g/day for a 75 kg goal): eggs, chicken, fish, beans, moi moi.</li>
+        <li><strong>8–10k steps daily.</strong> It's the easiest 300–500 kcal you'll ever burn. Log them below the workouts.</li>
+        <li><strong>Weigh in every morning</strong>, after the bathroom, before eating. Judge the weekly trend, never a single day.</li>
+        <li><strong>Sleep 7+ hours.</strong> Short sleep measurably increases hunger the next day.</li>
+        <li><strong>Drinks count.</strong> A 50cl soft drink is ~210 kcal; water and zero-sugar drinks are 0.</li>
+      </ol>
+    </div>
+  </section>
+
 </div>
 
 <nav class="tabs" id="tabs" style="display:none">
   <button data-screen="today"><span class="ico">🍽</span>Today</button>
   <button data-screen="progress"><span class="ico">📈</span>Progress</button>
+  <button data-screen="guide"><span class="ico">📖</span>Guide</button>
   <button data-screen="settings"><span class="ico">⚙️</span>Settings</button>
 </nav>
 
@@ -706,6 +794,30 @@ function renderToday() {
 
   renderEntryList('food-list', d.food, k, 'food');
   renderEntryList('workout-list', d.workouts, k, 'workouts');
+  renderIfPill();
+}
+
+function renderIfPill() {
+  const p = state.profile;
+  const pill = $('if-pill');
+  if (!p.ifStart || !p.ifEnd) { pill.style.display = 'none'; return; }
+  pill.style.display = 'inline-flex';
+  const toMins = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+  const now = new Date();
+  const nowM = now.getHours() * 60 + now.getMinutes();
+  const s = toMins(p.ifStart), e = toMins(p.ifEnd);
+  const inWindow = s <= e ? (nowM >= s && nowM < e) : (nowM >= s || nowM < e);
+  const fmtM = m => {
+    const h = Math.floor(m / 60), mm = m % 60;
+    return h > 0 ? `${h}h ${mm}m` : `${mm}m`;
+  };
+  if (inWindow) {
+    const left = (e - nowM + 1440) % 1440;
+    pill.innerHTML = '<span class="ico">🍽</span>Eating window open — closes in ' + fmtM(left) + ' (' + p.ifEnd + ')';
+  } else {
+    const until = (s - nowM + 1440) % 1440;
+    pill.innerHTML = '<span class="ico">⏳</span>Fasting — window opens in ' + fmtM(until) + ' (' + p.ifStart + ')';
+  }
 }
 
 function renderEntryList(elId, list, dayKey, kind) {
@@ -823,6 +935,21 @@ function initToday() {
     $('wo-mins').value = ''; $('wo-kcal').value = '';
     save(); renderToday();
   });
+
+  $('steps-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const steps = +$('steps-input').value;
+    if (!steps) return;
+    // ~0.04 kcal per step at 75kg, scaled by body weight
+    const kcal = Math.round(steps * 0.04 * ((latestWeight() || 75) / 75));
+    const d = day(todayKey());
+    // one steps entry per day — replace if it already exists
+    const existing = d.workouts.find(w => w.steps);
+    if (existing) { existing.name = `Walking — ${steps.toLocaleString()} steps`; existing.kcal = kcal; existing.steps = steps; }
+    else d.workouts.push({ id: uid(), name: `Walking — ${steps.toLocaleString()} steps`, mins: null, kcal, steps });
+    $('steps-input').value = '';
+    save(); renderToday();
+  });
 }
 
 /* ================= progress screen ================= */
@@ -864,6 +991,63 @@ function renderProgress() {
   drawWeightChart();
   drawCalChart();
   renderWeightTable();
+  renderWeeklyReview();
+}
+
+function renderWeeklyReview() {
+  const { budget } = calorieBudget();
+  const dayStats = i => { // i days ago
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const dd = state.days[k];
+    if (!dd || (!dd.food.length && !dd.workouts.length)) return null;
+    return { eaten: sumKcal(dd.food), burned: sumKcal(dd.workouts) };
+  };
+  let logged = 0, over = 0, net = 0, steps = 0, workouts = 0;
+  for (let i = 0; i < 7; i++) {
+    const s = dayStats(i);
+    if (!s) continue;
+    logged++; net += s.eaten - s.burned;
+    if (s.eaten - s.burned > budget) over++;
+  }
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const dd = state.days[k];
+    if (dd) dd.workouts.forEach(w => { if (w.steps) steps += w.steps; else workouts++; });
+  }
+  // weight change over ~the last week
+  const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+  const cutoff = weekAgo.getFullYear() + '-' + String(weekAgo.getMonth() + 1).padStart(2, '0') + '-' + String(weekAgo.getDate()).padStart(2, '0');
+  const older = state.weights.filter(x => x.date <= cutoff);
+  const base = older.length ? older[older.length - 1].kg : (state.weights.length ? state.weights[0].kg : null);
+  const wChange = base !== null && state.weights.length ? latestWeight() - base : null;
+
+  const el2 = $('weekly-review');
+  const avgNet = logged ? Math.round(net / logged) : 0;
+  const avgDef = logged ? Math.round(calorieBudget().tdee - avgNet) : 0;
+  const projMonth = logged ? (Math.max(0, avgDef) * 30 / KCAL_PER_KG) : 0;
+
+  const row = (label, val, cls) =>
+    `<div class="review-row"><span>${label}</span><span class="rv" ${cls ? `style="color:${cls}"` : ''}>${val}</span></div>`;
+  let html = '';
+  html += row('Days logged', logged + ' of 7', logged >= 5 ? 'var(--good-text)' : 'var(--warning-text)');
+  html += row('Days over budget', over + (logged ? ' of ' + logged : ''), over === 0 ? 'var(--good-text)' : over >= 3 ? 'var(--critical)' : 'var(--warning-text)');
+  if (logged) html += row('Avg daily deficit', fmt(Math.max(0, avgDef)) + ' kcal', avgDef >= 500 ? 'var(--good-text)' : 'var(--warning-text)');
+  if (wChange !== null && older.length) html += row('Weight this week', (wChange > 0 ? '+' : '') + wChange.toFixed(1) + ' kg', wChange < 0 ? 'var(--good-text)' : 'var(--critical)');
+  if (steps) html += row('Steps logged', steps.toLocaleString());
+  if (workouts) html += row('Workouts', String(workouts));
+  if (logged) html += row('Projected loss / month', '−' + projMonth.toFixed(1) + ' kg', projMonth >= 2 ? 'var(--good-text)' : 'var(--warning-text)');
+
+  // one nudge, most important first
+  let nudge;
+  if (logged < 5) nudge = 'Log food every day — even rough estimates. Consistent logging is the strongest predictor of hitting your goal.';
+  else if (over >= 3) nudge = `You went over budget ${over} days. Look at what those days had in common (weekend? drinks? late-night?) and plan around it this week.`;
+  else if (avgDef < 500) nudge = 'Your average deficit is modest. Add a daily walk or swap one heavy meal for a lighter one to speed things up.';
+  else if (workouts < 2) nudge = 'Calories are on track — add 2–3 strength sessions (see the Guide tab) so the loss comes from fat, not muscle.';
+  else nudge = 'Strong week — deficit on target and training logged. Repeat exactly this.';
+  html += `<p class="note" style="margin-top:10px">💡 ${nudge}</p>`;
+  el2.innerHTML = html;
 }
 
 function initProgress() {
@@ -1092,6 +1276,8 @@ function renderSettings() {
   $('st-sex').value = p.sex;
   $('st-activity').value = String(p.activity);
   $('st-budget').value = p.customBudget || '';
+  $('st-if-start').value = p.ifStart || '';
+  $('st-if-end').value = p.ifEnd || '';
   updateSettingsPreview();
 }
 
@@ -1112,6 +1298,9 @@ function initSettings() {
     p.activity = +$('st-activity').value;
     p.targetDate = $('st-date').value;
     p.customBudget = +$('st-budget').value || null;
+    const ifS = $('st-if-start').value, ifE = $('st-if-end').value;
+    p.ifStart = (ifS && ifE) ? ifS : null;
+    p.ifEnd = (ifS && ifE) ? ifE : null;
     save();
     updateSettingsPreview();
     alert('Saved.');
@@ -1164,11 +1353,17 @@ initProgress();
 initSettings();
 show(state.profile ? 'today' : 'setup');
 
-// re-render at midnight rollover if the tab stays open
+// re-render at midnight rollover if the tab stays open; keep the fasting countdown fresh
 let bootDay = todayKey();
 setInterval(() => {
   if (todayKey() !== bootDay) { bootDay = todayKey(); if (state.profile) show('today'); }
+  else if (state.profile && $('screen-today').classList.contains('active')) renderIfPill();
 }, 60000);
+
+// installable app (PWA): cache for offline use
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>

@@ -241,6 +241,21 @@
   .guide ul, .guide ol { padding-left: 20px; margin: 6px 0; }
   .guide .sub2 { font-size: 13px; font-weight: 650; color: var(--text-secondary); margin: 10px 0 4px; }
 
+  /* ---- exercise illustrations ---- */
+  .ex { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--grid); align-items: flex-start; }
+  .ex:last-child { border-bottom: none; }
+  .ex-fig { width: 112px; flex-shrink: 0; background: var(--page); border-radius: 10px; }
+  .ex-txt { min-width: 0; }
+  .ex-name { font-weight: 650; font-size: 14px; margin-bottom: 4px; }
+  .ex-txt ul { margin: 0; padding-left: 16px; }
+  .ex-txt li { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
+  .ex-fig .fig { stroke: var(--text-primary); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ex-fig .head { fill: var(--text-primary); }
+  .ex-fig .eq { stroke: var(--muted); stroke-width: 3; fill: none; stroke-linecap: round; }
+  .ex-fig .eqt { stroke: var(--muted); stroke-width: 5; fill: none; stroke-linecap: round; }
+  .ex-fig .eqf { fill: var(--muted); }
+  .ex-fig .mv { stroke: var(--series-1); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
   /* ---- food autocomplete ---- */
   .ac-wrap { position: relative; flex: 1; min-width: 0; }
   .ac-list {
@@ -466,29 +481,238 @@
   <section class="screen guide" id="screen-guide">
     <div class="card">
       <h2>Strength plan — 3 days a week</h2>
-      <p>In a big calorie deficit, lifting is what makes the weight you lose <strong>fat instead of muscle</strong>. Three short full-body sessions a week is enough. Rest at least a day between sessions.</p>
-      <div class="sub2">Day A</div>
+      <p>In a big calorie deficit, lifting is what makes the weight you lose <strong>fat instead of muscle</strong>. Three sessions a week, at least a day of rest between them. Form guide with pictures below.</p>
+      <div class="sub2">Day A — Legs</div>
       <ul>
-        <li>Goblet squat — 3 × 10</li>
-        <li>Push-ups (knees if needed) — 3 × as many as you can</li>
-        <li>One-arm dumbbell row — 3 × 10 each side</li>
+        <li>Squat — 3 × 10</li>
+        <li>Lunges — 3 × 10 each leg</li>
         <li>Plank — 3 × 30 seconds</li>
+        <li>Treadmill incline walk — 15 min</li>
       </ul>
-      <div class="sub2">Day B</div>
+      <div class="sub2">Day B — Push</div>
       <ul>
-        <li>Romanian deadlift (dumbbells) — 3 × 8</li>
+        <li>Bench press — 3 × 10</li>
         <li>Overhead press — 3 × 10</li>
-        <li>Walking lunges — 3 × 10 each leg</li>
-        <li>Dead bug — 3 × 10 each side</li>
+        <li>Plank — 3 × 30 seconds</li>
+        <li>Treadmill easy jog — 10 min</li>
       </ul>
-      <div class="sub2">Day C</div>
+      <div class="sub2">Day C — Pull</div>
       <ul>
-        <li>Squat or leg press — 3 × 10</li>
-        <li>Incline push-up or bench press — 3 × 10</li>
-        <li>Lat pulldown or band pull-down — 3 × 10</li>
-        <li>Farmer's carry — 3 × 30 metres</li>
+        <li>Deadlift — 3 × 8</li>
+        <li>Pull-ups (or lat pulldown) — 3 × as many as you can</li>
+        <li>One-arm dumbbell row — 3 × 10 each side</li>
+        <li>Treadmill intervals — 10 min (1 min brisk / 1 min easy)</li>
       </ul>
-      <p class="note">Progress by adding a rep each session; when you hit 12s, add weight and drop back to 8–10. Log each session under "Strength training" on the Today tab.</p>
+      <p class="note">Start light enough to finish every set with clean form. Progress by adding one rep per session; at 12 reps, add weight and drop back to 8–10. Log each session under "Strength training" on the Today tab.</p>
+    </div>
+
+    <div class="card">
+      <h2>Exercise form guide</h2>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Squat: figure in deep squat holding a weight, arrow pointing up">
+          <line class="eq" x1="14" y1="98" x2="106" y2="98"/>
+          <circle class="head" cx="62" cy="28" r="6.5"/>
+          <path class="fig" d="M60,36 L52,62 L72,68 L68,94 L80,94"/>
+          <path class="fig" d="M58,42 L66,52"/>
+          <circle class="eqf" cx="68" cy="55" r="5"/>
+          <line class="mv" x1="96" y1="84" x2="96" y2="48"/>
+          <polyline class="mv" points="90,55 96,48 102,55"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Squat</div>
+          <ul>
+            <li>Feet shoulder-width, toes slightly out</li>
+            <li>Sit back and down until thighs are parallel</li>
+            <li>Chest up, heels flat, knees track over toes</li>
+            <li>Drive up through the heels</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Deadlift: hinged figure gripping a barbell at the shins, arrow curving up">
+          <line class="eq" x1="14" y1="98" x2="106" y2="98"/>
+          <circle class="head" cx="42" cy="32" r="6.5"/>
+          <path class="fig" d="M45,40 L32,60 L46,74 L42,94 L54,94"/>
+          <path class="fig" d="M46,42 L56,76"/>
+          <circle class="eq" cx="58" cy="82" r="11"/>
+          <circle class="head" cx="58" cy="82" r="2.5"/>
+          <path class="mv" d="M84,82 Q94,62 86,44"/>
+          <polyline class="mv" points="79,49 86,44 92,51"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Deadlift</div>
+          <ul>
+            <li>Bar over mid-foot, shins close to it</li>
+            <li>Push hips back, flat back — never rounded</li>
+            <li>Stand up by driving hips forward</li>
+            <li>Arms stay straight; the legs do the lifting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Bench press: figure lying on a bench pressing a weight upward">
+          <line class="eqt" x1="22" y1="72" x2="78" y2="72"/>
+          <line class="eq" x1="30" y1="74" x2="30" y2="90"/>
+          <line class="eq" x1="68" y1="74" x2="68" y2="90"/>
+          <circle class="head" cx="29" cy="63" r="6"/>
+          <path class="fig" d="M37,66 L62,66 L72,78 L72,94 L80,94"/>
+          <path class="fig" d="M41,64 L41,46"/>
+          <circle class="eqf" cx="41" cy="40" r="6.5"/>
+          <line class="mv" x1="94" y1="68" x2="94" y2="38"/>
+          <polyline class="mv" points="88,45 94,38 100,45"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Bench press</div>
+          <ul>
+            <li>Eyes under the bar, feet flat on the floor</li>
+            <li>Lower to mid-chest with control</li>
+            <li>Press up until arms are straight</li>
+            <li>Wrists stacked over elbows</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Overhead press: standing figure holding a bar overhead">
+          <line class="eq" x1="14" y1="98" x2="106" y2="98"/>
+          <circle class="head" cx="60" cy="36" r="6.5"/>
+          <path class="fig" d="M60,44 L60,66 L52,94"/>
+          <path class="fig" d="M60,66 L68,94"/>
+          <path class="fig" d="M54,46 L46,26"/>
+          <path class="fig" d="M66,46 L74,26"/>
+          <line class="eq" x1="36" y1="22" x2="84" y2="22"/>
+          <circle class="eqf" cx="36" cy="22" r="4.5"/>
+          <circle class="eqf" cx="84" cy="22" r="4.5"/>
+          <line class="mv" x1="100" y1="62" x2="100" y2="34"/>
+          <polyline class="mv" points="94,41 100,34 106,41"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Overhead press</div>
+          <ul>
+            <li>Bar at shoulders, elbows under wrists</li>
+            <li>Brace your core — don't lean back</li>
+            <li>Press straight up past your face</li>
+            <li>Finish with biceps by your ears</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Pull-up: figure hanging from a bar pulling chin above it">
+          <line class="eqt" x1="22" y1="16" x2="98" y2="16"/>
+          <circle class="head" cx="60" cy="26" r="6.5"/>
+          <path class="fig" d="M44,16 L46,32 L54,36"/>
+          <path class="fig" d="M76,16 L74,32 L66,36"/>
+          <path class="fig" d="M60,34 L60,60 L52,76 L60,88"/>
+          <line class="mv" x1="104" y1="60" x2="104" y2="32"/>
+          <polyline class="mv" points="98,39 104,32 110,39"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Pull-up</div>
+          <ul>
+            <li>Hands slightly wider than shoulders</li>
+            <li>Pull until your chin clears the bar</li>
+            <li>Lower slowly — that half builds muscle too</li>
+            <li>Too hard? Use the assisted machine or lat pulldown</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="One-arm row: bent-over figure with one hand on a bench rowing a dumbbell">
+          <line class="eqt" x1="20" y1="70" x2="52" y2="70"/>
+          <line class="eq" x1="24" y1="72" x2="24" y2="88"/>
+          <line class="eq" x1="48" y1="72" x2="48" y2="88"/>
+          <circle class="head" cx="26" cy="34" r="6"/>
+          <path class="fig" d="M33,39 L62,48"/>
+          <path class="fig" d="M37,40 L30,66"/>
+          <path class="fig" d="M62,48 L68,70 L64,92"/>
+          <path class="fig" d="M62,48 L80,64 L86,88"/>
+          <path class="fig" d="M42,42 L46,58 L44,66"/>
+          <circle class="eqf" cx="44" cy="71" r="5"/>
+          <line class="mv" x1="58" y1="76" x2="58" y2="56"/>
+          <polyline class="mv" points="53,62 58,56 63,62"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">One-arm dumbbell row</div>
+          <ul>
+            <li>One hand on the bench, back flat</li>
+            <li>Pull the weight to your hip, not your chest</li>
+            <li>Squeeze the shoulder blade at the top</li>
+            <li>No twisting — torso stays square</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Lunge: figure with front knee bent and rear leg extended back, arrow pointing down">
+          <line class="eq" x1="14" y1="94" x2="106" y2="94"/>
+          <circle class="head" cx="52" cy="22" r="6.5"/>
+          <path class="fig" d="M52,30 L52,58 L70,62 L70,90 L80,90"/>
+          <path class="fig" d="M52,58 L38,76 L22,90"/>
+          <path class="fig" d="M52,36 L55,56"/>
+          <circle class="eqf" cx="55" cy="60" r="4.5"/>
+          <line class="mv" x1="94" y1="46" x2="94" y2="72"/>
+          <polyline class="mv" points="88,65 94,72 100,65"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Lunge</div>
+          <ul>
+            <li>Big step forward, drop the back knee</li>
+            <li>Front knee at 90°, over the ankle</li>
+            <li>Torso upright, core tight</li>
+            <li>Push off the front heel to stand</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Plank: figure holding a straight line on forearms and toes">
+          <line class="eq" x1="14" y1="90" x2="106" y2="90"/>
+          <circle class="head" cx="28" cy="52" r="6"/>
+          <path class="fig" d="M36,57 L86,76 L92,86"/>
+          <path class="fig" d="M38,58 L33,86 L48,86"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Plank</div>
+          <ul>
+            <li>Forearms down, elbows under shoulders</li>
+            <li>One straight line from head to heels</li>
+            <li>Squeeze glutes; don't let hips sag or pike</li>
+            <li>Breathe — don't hold your breath</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ex">
+        <svg class="ex-fig" viewBox="0 0 120 110" role="img" aria-label="Treadmill: figure running on a treadmill with motion lines">
+          <line class="eqt" x1="22" y1="90" x2="86" y2="93"/>
+          <line class="eq" x1="84" y1="91" x2="96" y2="44"/>
+          <rect class="eqf" x="88" y="34" width="16" height="9" rx="2"/>
+          <circle class="head" cx="50" cy="30" r="6"/>
+          <path class="fig" d="M50,38 L48,60"/>
+          <path class="fig" d="M50,42 L59,50 L53,56"/>
+          <path class="fig" d="M50,43 L41,53"/>
+          <path class="fig" d="M48,60 L59,72 L55,86"/>
+          <path class="fig" d="M48,60 L38,72 L31,64"/>
+          <line class="mv" x1="16" y1="38" x2="27" y2="38"/>
+          <line class="mv" x1="12" y1="48" x2="23" y2="48"/>
+          <line class="mv" x1="16" y1="58" x2="27" y2="58"/>
+        </svg>
+        <div class="ex-txt">
+          <div class="ex-name">Treadmill</div>
+          <ul>
+            <li>Incline walk (10–12% at 4–5 km/h) burns like a jog, easier on knees</li>
+            <li>Intervals: 1 min brisk, 1 min easy, repeat</li>
+            <li>Don't hold the rails — it cancels the incline</li>
+            <li>Log it as Walking or Running on Today</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
     <div class="card">

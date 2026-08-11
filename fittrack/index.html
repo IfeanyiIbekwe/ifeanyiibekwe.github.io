@@ -100,6 +100,7 @@
   .meter .fill { height: 100%; border-radius: 5px; background: var(--series-1); transition: width .3s ease; }
   .meter .fill.warn { background: var(--warning); }
   .meter .fill.over { background: var(--critical); }
+  .meter .fill.done { background: var(--good); }
 
   .tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px; }
   .tile {
@@ -359,6 +360,15 @@
       <div class="tile"><div class="label">Eaten</div><div class="value" id="t-eaten">0</div><div class="delta">kcal</div></div>
       <div class="tile"><div class="label">Burned</div><div class="value" id="t-burned">0</div><div class="delta">kcal exercise</div></div>
       <div class="tile"><div class="label">Budget</div><div class="value" id="t-budget">0</div><div class="delta">kcal / day</div></div>
+    </div>
+
+    <div class="card" style="padding:12px 16px; margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; font-size:13px; margin-bottom:8px;">
+        <span style="color:var(--text-secondary); font-weight:600;">Protein today</span>
+        <span style="font-variant-numeric:tabular-nums;"><b id="protein-now">0</b> <span style="color:var(--muted)">/ <span id="protein-goal">—</span> g</span></span>
+      </div>
+      <div class="meter" style="margin-top:0;"><div class="fill" id="protein-meter" style="width:0%"></div></div>
+      <p class="note" id="protein-note" style="margin-top:8px;">Aim for ~1.6 g per kg of goal weight so the weight you lose is fat, not muscle. Counted from search picks, quick-add chips, and photo estimates.</p>
     </div>
 
     <div class="card">
@@ -966,11 +976,70 @@ function estimateBurn(met, mins) {
   return Math.round(met * w * (mins / 60));
 }
 
-/* quick-add food suggestions */
+/* quick-add food suggestions: [name, kcal, protein g] */
 const QUICK_FOODS = [
-  ['Eggs (2)', 150], ['Oatmeal bowl', 300], ['Chicken & rice', 550],
-  ['Salad + protein', 400], ['Protein shake', 200], ['Coffee w/ milk', 50],
+  ['Eggs (2)', 150, 12], ['Oatmeal bowl', 300, 10], ['Chicken & rice', 550, 35],
+  ['Salad + protein', 400, 30], ['Protein shake', 200, 25], ['Coffee w/ milk', 50, 1],
 ];
+
+/* Protein grams per FOOD_DB serving (same public nutrition sources).
+   Foods not listed are low-protein (fruit, drinks, sweets) and show no figure. */
+const PROTEIN = {
+  'Jollof rice': 6, 'Fried rice (Nigerian)': 8, 'White rice (boiled)': 4, 'Rice & beans': 10,
+  'Rice & stew': 10, 'Ofada rice & sauce': 12, 'Eba (garri)': 2, 'Pounded yam': 3,
+  'Amala': 2, 'Fufu': 2, 'Semovita/semolina': 3, 'Tuwo shinkafa': 3,
+  'Egusi soup': 18, 'Ogbono soup': 12, 'Efo riro': 12, 'Okra soup': 8,
+  'Vegetable soup': 10, 'Banga soup': 15, 'Afang soup': 14, 'Oha soup': 14,
+  'Pepper soup (goat/fish)': 20, 'Nsala (white soup)': 22, 'Moi moi': 12, 'Akara': 4,
+  'Okpa': 12, 'Ewa agoyin & bread': 20, 'Beans porridge': 15, 'Yam porridge (asaro)': 5,
+  'Boiled yam': 2, 'Fried yam': 3, 'Fried plantain (dodo)': 2, 'Boiled plantain': 2,
+  'Plantain chips': 2, 'Suya (beef)': 26, 'Kilishi': 16, 'Asun (spicy goat)': 25,
+  'Nkwobi': 30, 'Isi ewu': 32, 'Abacha (African salad)': 10, 'Shawarma (chicken)': 30,
+  'Meat pie': 10, 'Sausage roll (Gala)': 6, 'Egg roll (Nigerian)': 8,
+  'Indomie (1 pack, cooked)': 7, 'Indomie + egg': 13, 'Spaghetti jollof': 8,
+  'Bread & akara': 14, 'Agege bread': 6, 'Bread & butter': 5, 'Golden Morn': 5,
+  'Boiled egg': 6, 'Fried egg': 6, 'Scrambled eggs (2)': 12, 'Grilled chicken breast': 31,
+  'Grilled chicken thigh': 22, 'Fried chicken': 28, 'Turkey (fried)': 27, 'Goat meat': 20,
+  'Beef (stewed)': 22, 'Fried fish (titus/mackerel)': 28, 'Grilled fish': 30,
+  'Croaker fish (grilled)': 30, 'Stockfish': 20, 'Salmon fillet': 34,
+  'Tuna (canned in water)': 26, 'Sardines (canned)': 22, 'Sausage': 6, 'Bacon': 6,
+  'Corned beef': 20, 'Snail (boiled)': 15, 'Ponmo (cow skin)': 9,
+  'Cheeseburger': 28, 'Chicken burger': 27, 'Pizza': 12, 'French fries': 4,
+  'Chicken wrap': 28, 'Club sandwich': 30, 'Tuna sandwich': 22, 'Caesar salad + chicken': 35,
+  'Steak': 50, 'Chicken curry': 30, 'Chinese fried rice': 15, 'Noodles (stir-fried)': 15,
+  'Spaghetti bolognese': 25, 'Burrito': 25, 'Pancakes': 5, 'Waffle': 5,
+  'Croissant': 5, 'Bagel + cream cheese': 10, 'Oatmeal (cooked)': 6, 'Cereal with milk': 8,
+  'Granola': 6, 'Greek yogurt': 15, 'Peanut butter': 4,
+  'Groundnuts (peanuts)': 7, 'Cashew nuts': 5, 'Boiled corn': 3, 'Roasted corn': 3,
+  'Latte': 8, 'Cappuccino': 6, 'Milkshake': 10, 'Yogurt drink': 6,
+  'Milo/Bournvita (made)': 6, 'Smoothie': 3,
+  'Protein bar': 20, 'Protein shake': 25, 'Chocolate bar': 3,
+  'Greek salad': 10, 'Cobb salad': 30, 'Niçoise salad': 30, 'Caprese salad': 18,
+  'Chicken salad (with mayo)': 28, 'Quinoa salad': 12, 'Poke bowl': 32, 'Buddha bowl': 20,
+  'Tabbouleh': 4, 'Potato salad': 4,
+  'Sea bass (grilled)': 36, 'Cod (baked)': 32, 'Tilapia (grilled)': 38, 'Halibut': 40,
+  'Tuna steak': 45, 'Smoked salmon': 11, 'Prawns / shrimp (grilled)': 24,
+  'Calamari (fried)': 22, 'Fish & chips': 45, 'Sushi rolls': 12, 'Sashimi': 24,
+  'Lobster (steamed)': 27, 'Crab meat': 20, 'Mussels (steamed)': 24, 'Octopus (grilled)': 30,
+  'Roast chicken': 35, 'Chicken tikka': 35, 'Butter chicken (no rice)': 32,
+  'Lamb chops': 36, 'Pork chop (grilled)': 32, 'Beef kebab': 24,
+  'Meatballs in tomato sauce': 22, 'Roast beef': 28, 'Duck breast': 35,
+  'Turkey breast (sliced)': 22, 'Grilled halloumi': 17, 'Omelette (3 eggs)': 20,
+  'Eggs Benedict': 22, 'Full English breakfast': 35, 'Avocado toast': 7, 'Shakshuka': 18,
+  'Overnight oats': 12, 'Chia pudding': 7,
+  'Pasta with tomato sauce': 13, 'Spaghetti carbonara': 24, 'Lasagna': 24,
+  'Mac and cheese': 18, 'Risotto': 10, 'Couscous (cooked)': 6, 'Quinoa (cooked)': 8,
+  'Brown rice (cooked)': 5, 'Mashed potatoes': 4, 'Baked potato': 4,
+  'Sweet potato (baked)': 3, 'Roast potatoes': 4,
+  'Pad thai': 28, 'Ramen': 24, 'Pho': 28, 'Chicken teriyaki with rice': 38,
+  'Spring rolls (fried)': 4, 'Dumplings': 12, 'Chicken & vegetable stir-fry': 32,
+  'Thai green curry (no rice)': 24, 'Tacos': 20, 'Quesadilla': 22,
+  'Hummus': 2, 'Falafel': 6, 'Falafel wrap': 16, 'Kebab wrap (doner)': 35,
+  'Chicken soup': 12, 'Lentil soup': 13, 'Minestrone': 6, 'Miso soup': 4,
+  'Steamed broccoli': 4, 'Mixed vegetables (steamed)': 3, 'Grilled asparagus': 3,
+  'Sautéed spinach': 3, 'Cheese (cheddar)': 7, 'Cottage cheese': 13, 'Feta cheese': 4,
+  'Cheesecake': 7, 'Tiramisu': 7, 'Gelato': 3, 'Banana bread': 4, 'Muffin': 6,
+};
 
 /* Searchable food database — approximate kcal per typical serving,
    compiled from public nutrition data (USDA FoodData Central and
@@ -1219,6 +1288,14 @@ function renderToday() {
   $('t-burned').textContent = fmt(burned);
   $('t-budget').textContent = fmt(budget);
 
+  const proteinGoal = Math.round(state.profile.goalWeight * 1.6);
+  const proteinNow = d.food.reduce((s, e) => s + (e.protein || 0), 0);
+  $('protein-now').textContent = proteinNow;
+  $('protein-goal').textContent = proteinGoal;
+  const pFill = $('protein-meter');
+  pFill.style.width = Math.min(100, (proteinNow / proteinGoal) * 100) + '%';
+  pFill.className = 'fill' + (proteinNow >= proteinGoal ? ' done' : '');
+
   const banner = $('budget-banner');
   if (clamped) {
     banner.innerHTML = `<div class="banner warn">⚠️ <strong>Your goal pace needs a ${fmt(requiredDeficit)} kcal/day deficit</strong>, which would put your budget below a safe minimum. It has been capped at ${fmt(budget)} kcal/day (maintenance ≈ ${fmt(t)}). To close the gap safely: add more exercise, or move your target date later in Settings.</div>`;
@@ -1269,6 +1346,13 @@ function renderEntryList(elId, list, dayKey, kind) {
     const kcal = document.createElement('span');
     kcal.className = 'kcal';
     kcal.textContent = (kind === 'food' ? '' : '−') + fmt(e.kcal) + ' kcal';
+    if (kind === 'food' && e.protein) {
+      kcal.style.textAlign = 'right';
+      const pr = document.createElement('span');
+      pr.style.cssText = 'display:block;font-size:11px;color:var(--muted)';
+      pr.textContent = e.protein + ' g protein';
+      kcal.appendChild(pr);
+    }
     const del = document.createElement('button');
     del.className = 'del'; del.textContent = '×'; del.setAttribute('aria-label', 'Delete entry');
     del.addEventListener('click', () => {
@@ -1283,12 +1367,12 @@ function renderEntryList(elId, list, dayKey, kind) {
 
 function initToday() {
   const chips = $('food-chips');
-  QUICK_FOODS.forEach(([name, kcal]) => {
+  QUICK_FOODS.forEach(([name, kcal, protein]) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'chip';
     b.textContent = `${name} · ${kcal}`;
     b.addEventListener('click', () => {
-      day(todayKey()).food.push({ id: uid(), name, kcal });
+      day(todayKey()).food.push({ id: uid(), name, kcal, protein });
       save(); renderToday();
     });
     chips.appendChild(b);
@@ -1297,6 +1381,7 @@ function initToday() {
   // food autocomplete over FOOD_DB
   const acList = $('food-ac');
   const nameInput = $('food-name');
+  let pendingProtein = null; // protein of the last-selected suggestion; cleared on manual typing
   function closeAc() { acList.classList.remove('open'); acList.innerHTML = ''; }
   function searchFoods(q) {
     q = q.trim().toLowerCase();
@@ -1311,17 +1396,21 @@ function initToday() {
     return starts.concat(contains).slice(0, 8);
   }
   nameInput.addEventListener('input', () => {
+    pendingProtein = null;
     const matches = searchFoods(nameInput.value);
     if (!matches.length) { closeAc(); return; }
     acList.innerHTML = '';
     matches.forEach(([n, k, serv]) => {
+      const pr = PROTEIN[n];
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'ac-item';
-      b.innerHTML = `<span class="fn">${n}<span class="fs">${serv}</span></span><span class="fk">${k} kcal</span>`;
+      b.innerHTML = `<span class="fn">${n}<span class="fs">${serv}</span></span>` +
+        `<span class="fk">${k} kcal${pr ? `<span style="display:block;font-size:11px;color:var(--muted);text-align:right">${pr} g protein</span>` : ''}</span>`;
       b.addEventListener('pointerdown', ev => {
         ev.preventDefault(); // fire before the input loses focus
         nameInput.value = n;
         $('food-kcal').value = k;
+        pendingProtein = pr || null;
         closeAc();
         $('food-kcal').focus();
       });
@@ -1344,7 +1433,10 @@ function initToday() {
     const kcal = +$('food-kcal').value;
     if (!name || !kcal) return;
     closeAc();
-    day(todayKey()).food.push({ id: uid(), name, kcal });
+    const entry = { id: uid(), name, kcal };
+    if (pendingProtein) entry.protein = pendingProtein;
+    pendingProtein = null;
+    day(todayKey()).food.push(entry);
     $('food-name').value = ''; $('food-kcal').value = '';
     save(); renderToday();
   });
@@ -1469,6 +1561,20 @@ function renderWeeklyReview() {
   html += row('Days logged', logged + ' of 7', logged >= 5 ? 'var(--good-text)' : 'var(--warning-text)');
   html += row('Days over budget', over + (logged ? ' of ' + logged : ''), over === 0 ? 'var(--good-text)' : over >= 3 ? 'var(--critical)' : 'var(--warning-text)');
   if (logged) html += row('Avg daily deficit', fmt(Math.max(0, avgDef)) + ' kcal', avgDef >= 500 ? 'var(--good-text)' : 'var(--warning-text)');
+  let proteinDays = 0, proteinSum = 0;
+  for (let i = 0; i < 7; i++) {
+    const d2 = new Date(); d2.setDate(d2.getDate() - i);
+    const k2 = d2.getFullYear() + '-' + String(d2.getMonth() + 1).padStart(2, '0') + '-' + String(d2.getDate()).padStart(2, '0');
+    const dd2 = state.days[k2];
+    if (!dd2 || !dd2.food.length) continue;
+    const pp = dd2.food.reduce((s2, e2) => s2 + (e2.protein || 0), 0);
+    if (pp > 0) { proteinDays++; proteinSum += pp; }
+  }
+  if (proteinDays) {
+    const avgP = Math.round(proteinSum / proteinDays);
+    const pGoal = Math.round(state.profile.goalWeight * 1.6);
+    html += row('Avg protein', avgP + ' / ' + pGoal + ' g', avgP >= pGoal * 0.9 ? 'var(--good-text)' : 'var(--warning-text)');
+  }
   if (wChange !== null && older.length) html += row('Weight this week', (wChange > 0 ? '+' : '') + wChange.toFixed(1) + ' kg', wChange < 0 ? 'var(--good-text)' : 'var(--critical)');
   if (steps) html += row('Steps logged', steps.toLocaleString());
   if (workouts) html += row('Workouts', String(workouts));
@@ -1878,15 +1984,17 @@ const PLATE_SCHEMA = {
           name: { type: 'string' },
           portion: { type: 'string' },
           kcal: { type: 'integer' },
+          protein_g: { type: 'integer' },
         },
-        required: ['name', 'portion', 'kcal'],
+        required: ['name', 'portion', 'kcal', 'protein_g'],
         additionalProperties: false,
       },
     },
     total_kcal: { type: 'integer' },
+    total_protein_g: { type: 'integer' },
     confidence: { type: 'string', enum: ['low', 'medium', 'high'] },
   },
-  required: ['items', 'total_kcal', 'confidence'],
+  required: ['items', 'total_kcal', 'total_protein_g', 'confidence'],
   additionalProperties: false,
 };
 
@@ -1914,7 +2022,7 @@ async function analyzePlatePhoto(file) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
-          { type: 'text', text: 'This is a photo of food someone is about to eat while tracking calories for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories per item. West African / Nigerian dishes (jollof, eba, egusi, dodo, suya, moi moi) are likely but not certain. Account for cooking oil in stews and fried foods. When unsure, estimate slightly high rather than low.' },
+          { type: 'text', text: 'This is a photo of food someone is about to eat while tracking calories and protein for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories and protein grams per item. Dishes may be West African / Nigerian (jollof, eba, egusi, dodo, suya) or international (salads, fish, grills). Account for cooking oil in stews and fried foods. For calories, estimate slightly high when unsure; for protein, estimate realistically rather than optimistically.' },
         ],
       }],
     }),
@@ -1941,7 +2049,7 @@ function renderPhotoResults(data) {
   card.style.cssText = 'border:1px solid var(--border);border-radius:12px;padding:12px;margin-top:10px;background:var(--page)';
   const head = document.createElement('div');
   head.style.cssText = 'display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px';
-  head.innerHTML = `<b style="font-size:14px">Claude sees ~${fmt(data.total_kcal)} kcal</b>` +
+  head.innerHTML = `<b style="font-size:14px">Claude sees ~${fmt(data.total_kcal)} kcal · ${data.total_protein_g || 0} g protein</b>` +
     `<span class="note" style="margin:0">${data.confidence} confidence</span>`;
   card.appendChild(head);
   const remaining = [...data.items];
@@ -1951,7 +2059,7 @@ function renderPhotoResults(data) {
     const li = document.createElement('li');
     const name = document.createElement('span');
     name.className = 'name';
-    name.innerHTML = `${item.name}<span style="display:block;font-size:12px;color:var(--muted)">${item.portion}</span>`;
+    name.innerHTML = `${item.name}<span style="display:block;font-size:12px;color:var(--muted)">${item.portion}${item.protein_g ? ` · ${item.protein_g} g protein` : ''}</span>`;
     const kcal = document.createElement('span');
     kcal.className = 'kcal';
     kcal.textContent = fmt(item.kcal) + ' kcal';
@@ -1960,7 +2068,7 @@ function renderPhotoResults(data) {
     add.style.cssText = 'padding:5px 12px;font-size:13px';
     add.textContent = 'Add';
     add.addEventListener('click', () => {
-      day(todayKey()).food.push({ id: uid(), name: item.name, kcal: item.kcal });
+      day(todayKey()).food.push({ id: uid(), name: item.name, kcal: item.kcal, protein: item.protein_g || null });
       remaining.splice(remaining.indexOf(item), 1);
       save(); renderToday();
       li.remove();
@@ -1978,7 +2086,7 @@ function renderPhotoResults(data) {
   addAll.textContent = 'Add all';
   addAll.addEventListener('click', () => {
     const d = day(todayKey());
-    remaining.forEach(item => d.food.push({ id: uid(), name: item.name, kcal: item.kcal }));
+    remaining.forEach(item => d.food.push({ id: uid(), name: item.name, kcal: item.kcal, protein: item.protein_g || null }));
     box.innerHTML = '';
     save(); renderToday();
   });

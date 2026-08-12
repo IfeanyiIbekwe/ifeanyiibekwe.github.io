@@ -453,7 +453,7 @@
     </div>
 
     <div class="card">
-      <h2>Last 14 days — calories eaten vs budget</h2>
+      <h2>Last 14 days — net calories vs budget</h2>
       <div class="legend">
         <span class="key"><span class="swatch" style="background:var(--good);height:10px;width:10px;border-radius:3px"></span>Under budget ✓</span>
         <span class="key"><span class="swatch" style="background:var(--critical);height:10px;width:10px;border-radius:3px"></span>Over budget ✕</span>
@@ -1791,9 +1791,11 @@ function drawCalChart() {
   }
   const data = keys.map(k => {
     const dd = state.days[k];
-    return { key: k, eaten: dd ? sumKcal(dd.food) : 0, burned: dd ? sumKcal(dd.workouts) : 0 };
+    const eaten = dd ? sumKcal(dd.food) : 0;
+    const burned = dd ? sumKcal(dd.workouts) : 0;
+    return { key: k, eaten, burned, net: Math.max(0, eaten - burned) };
   });
-  const yMax = Math.max(budget * 1.25, ...data.map(d => d.eaten)) || 2000;
+  const yMax = Math.max(budget * 1.25, ...data.map(d => d.net)) || 2000;
   const Y = v => m.t + (1 - v / yMax) * (H - m.t - m.b);
   const band = (W - m.l - m.r) / 14;
   const barW = Math.min(24, band - 2); // ≤24px, 2px surface gap between bars
@@ -1810,11 +1812,11 @@ function drawCalChart() {
   data.forEach((d, i) => {
     const cx = m.l + band * i + band / 2;
     if (d.eaten > 0) {
-      const y = Y(d.eaten), h = Y(0) - y;
+      const y = Y(Math.max(d.net, 40)), h = Y(0) - y; // floor so fully-earned-back days stay visible
       const r = Math.min(4, h); // 4px rounded data-end, square at baseline
       const path = `M${(cx - barW / 2).toFixed(1)},${Y(0).toFixed(1)} V${(y + r).toFixed(1)} Q${(cx - barW / 2).toFixed(1)},${y.toFixed(1)} ${(cx - barW / 2 + r).toFixed(1)},${y.toFixed(1)} H${(cx + barW / 2 - r).toFixed(1)} Q${(cx + barW / 2).toFixed(1)},${y.toFixed(1)} ${(cx + barW / 2).toFixed(1)},${(y + r).toFixed(1)} V${Y(0).toFixed(1)} Z`;
-      const over = d.eaten > budget;
-      svg.appendChild(el('path', { d: path, fill: css(over ? '--critical' : '--good'), 'data-tip': `${fmtDate(d.key)}|${fmt(d.eaten)} kcal eaten` + (d.burned ? `, ${fmt(d.burned)} burned` : '') + (over ? ` — ${fmt(d.eaten - budget)} over ✕` : ' — under ✓'), style: 'cursor:pointer' }));
+      const over = d.net > budget;
+      svg.appendChild(el('path', { d: path, fill: css(over ? '--critical' : '--good'), 'data-tip': `${fmtDate(d.key)}|${fmt(d.eaten)} eaten − ${fmt(d.burned)} exercise = ${fmt(d.net)} net` + (over ? ` — ${fmt(d.net - budget)} over ✕` : ' — under ✓'), style: 'cursor:pointer' }));
     }
     if (i % 2 === 0) {
       const t = el('text', { x: cx, y: H - 6, 'text-anchor': 'middle', 'font-size': 9, fill: css('--muted') });

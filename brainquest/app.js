@@ -410,7 +410,7 @@ function defaultState() {
       totalCorrect: 0, totalAnswered: 0, bestStreak: 0, coinsEarned: 0,
       questsClaimed: 0, memoryPerfect: 0, playSeconds: 0, gamesPlayed: {},
     },
-    settings: { sound: true, speech: true, breakEvery: 20 },
+    settings: { sound: true, speech: true, breakEvery: 20, minDiff: 1 },
   };
 }
 let state = defaultState();
@@ -674,6 +674,11 @@ function bumpQuestCounters(mode, wasCorrect, xpGain, coinGain) {
 /* ------------------------------------------------------------
    Adaptive difficulty — the "AI tutor" brain
 ------------------------------------------------------------ */
+const diffFloor = () => Math.max(1, state.settings.minDiff || 1);
+function applyMinDiff() {
+  GAMES.forEach((g) => { state.skills[g.id].diff = Math.max(state.skills[g.id].diff, diffFloor()); });
+}
+
 function adaptSkill(mode, wasCorrect) {
   const sk = state.skills[mode];
   sk.answered++;
@@ -681,7 +686,7 @@ function adaptSkill(mode, wasCorrect) {
     sk.correct++;
     sk.streak++;
     sk.wrongStreak = 0;
-    if (sk.streak >= 4 && sk.diff < 5) {
+    if (sk.streak >= 3 && sk.diff < 5) {
       sk.diff++;
       sk.streak = 0;
       sparkySay(pick(SPARKY.harder), true);
@@ -689,7 +694,7 @@ function adaptSkill(mode, wasCorrect) {
   } else {
     sk.streak = 0;
     sk.wrongStreak++;
-    if (sk.wrongStreak >= 2 && sk.diff > 1) {
+    if (sk.wrongStreak >= 2 && sk.diff > diffFloor()) {
       sk.diff--;
       sk.wrongStreak = 0;
       sparkySay(pick(SPARKY.easier));
@@ -720,9 +725,9 @@ function genMath(diff) {
   const type = (() => {
     if (diff === 1) return "add";
     if (diff === 2) return pick(["add", "add", "sub"]);
-    if (diff === 3) return pick(["add", "sub"]);
-    if (diff === 4) return pick(["add", "sub", "missing"]);
-    return pick(["add", "sub", "missing", "double"]);
+    if (diff === 3) return pick(["add", "sub", "missing"]);
+    if (diff === 4) return pick(["add", "sub", "missing", "mult"]);
+    return pick(["add", "sub", "missing", "double", "mult", "mult"]);
   })();
 
   if (type === "add") {
@@ -746,10 +751,20 @@ function genMath(diff) {
       visual = `<div class="q-visual small">${em.repeat(a)}<br><span style="font-size:0.8em;color:var(--ink-soft)">take away ${b}</span></div>`;
     }
   } else if (type === "missing") {
-    const max = diff === 4 ? 10 : 20;
+    const max = { 3: 8, 4: 12, 5: 20 }[diff] || 10;
     a = randInt(1, max - 1); answer = randInt(1, max - a);
     prompt = `${a} + ❓ = ${a + answer}`;
     spoken = `${a} plus what makes ${a + answer}?`;
+  } else if (type === "mult") {
+    if (diff === 4) { b = pick([2, 5, 10]); a = randInt(1, 5); }
+    else { b = randInt(2, 10); a = randInt(2, 10); }
+    answer = a * b;
+    prompt = `${a} × ${b} = ?`;
+    spoken = `What is ${a} times ${b}?`;
+    if (diff === 4) {
+      const em = pick(CRITTERS);
+      visual = `<div class="q-visual small">${Array.from({ length: a }, () => em.repeat(b)).join("<br>")}</div>`;
+    }
   } else { // double
     a = randInt(2, 12);
     answer = a * 2;
@@ -1336,7 +1351,7 @@ function finishMemory() {
   if (memMistakes <= memPairs) {
     sk.streak++;
     if (sk.streak >= 2 && sk.diff < 5) { sk.diff++; sk.streak = 0; sparkySay(pick(SPARKY.harder), true); }
-  } else if (memMistakes > memPairs * 2 && sk.diff > 1) {
+  } else if (memMistakes > memPairs * 2 && sk.diff > diffFloor()) {
     sk.diff--;
     sparkySay(pick(SPARKY.easier));
   }
@@ -1612,6 +1627,12 @@ function openParent() {
         <div class="switch"><input type="checkbox" id="set-speech" ${state.settings.speech ? "checked" : ""}/><span class="track"></span></div>
       </div>
       <div class="parent-row">
+        <label>Challenge level<small>Minimum stars for every game — raise this if it feels too easy</small></label>
+        <select id="set-mindiff">
+          ${[1, 2, 3, 4, 5].map((v) => `<option value="${v}" ${(state.settings.minDiff || 1) === v ? "selected" : ""}>${"★".repeat(v)}${"☆".repeat(5 - v)}</option>`).join("")}
+        </select>
+      </div>
+      <div class="parent-row">
         <label>Stretch break reminder<small>Sparky suggests a movement break</small></label>
         <select id="set-break">
           ${[[10, "Every 10 min"], [15, "Every 15 min"], [20, "Every 20 min"], [30, "Every 30 min"], [45, "Every 45 min"], [0, "Off"]]
@@ -1630,6 +1651,12 @@ function openParent() {
 
   $("#set-sound").addEventListener("change", (e) => { state.settings.sound = e.target.checked; save(); });
   $("#set-speech").addEventListener("change", (e) => { state.settings.speech = e.target.checked; save(); });
+  $("#set-mindiff").addEventListener("change", (e) => {
+    state.settings.minDiff = parseInt(e.target.value, 10);
+    applyMinDiff();
+    save();
+    openParent();
+  });
   $("#set-break").addEventListener("change", (e) => {
     state.settings.breakEvery = parseInt(e.target.value, 10);
     playSecondsSinceBreak = 0;
@@ -1667,8 +1694,15 @@ function renderOnboarding(editing = false) {
     <div class="avatar-grid" id="ob-avatars">
       ${AVATARS.map((a) => `<button data-av="${a}" class="${a === picked ? "picked" : ""}">${a}</button>`).join("")}
     </div>
+    <h3>How tricky should the games be?</h3>
+    <div class="diff-row" id="ob-diff">
+      <button data-d="1">🌱 Nice &amp; Easy<br><span class="gt-stars">★☆☆☆☆</span></button>
+      <button data-d="2" class="picked">🙂 Medium<br><span class="gt-stars">★★☆☆☆</span></button>
+      <button data-d="3">🚀 Big Kid Mode<br><span class="gt-stars">★★★☆☆</span></button>
+    </div>
     <button class="bigbtn" id="ob-start" style="font-size:1.35rem;">${editing ? "Save ✓" : "Let's Play! 🚀"}</button>`;
 
+  let pickedDiff = 2;
   document.querySelectorAll("#ob-avatars button").forEach((btn) => {
     btn.addEventListener("click", () => {
       sfx.click();
@@ -1676,11 +1710,20 @@ function renderOnboarding(editing = false) {
       document.querySelectorAll("#ob-avatars button").forEach((b) => b.classList.toggle("picked", b === btn));
     });
   });
+  document.querySelectorAll("#ob-diff button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      sfx.click();
+      pickedDiff = parseInt(btn.dataset.d, 10);
+      document.querySelectorAll("#ob-diff button").forEach((b) => b.classList.toggle("picked", b === btn));
+    });
+  });
   $("#ob-start").addEventListener("click", () => {
     const name = $("#ob-name").value.trim();
     state.name = name || "Explorer";
     state.avatar = picked;
     state.onboarded = true;
+    state.settings.minDiff = Math.max(state.settings.minDiff || 1, pickedDiff);
+    applyMinDiff();
     save();
     $("#hud").classList.remove("hidden");
     sfx.level();
@@ -1765,6 +1808,7 @@ function makeClouds() {
 function init() {
   load();
   ensureDaily();
+  applyMinDiff();
   makeClouds();
 
   $("#nav-home").addEventListener("click", () => { sfx.click(); goHome(); });

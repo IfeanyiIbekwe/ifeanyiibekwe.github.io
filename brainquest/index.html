@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Brain Quest Jr. 🚀 — Learn &amp; Play</title>
+  <meta name="description" content="A gamified adaptive learning adventure for kids: math, reading, spelling, shapes, patterns, memory and more — with Sparky the robot tutor!" />
+  <meta name="theme-color" content="#7ecbff" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <!-- decorative clouds (positioned by JS) -->
+  <div id="clouds"></div>
+
+  <div id="app">
+    <header id="hud" class="hidden">
+      <div class="avatar" id="hud-avatar" title="That's you!">🦊</div>
+      <div class="who">
+        <div class="name" id="hud-name">Explorer</div>
+        <div class="title" id="hud-title">Curious Chick</div>
+        <div class="xpwrap">
+          <span class="levelchip" id="hud-level">Lv 1</span>
+          <div class="xpbar"><div id="hud-xpfill"></div></div>
+        </div>
+      </div>
+      <div class="pill" id="hud-coins" title="Coins">🪙 <span id="hud-coin-count">0</span></div>
+      <div class="pill streakpill" id="hud-streak" title="Days played in a row">🔥 <span id="hud-streak-count">0</span></div>
+      <nav>
+        <button class="navbtn" id="nav-home" title="Home">🏠</button>
+        <button class="navbtn" id="nav-quests" title="Daily Quests">📜</button>
+        <button class="navbtn" id="nav-shop" title="Prize Shop">🛍️</button>
+        <button class="navbtn" id="nav-collection" title="My Stickers & Badges">🏆</button>
+        <button class="navbtn" id="nav-parent" title="Grown-ups">👨‍👩‍👧</button>
+      </nav>
+    </header>
+
+    <main id="screens">
+      <section id="screen-onboarding" class="screen hidden"></section>
+      <section id="screen-home" class="screen hidden"></section>
+      <section id="screen-game" class="screen hidden"></section>
+      <section id="screen-shop" class="screen hidden"></section>
+      <section id="screen-collection" class="screen hidden"></section>
+      <section id="screen-quests" class="screen hidden"></section>
+      <section id="screen-parent" class="screen hidden"></section>
+    </main>
+  </div>
+
+  <div id="sparky">
+    <span class="bot" id="sparky-bot" title="Sparky">🤖</span>
+    <div class="bubble" id="sparky-bubble"></div>
+  </div>
+
+  <div id="overlays"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

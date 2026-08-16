@@ -374,17 +374,22 @@
     <div class="card">
       <h2>Log food</h2>
       <div class="chips" id="food-chips"></div>
-      <form class="row" id="food-form">
-        <div class="ac-wrap">
-          <input type="text" id="food-name" placeholder="Search food… e.g. jollof" required autocomplete="off">
+      <form id="food-form">
+        <div class="ac-wrap" style="margin-bottom:8px">
+          <input type="text" id="food-name" placeholder="Search food… e.g. boiled egg" required autocomplete="off">
           <div class="ac-list" id="food-ac"></div>
         </div>
-        <input type="number" id="food-kcal" placeholder="kcal" min="1" max="5000" required style="max-width:90px">
-        <button class="primary" type="submit">Add</button>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:var(--muted); font-size:15px;">×</span>
+          <input type="number" id="food-qty" value="1" min="0.25" max="20" step="0.25" style="max-width:64px" aria-label="Quantity">
+          <input type="number" id="food-kcal" placeholder="kcal each" min="1" max="5000" required>
+          <button class="primary" type="submit">Add</button>
+        </div>
       </form>
-      <p class="note" style="margin-top:8px">Start typing to search ~250 foods — Nigerian staples, salads, fish &amp; seafood, international mains, and more (values from public nutrition data). Tap a match to fill in the calories, then adjust for your portion size if needed.</p>
-      <div style="margin-top:10px">
-        <button class="ghost" type="button" id="photo-btn">📷 Estimate calories from a photo</button>
+      <p class="note" style="margin-top:8px">Start typing to search ~250 foods — Nigerian staples, salads, fish &amp; seafood, international mains, and more. Tap a match, then set the quantity: 3 boiled eggs is <b>× 3</b>, two slices of bread is <b>× 2</b>. Calories and protein multiply automatically.</p>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="ghost" type="button" id="photo-btn">📷 Estimate a plate</button>
+        <button class="ghost" type="button" id="label-btn">🏷 Scan a nutrition label</button>
         <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none">
       </div>
       <p class="note" id="photo-status" style="display:none"></p>
@@ -997,7 +1002,7 @@ const PROTEIN = {
   'Nkwobi': 30, 'Isi ewu': 32, 'Abacha (African salad)': 10, 'Shawarma (chicken)': 30,
   'Meat pie': 10, 'Sausage roll (Gala)': 6, 'Egg roll (Nigerian)': 8,
   'Indomie (1 pack, cooked)': 7, 'Indomie + egg': 13, 'Spaghetti jollof': 8,
-  'Bread & akara': 14, 'Agege bread': 6, 'Bread & butter': 5, 'Golden Morn': 5,
+  'Bread & akara': 14, 'Agege bread': 2, 'Sliced bread (white/wheat)': 3, 'Bread & butter': 5, 'Golden Morn': 5,
   'Boiled egg': 6, 'Fried egg': 6, 'Scrambled eggs (2)': 12, 'Grilled chicken breast': 31,
   'Grilled chicken thigh': 22, 'Fried chicken': 28, 'Turkey (fried)': 27, 'Goat meat': 20,
   'Beef (stewed)': 22, 'Fried fish (titus/mackerel)': 28, 'Grilled fish': 30,
@@ -1073,7 +1078,8 @@ const FOOD_DB = [
   ['Buns', 220, '1 piece'], ['Egg roll (Nigerian)', 280, '1 piece'],
   ['Indomie (1 pack, cooked)', 350, '70g pack'], ['Indomie + egg', 440, '1 pack + egg'],
   ['Spaghetti jollof', 320, '1 cup'], ['Bread & akara', 480, '2 slices + 3 balls'],
-  ['Agege bread', 210, '3 slices'], ['Bread & butter', 240, '2 slices'],
+  ['Agege bread', 70, '1 slice'], ['Sliced bread (white/wheat)', 80, '1 slice'],
+  ['Bread & butter', 240, '2 slices'],
   ['Custard (prepared)', 170, '1 cup'], ['Pap (ogi/akamu)', 110, '1 cup'],
   ['Golden Morn', 190, '1 cup prepared'], ['Zobo drink', 50, '1 cup unsweetened'],
   ['Kunu drink', 130, '1 cup'], ['Chapman', 220, '1 glass'],
@@ -1431,13 +1437,18 @@ function initToday() {
     e.preventDefault();
     const name = $('food-name').value.trim();
     const kcal = +$('food-kcal').value;
+    const qty = +$('food-qty').value || 1;
     if (!name || !kcal) return;
     closeAc();
-    const entry = { id: uid(), name, kcal };
-    if (pendingProtein) entry.protein = pendingProtein;
+    const entry = {
+      id: uid(),
+      name: qty !== 1 ? `${name} × ${qty}` : name,
+      kcal: Math.round(kcal * qty),
+    };
+    if (pendingProtein) entry.protein = Math.round(pendingProtein * qty);
     pendingProtein = null;
     day(todayKey()).food.push(entry);
-    $('food-name').value = ''; $('food-kcal').value = '';
+    $('food-name').value = ''; $('food-kcal').value = ''; $('food-qty').value = '1';
     save(); renderToday();
   });
 
@@ -2000,7 +2011,20 @@ const PLATE_SCHEMA = {
   additionalProperties: false,
 };
 
-async function analyzePlatePhoto(file) {
+const LABEL_SCHEMA = {
+  type: 'object',
+  properties: {
+    product_name: { type: 'string' },
+    serving: { type: 'string' },
+    kcal_per_serving: { type: 'integer' },
+    protein_g_per_serving: { type: 'number' },
+    confidence: { type: 'string', enum: ['low', 'medium', 'high'] },
+  },
+  required: ['product_name', 'serving', 'kcal_per_serving', 'protein_g_per_serving', 'confidence'],
+  additionalProperties: false,
+};
+
+async function claudeVision(file, promptText, schema) {
   const key = localStorage.getItem(APIKEY_STORE);
   if (!key) {
     alert('Add your Claude API key in Settings first (Photo calorie estimation section).');
@@ -2019,12 +2043,12 @@ async function analyzePlatePhoto(file) {
     body: JSON.stringify({
       model: 'claude-opus-5',
       max_tokens: 2048,
-      output_config: { effort: 'low', format: { type: 'json_schema', schema: PLATE_SCHEMA } },
+      output_config: { effort: 'low', format: { type: 'json_schema', schema } },
       messages: [{
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
-          { type: 'text', text: 'This is a photo of food someone is about to eat while tracking calories and protein for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories and protein grams per item. Dishes may be West African / Nigerian (jollof, eba, egusi, dodo, suya) or international (salads, fish, grills). Account for cooking oil in stews and fried foods. For calories, estimate slightly high when unsure; for protein, estimate realistically rather than optimistically.' },
+          { type: 'text', text: promptText },
         ],
       }],
     }),
@@ -2038,6 +2062,63 @@ async function analyzePlatePhoto(file) {
   const text = msg.content.find(b => b.type === 'text')?.text;
   if (!text) throw new Error('No result returned.');
   return JSON.parse(text);
+}
+
+const PLATE_PROMPT = 'This is a photo of food someone is about to eat while tracking calories and protein for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories and protein grams per item. Dishes may be West African / Nigerian (jollof, eba, egusi, dodo, suya) or international (salads, fish, grills). Account for cooking oil in stews and fried foods. For calories, estimate slightly high when unsure; for protein, estimate realistically rather than optimistically.';
+
+const LABEL_PROMPT = 'This is a photo of a packaged food product or its nutrition facts label. Read the label and extract: the product name (from the packaging if visible, otherwise describe it), the serving size as printed (e.g. "2 biscuits (25g)", "per 330ml can"), and the calories (kcal) and protein grams PER SERVING. If the label only gives per-100g/per-100ml values, use 100g/100ml as the serving. If both are shown, prefer the per-serving column. Convert kJ to kcal if only kJ is shown (divide by 4.184).';
+
+function analyzePlatePhoto(file) { return claudeVision(file, PLATE_PROMPT, PLATE_SCHEMA); }
+function analyzeLabelPhoto(file) { return claudeVision(file, LABEL_PROMPT, LABEL_SCHEMA); }
+
+function renderLabelResult(data) {
+  const box = $('photo-results');
+  box.innerHTML = '';
+  const card = document.createElement('div');
+  card.style.cssText = 'border:1px solid var(--border);border-radius:12px;padding:12px;margin-top:10px;background:var(--page)';
+  card.innerHTML =
+    `<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px">` +
+    `<b style="font-size:14px"></b><span class="note" style="margin:0">${data.confidence} confidence</span></div>` +
+    `<div class="note" style="margin:0 0 10px">Per serving (${data.serving}): ${fmt(data.kcal_per_serving)} kcal · ${data.protein_g_per_serving} g protein</div>`;
+  card.querySelector('b').textContent = data.product_name;
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:8px;align-items:center;flex-wrap:wrap';
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'font-size:13px;color:var(--text-secondary)';
+  lbl.textContent = 'Servings I had:';
+  const qty = document.createElement('input');
+  qty.type = 'number'; qty.value = '1'; qty.min = '0.25'; qty.max = '20'; qty.step = '0.25';
+  qty.style.cssText = 'max-width:70px';
+  const total = document.createElement('span');
+  total.style.cssText = 'font-size:13px;font-weight:600;flex:1';
+  const updateTotal = () => {
+    const q = +qty.value || 1;
+    total.textContent = `= ${fmt(Math.round(data.kcal_per_serving * q))} kcal · ${Math.round(data.protein_g_per_serving * q)} g protein`;
+  };
+  qty.addEventListener('input', updateTotal);
+  updateTotal();
+  const add = document.createElement('button');
+  add.className = 'primary';
+  add.style.cssText = 'border:none;border-radius:10px;padding:8px 16px;font-size:14px;cursor:pointer';
+  add.textContent = 'Add';
+  add.addEventListener('click', () => {
+    const q = +qty.value || 1;
+    day(todayKey()).food.push({
+      id: uid(),
+      name: q !== 1 ? `${data.product_name} × ${q}` : data.product_name,
+      kcal: Math.round(data.kcal_per_serving * q),
+      protein: Math.round(data.protein_g_per_serving * q) || null,
+    });
+    box.innerHTML = '';
+    save(); renderToday();
+  });
+  const dismiss = document.createElement('button');
+  dismiss.className = 'ghost';
+  dismiss.textContent = 'Dismiss';
+  dismiss.addEventListener('click', () => { box.innerHTML = ''; });
+  row.append(lbl, qty, total, add, dismiss);
+  card.appendChild(row);
+  box.appendChild(card);
 }
 
 function renderPhotoResults(data) {
@@ -2102,23 +2183,29 @@ function renderPhotoResults(data) {
 }
 
 function initPhoto() {
-  $('photo-btn').addEventListener('click', () => $('photo-input').click());
+  let photoMode = 'plate';
+  $('photo-btn').addEventListener('click', () => { photoMode = 'plate'; $('photo-input').click(); });
+  $('label-btn').addEventListener('click', () => { photoMode = 'label'; $('photo-input').click(); });
   $('photo-input').addEventListener('change', async e => {
     const file = e.target.files[0];
     e.target.value = '';
     if (!file) return;
     const status = $('photo-status');
     status.style.display = 'block';
-    status.textContent = 'Analyzing your plate… (usually 5–15 seconds)';
+    status.textContent = photoMode === 'label'
+      ? 'Reading the label… (usually 5–15 seconds)'
+      : 'Analyzing your plate… (usually 5–15 seconds)';
     $('photo-btn').disabled = true;
+    $('label-btn').disabled = true;
     try {
-      const data = await analyzePlatePhoto(file);
+      const data = photoMode === 'label' ? await analyzeLabelPhoto(file) : await analyzePlatePhoto(file);
       status.style.display = 'none';
-      if (data) renderPhotoResults(data);
+      if (data) (photoMode === 'label' ? renderLabelResult : renderPhotoResults)(data);
     } catch (err) {
       status.textContent = '⚠ ' + err.message;
     } finally {
       $('photo-btn').disabled = false;
+      $('label-btn').disabled = false;
     }
   });
 }

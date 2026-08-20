@@ -386,7 +386,7 @@
           <button class="primary" type="submit">Add</button>
         </div>
       </form>
-      <p class="note" style="margin-top:8px">Start typing to search ~250 foods — Nigerian staples, salads, fish &amp; seafood, international mains, and more. Tap a match, then set the quantity: 3 boiled eggs is <b>× 3</b>, two slices of bread is <b>× 2</b>. Calories and protein multiply automatically.</p>
+      <p class="note" style="margin-top:8px">Start typing to search ~340 foods — Nigerian staples and combos, salads, fish &amp; seafood, fast food, dried fruits &amp; nuts, international mains, and more. If it's not listed, the dropdown offers an AI lookup. Tap a match, then set the quantity: 3 boiled eggs is <b>× 3</b>, two slices of bread is <b>× 2</b>. Calories and protein multiply automatically.</p>
       <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
         <button class="ghost" type="button" id="photo-btn">📷 Estimate a plate</button>
         <button class="ghost" type="button" id="label-btn">🏷 Scan a nutrition label</button>
@@ -1046,6 +1046,21 @@ const PROTEIN = {
   'Steamed broccoli': 4, 'Mixed vegetables (steamed)': 3, 'Grilled asparagus': 3,
   'Sautéed spinach': 3, 'Cheese (cheddar)': 7, 'Cottage cheese': 13, 'Feta cheese': 4,
   'Cheesecake': 7, 'Tiramisu': 7, 'Gelato': 3, 'Banana bread': 4, 'Muffin': 6,
+  'Almonds': 6, 'Walnuts': 4, 'Pistachios': 6, 'Mixed nuts': 5, 'Trail mix': 5,
+  'Kuli kuli': 8, 'Boiled groundnuts': 9, 'Tiger nuts': 2,
+  'Ayamase (ofada stew)': 15, 'Gizdodo (gizzard & plantain)': 20, 'Peppered gizzard': 28,
+  'Chicken pepper soup': 28, 'Catfish pepper soup': 30, 'Boiled beans (ewa)': 15,
+  'Egg stew (fried stew with egg)': 12, 'Egg sauce': 12, 'Bread & egg sauce': 16,
+  'Yamarita (egg-coated fried yam)': 8, 'Masa (rice cake)': 5, 'Fura da nono': 8,
+  'Coconut rice': 6, 'Native jollof (palm oil rice)': 6, 'Garri soakings (with sugar)': 2,
+  'Cabin biscuits': 3, 'Eba + egusi (combo)': 20, 'Pounded yam + egusi (combo)': 21,
+  'Pap + akara (combo)': 10, 'Grilled peppered turkey': 35, 'Boiled chicken lap': 30,
+  'Cow leg (bokoto)': 25, 'Shaki (tripe)': 18, 'Shawarma (beef)': 28,
+  'Tigernut drink (kunun aya)': 3,
+  'Big Mac': 25, 'Whopper': 28, 'McChicken': 14, 'Chicken nuggets': 15,
+  'Fried chicken wings': 30, 'Hot dog': 10, 'Subway turkey sub (6-inch)': 18,
+  'Chicken & chips': 40, 'Hash browns': 3, 'Home fries / fried potatoes': 4,
+  'Toast with jam': 3, 'Weetabix with milk': 8, 'Sardine sandwich': 18,
 };
 
 /* Searchable food database — approximate kcal per typical serving,
@@ -1207,6 +1222,49 @@ const FOOD_DB = [
   ['Green tea', 0, '1 cup, plain'], ['Kombucha', 35, '1 cup'],
   ['Coconut water', 45, '1 cup'], ['Gin & tonic', 170, '1 glass'],
   ['Mojito', 220, '1 glass'], ['Prosecco', 80, '1 glass'],
+  // dried fruits & nuts
+  ['Dates (medjool)', 66, '1 date'], ['Dates (deglet noor)', 20, '1 date'],
+  ['Dried apricots', 100, '5 pieces'], ['Raisins', 85, '2 tbsp'],
+  ['Dried figs', 95, '2 figs'], ['Prunes', 70, '3 prunes'],
+  ['Dried mango', 160, '6 strips (40g)'], ['Dried cranberries', 65, '2 tbsp'],
+  ['Banana chips', 150, '1 handful'], ['Trail mix', 170, '1 handful'],
+  ['Almonds', 165, '1 handful (23 nuts)'], ['Walnuts', 185, '1 handful'],
+  ['Pistachios', 160, '1 handful (shelled)'], ['Mixed nuts', 170, '1 handful'],
+  ['Tiger nuts', 120, '1 handful'], ['Kuli kuli', 160, '3 sticks'],
+  ['Boiled groundnuts', 200, '1 cup in shell'],
+  // more Nigerian dishes & combos
+  ['Ayamase (ofada stew)', 300, '1 serving'], ['Gizdodo (gizzard & plantain)', 400, '1 serving'],
+  ['Peppered gizzard', 250, '1 serving'], ['Chicken pepper soup', 220, '1 bowl'],
+  ['Catfish pepper soup', 260, '1 bowl'], ['Boiled beans (ewa)', 250, '1 cup'],
+  ['Egg stew (fried stew with egg)', 300, '1 serving'], ['Egg sauce', 250, '1 serving'],
+  ['Bread & egg sauce', 450, '2 slices + sauce'], ['Yamarita (egg-coated fried yam)', 380, '6 pieces'],
+  ['Masa (rice cake)', 240, '3 pieces'], ['Fura da nono', 180, '1 cup'],
+  ['Coconut rice', 320, '1 cup'], ['Native jollof (palm oil rice)', 330, '1 cup'],
+  ['Garri soakings (with sugar)', 350, '1 bowl'], ['Cabin biscuits', 150, '5 pieces'],
+  ['Eba + egusi (combo)', 730, '1 cup eba + soup'], ['Pounded yam + egusi (combo)', 800, '1 cup + soup'],
+  ['Pap + akara (combo)', 335, '1 cup pap + 3 balls'],
+  ['Grilled peppered turkey', 320, '1 piece'], ['Boiled chicken lap', 250, '1 lap'],
+  ['Cow leg (bokoto)', 300, '1 serving'], ['Shaki (tripe)', 120, '2 pieces'],
+  ['Shawarma (beef)', 550, '1 wrap'], ['Palm wine', 150, '1 cup'],
+  ['Tigernut drink (kunun aya)', 180, '1 cup'],
+  // fast food & takeaway
+  ['Big Mac', 550, '1 burger'], ['Whopper', 670, '1 burger'],
+  ['McChicken', 400, '1 burger'], ['Chicken nuggets', 270, '6 pieces'],
+  ['Fried chicken wings', 400, '4 wings'], ['Hot dog', 300, '1 with bun'],
+  ['Subway turkey sub (6-inch)', 280, '1 sub'], ['Chicken & chips', 800, '1 plate'],
+  ['Hash browns', 300, '2 pieces'], ['Home fries / fried potatoes', 360, '1 cup'],
+  ['Toast with jam', 150, '1 slice'], ['Weetabix with milk', 230, '2 biscuits + milk'],
+  ['Sardine sandwich', 380, '1 sandwich'],
+  // more fresh fruit
+  ['Guava', 37, '1 fruit'], ['Tangerine', 47, '1 fruit'],
+  ['Agbalumo (African star apple)', 60, '1 fruit'], ['Soursop', 150, '1 cup pulp'],
+  ['Pear', 100, '1 medium'], ['Strawberries', 50, '1 cup'],
+  ['Blueberries', 85, '1 cup'], ['Mixed berries', 70, '1 cup'],
+  ['Kiwi', 42, '1 fruit'], ['Peach', 60, '1 medium'],
+  ['Plum', 30, '1 fruit'], ['Grapefruit', 52, '½ fruit'],
+  // condiments & cooking
+  ['Vegetable / groundnut oil', 120, '1 tbsp'], ['Palm oil', 120, '1 tbsp'],
+  ['Mayonnaise', 95, '1 tbsp'], ['Ketchup', 20, '1 tbsp'],
 ];
 
 /* ================= navigation ================= */

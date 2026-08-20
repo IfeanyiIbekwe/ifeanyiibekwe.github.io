@@ -386,7 +386,7 @@
           <button class="primary" type="submit">Add</button>
         </div>
       </form>
-      <p class="note" style="margin-top:8px">Start typing to search ~250 foods — Nigerian staples, salads, fish &amp; seafood, international mains, and more. Tap a match, then set the quantity: 3 boiled eggs is <b>× 3</b>, two slices of bread is <b>× 2</b>. Calories and protein multiply automatically.</p>
+      <p class="note" style="margin-top:8px">Start typing to search ~340 foods — Nigerian staples and combos, salads, fish &amp; seafood, fast food, dried fruits &amp; nuts, international mains, and more. If it's not listed, the dropdown offers an AI lookup. Tap a match, then set the quantity: 3 boiled eggs is <b>× 3</b>, two slices of bread is <b>× 2</b>. Calories and protein multiply automatically.</p>
       <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
         <button class="ghost" type="button" id="photo-btn">📷 Estimate a plate</button>
         <button class="ghost" type="button" id="label-btn">🏷 Scan a nutrition label</button>
@@ -1003,7 +1003,9 @@ const PROTEIN = {
   'Meat pie': 10, 'Sausage roll (Gala)': 6, 'Egg roll (Nigerian)': 8,
   'Indomie (1 pack, cooked)': 7, 'Indomie + egg': 13, 'Spaghetti jollof': 8,
   'Bread & akara': 14, 'Agege bread': 2, 'Sliced bread (white/wheat)': 3, 'Bread & butter': 5, 'Golden Morn': 5,
-  'Boiled egg': 6, 'Fried egg': 6, 'Scrambled eggs (2)': 12, 'Grilled chicken breast': 31,
+  'Boiled egg': 6, 'Fried egg (sunny side up)': 6, 'Poached egg': 6, 'Egg whites': 7,
+  'Scrambled eggs (2)': 12, 'Beef burger patty': 20, 'Chicken burger patty': 23,
+  'Turkey burger patty': 22, 'Grilled chicken breast': 31,
   'Grilled chicken thigh': 22, 'Fried chicken': 28, 'Turkey (fried)': 27, 'Goat meat': 20,
   'Beef (stewed)': 22, 'Fried fish (titus/mackerel)': 28, 'Grilled fish': 30,
   'Croaker fish (grilled)': 30, 'Stockfish': 20, 'Salmon fillet': 34,
@@ -1044,6 +1046,21 @@ const PROTEIN = {
   'Steamed broccoli': 4, 'Mixed vegetables (steamed)': 3, 'Grilled asparagus': 3,
   'Sautéed spinach': 3, 'Cheese (cheddar)': 7, 'Cottage cheese': 13, 'Feta cheese': 4,
   'Cheesecake': 7, 'Tiramisu': 7, 'Gelato': 3, 'Banana bread': 4, 'Muffin': 6,
+  'Almonds': 6, 'Walnuts': 4, 'Pistachios': 6, 'Mixed nuts': 5, 'Trail mix': 5,
+  'Kuli kuli': 8, 'Boiled groundnuts': 9, 'Tiger nuts': 2,
+  'Ayamase (ofada stew)': 15, 'Gizdodo (gizzard & plantain)': 20, 'Peppered gizzard': 28,
+  'Chicken pepper soup': 28, 'Catfish pepper soup': 30, 'Boiled beans (ewa)': 15,
+  'Egg stew (fried stew with egg)': 12, 'Egg sauce': 12, 'Bread & egg sauce': 16,
+  'Yamarita (egg-coated fried yam)': 8, 'Masa (rice cake)': 5, 'Fura da nono': 8,
+  'Coconut rice': 6, 'Native jollof (palm oil rice)': 6, 'Garri soakings (with sugar)': 2,
+  'Cabin biscuits': 3, 'Eba + egusi (combo)': 20, 'Pounded yam + egusi (combo)': 21,
+  'Pap + akara (combo)': 10, 'Grilled peppered turkey': 35, 'Boiled chicken lap': 30,
+  'Cow leg (bokoto)': 25, 'Shaki (tripe)': 18, 'Shawarma (beef)': 28,
+  'Tigernut drink (kunun aya)': 3,
+  'Big Mac': 25, 'Whopper': 28, 'McChicken': 14, 'Chicken nuggets': 15,
+  'Fried chicken wings': 30, 'Hot dog': 10, 'Subway turkey sub (6-inch)': 18,
+  'Chicken & chips': 40, 'Hash browns': 3, 'Home fries / fried potatoes': 4,
+  'Toast with jam': 3, 'Weetabix with milk': 8, 'Sardine sandwich': 18,
 };
 
 /* Searchable food database — approximate kcal per typical serving,
@@ -1085,8 +1102,12 @@ const FOOD_DB = [
   ['Kunu drink', 130, '1 cup'], ['Chapman', 220, '1 glass'],
   ['Malt drink', 180, '33cl bottle'], ['Stew (tomato, with oil)', 150, '1 ladle'],
   // proteins
-  ['Boiled egg', 78, '1 egg'], ['Fried egg', 95, '1 egg'],
-  ['Scrambled eggs (2)', 200, '2 eggs'], ['Grilled chicken breast', 165, '100g'],
+  ['Boiled egg', 78, '1 egg'], ['Fried egg (sunny side up)', 95, '1 egg'],
+  ['Poached egg', 72, '1 egg'], ['Egg whites', 34, '2 whites'],
+  ['Scrambled eggs (2)', 200, '2 eggs'],
+  ['Beef burger patty', 250, '1 patty (¼ lb, cooked)'], ['Chicken burger patty', 200, '1 patty'],
+  ['Turkey burger patty', 190, '1 patty'],
+  ['Grilled chicken breast', 165, '100g'],
   ['Grilled chicken thigh', 180, '1 thigh'], ['Fried chicken', 320, '1 piece'],
   ['Turkey (fried)', 280, '1 wing'], ['Goat meat', 150, '1 portion'],
   ['Beef (stewed)', 200, '2 pieces'], ['Fried fish (titus/mackerel)', 300, '1 medium'],
@@ -1201,6 +1222,49 @@ const FOOD_DB = [
   ['Green tea', 0, '1 cup, plain'], ['Kombucha', 35, '1 cup'],
   ['Coconut water', 45, '1 cup'], ['Gin & tonic', 170, '1 glass'],
   ['Mojito', 220, '1 glass'], ['Prosecco', 80, '1 glass'],
+  // dried fruits & nuts
+  ['Dates (medjool)', 66, '1 date'], ['Dates (deglet noor)', 20, '1 date'],
+  ['Dried apricots', 100, '5 pieces'], ['Raisins', 85, '2 tbsp'],
+  ['Dried figs', 95, '2 figs'], ['Prunes', 70, '3 prunes'],
+  ['Dried mango', 160, '6 strips (40g)'], ['Dried cranberries', 65, '2 tbsp'],
+  ['Banana chips', 150, '1 handful'], ['Trail mix', 170, '1 handful'],
+  ['Almonds', 165, '1 handful (23 nuts)'], ['Walnuts', 185, '1 handful'],
+  ['Pistachios', 160, '1 handful (shelled)'], ['Mixed nuts', 170, '1 handful'],
+  ['Tiger nuts', 120, '1 handful'], ['Kuli kuli', 160, '3 sticks'],
+  ['Boiled groundnuts', 200, '1 cup in shell'],
+  // more Nigerian dishes & combos
+  ['Ayamase (ofada stew)', 300, '1 serving'], ['Gizdodo (gizzard & plantain)', 400, '1 serving'],
+  ['Peppered gizzard', 250, '1 serving'], ['Chicken pepper soup', 220, '1 bowl'],
+  ['Catfish pepper soup', 260, '1 bowl'], ['Boiled beans (ewa)', 250, '1 cup'],
+  ['Egg stew (fried stew with egg)', 300, '1 serving'], ['Egg sauce', 250, '1 serving'],
+  ['Bread & egg sauce', 450, '2 slices + sauce'], ['Yamarita (egg-coated fried yam)', 380, '6 pieces'],
+  ['Masa (rice cake)', 240, '3 pieces'], ['Fura da nono', 180, '1 cup'],
+  ['Coconut rice', 320, '1 cup'], ['Native jollof (palm oil rice)', 330, '1 cup'],
+  ['Garri soakings (with sugar)', 350, '1 bowl'], ['Cabin biscuits', 150, '5 pieces'],
+  ['Eba + egusi (combo)', 730, '1 cup eba + soup'], ['Pounded yam + egusi (combo)', 800, '1 cup + soup'],
+  ['Pap + akara (combo)', 335, '1 cup pap + 3 balls'],
+  ['Grilled peppered turkey', 320, '1 piece'], ['Boiled chicken lap', 250, '1 lap'],
+  ['Cow leg (bokoto)', 300, '1 serving'], ['Shaki (tripe)', 120, '2 pieces'],
+  ['Shawarma (beef)', 550, '1 wrap'], ['Palm wine', 150, '1 cup'],
+  ['Tigernut drink (kunun aya)', 180, '1 cup'],
+  // fast food & takeaway
+  ['Big Mac', 550, '1 burger'], ['Whopper', 670, '1 burger'],
+  ['McChicken', 400, '1 burger'], ['Chicken nuggets', 270, '6 pieces'],
+  ['Fried chicken wings', 400, '4 wings'], ['Hot dog', 300, '1 with bun'],
+  ['Subway turkey sub (6-inch)', 280, '1 sub'], ['Chicken & chips', 800, '1 plate'],
+  ['Hash browns', 300, '2 pieces'], ['Home fries / fried potatoes', 360, '1 cup'],
+  ['Toast with jam', 150, '1 slice'], ['Weetabix with milk', 230, '2 biscuits + milk'],
+  ['Sardine sandwich', 380, '1 sandwich'],
+  // more fresh fruit
+  ['Guava', 37, '1 fruit'], ['Tangerine', 47, '1 fruit'],
+  ['Agbalumo (African star apple)', 60, '1 fruit'], ['Soursop', 150, '1 cup pulp'],
+  ['Pear', 100, '1 medium'], ['Strawberries', 50, '1 cup'],
+  ['Blueberries', 85, '1 cup'], ['Mixed berries', 70, '1 cup'],
+  ['Kiwi', 42, '1 fruit'], ['Peach', 60, '1 medium'],
+  ['Plum', 30, '1 fruit'], ['Grapefruit', 52, '½ fruit'],
+  // condiments & cooking
+  ['Vegetable / groundnut oil', 120, '1 tbsp'], ['Palm oil', 120, '1 tbsp'],
+  ['Mayonnaise', 95, '1 tbsp'], ['Ketchup', 20, '1 tbsp'],
 ];
 
 /* ================= navigation ================= */
@@ -1392,19 +1456,57 @@ function initToday() {
   function searchFoods(q) {
     q = q.trim().toLowerCase();
     if (q.length < 2) return [];
+    // every word in the query must appear in the name, in any order —
+    // so "sunny side up egg" finds "Fried egg (sunny side up)"
+    const tokens = q.split(/\s+/);
     const starts = [], contains = [];
     for (const f of FOOD_DB) {
       const n = f[0].toLowerCase();
-      if (n.startsWith(q)) starts.push(f);
-      else if (n.includes(q)) contains.push(f);
-      if (starts.length >= 8) break;
+      if (!tokens.every(t => n.includes(t))) continue;
+      if (n.startsWith(tokens[0])) starts.push(f);
+      else contains.push(f);
     }
     return starts.concat(contains).slice(0, 8);
   }
+  async function askClaudeForFood(q) {
+    closeAc();
+    const status = $('photo-status');
+    status.style.display = 'block';
+    status.textContent = `Asking Claude about “${q}”…`;
+    try {
+      const data = await lookupFoodByName(q);
+      if (!data) { status.style.display = 'none'; return; }
+      nameInput.value = data.name;
+      $('food-kcal').value = data.kcal;
+      pendingProtein = Math.round(data.protein_g) || null;
+      status.textContent = `✓ ${data.name}: ${data.kcal} kcal · ${Math.round(data.protein_g)} g protein per ${data.serving}. Set the × quantity and tap Add.`;
+    } catch (err) {
+      status.textContent = '⚠ ' + err.message;
+    }
+  }
+
   nameInput.addEventListener('input', () => {
     pendingProtein = null;
     const matches = searchFoods(nameInput.value);
-    if (!matches.length) { closeAc(); return; }
+    if (!matches.length) {
+      const q = nameInput.value.trim();
+      if (q.length < 3) { closeAc(); return; }
+      acList.innerHTML = '';
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'ac-item';
+      const fn = document.createElement('span');
+      fn.className = 'fn';
+      fn.textContent = `🔍 Not in the list — ask Claude about “${q}”`;
+      const fs = document.createElement('span');
+      fs.className = 'fs';
+      fs.textContent = 'AI estimate via your API key (~a cent), fills in kcal & protein';
+      fn.appendChild(fs);
+      b.appendChild(fn);
+      b.addEventListener('pointerdown', ev => { ev.preventDefault(); askClaudeForFood(q); });
+      acList.appendChild(b);
+      acList.classList.add('open');
+      return;
+    }
     acList.innerHTML = '';
     matches.forEach(([n, k, serv]) => {
       const pr = PROTEIN[n];
@@ -2024,14 +2126,13 @@ const LABEL_SCHEMA = {
   additionalProperties: false,
 };
 
-async function claudeVision(file, promptText, schema) {
+async function claudeJSON(content, schema) {
   const key = localStorage.getItem(APIKEY_STORE);
   if (!key) {
     alert('Add your Claude API key in Settings first (Photo calorie estimation section).');
     show('settings');
     return null;
   }
-  const b64 = await resizeImage(file, 1024);
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -2044,13 +2145,7 @@ async function claudeVision(file, promptText, schema) {
       model: 'claude-opus-5',
       max_tokens: 2048,
       output_config: { effort: 'low', format: { type: 'json_schema', schema } },
-      messages: [{
-        role: 'user',
-        content: [
-          { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
-          { type: 'text', text: promptText },
-        ],
-      }],
+      messages: [{ role: 'user', content }],
     }),
   });
   if (!res.ok) {
@@ -2058,10 +2153,37 @@ async function claudeVision(file, promptText, schema) {
     throw new Error(err?.error?.message || ('API error ' + res.status));
   }
   const msg = await res.json();
-  if (msg.stop_reason === 'refusal') throw new Error('The model declined to analyze this image.');
+  if (msg.stop_reason === 'refusal') throw new Error('The model declined this request.');
   const text = msg.content.find(b => b.type === 'text')?.text;
   if (!text) throw new Error('No result returned.');
   return JSON.parse(text);
+}
+
+async function claudeVision(file, promptText, schema) {
+  const b64 = await resizeImage(file, 1024);
+  return claudeJSON([
+    { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
+    { type: 'text', text: promptText },
+  ], schema);
+}
+
+const FOOD_LOOKUP_SCHEMA = {
+  type: 'object',
+  properties: {
+    name: { type: 'string' },
+    serving: { type: 'string' },
+    kcal: { type: 'integer' },
+    protein_g: { type: 'number' },
+  },
+  required: ['name', 'serving', 'kcal', 'protein_g'],
+  additionalProperties: false,
+};
+
+async function lookupFoodByName(query) {
+  return claudeJSON(
+    `Give typical nutrition for "${query}" as commonly eaten (cooked/prepared). Pick one natural serving unit — one patty, one egg, one slice, one cup, one piece — and return a short cleaned-up name, the serving description, and calories (kcal) and protein grams for that single serving. Typical preparation, average size.`,
+    FOOD_LOOKUP_SCHEMA,
+  );
 }
 
 const PLATE_PROMPT = 'This is a photo of food someone is about to eat while tracking calories and protein for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories and protein grams per item. Dishes may be West African / Nigerian (jollof, eba, egusi, dodo, suya) or international (salads, fish, grills). Account for cooking oil in stews and fried foods. For calories, estimate slightly high when unsure; for protein, estimate realistically rather than optimistically.';

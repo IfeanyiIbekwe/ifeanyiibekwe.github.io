@@ -368,7 +368,12 @@
         <span style="font-variant-numeric:tabular-nums;"><b id="protein-now">0</b> <span style="color:var(--muted)">/ <span id="protein-goal">—</span> g</span></span>
       </div>
       <div class="meter" style="margin-top:0;"><div class="fill" id="protein-meter" style="width:0%"></div></div>
-      <p class="note" id="protein-note" style="margin-top:8px;">Aim for ~1.6 g per kg of goal weight so the weight you lose is fat, not muscle. Counted from search picks, quick-add chips, and photo estimates.</p>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; font-size:13px; margin:12px 0 8px;">
+        <span style="color:var(--text-secondary); font-weight:600;">Fiber today</span>
+        <span style="font-variant-numeric:tabular-nums;"><b id="fiber-now">0</b> <span style="color:var(--muted)">/ <span id="fiber-goal">30</span> g</span></span>
+      </div>
+      <div class="meter" style="margin-top:0;"><div class="fill" id="fiber-meter" style="width:0%"></div></div>
+      <p class="note" id="protein-note" style="margin-top:8px;">Protein (~1.6 g/kg of goal weight) keeps the weight you lose as fat, not muscle; fiber (~30 g) keeps you full on fewer calories. Counted from search picks, chips, and photo estimates.</p>
     </div>
 
     <div class="card">
@@ -538,29 +543,62 @@
   <section class="screen guide" id="screen-guide">
     <div class="card">
       <h2>Strength plan — 3 days a week</h2>
-      <p>In a big calorie deficit, lifting is what makes the weight you lose <strong>fat instead of muscle</strong>. Three sessions a week, at least a day of rest between them. Form guide with pictures below.</p>
-      <div class="sub2">Day A — Legs</div>
+      <p>In a big calorie deficit, lifting is what makes the weight you lose <strong>fat instead of muscle</strong>. Three sessions a week, at least a day of rest between them. Each muscle gets hit ~2× per week across the split. Form guide with pictures below.</p>
+      <div class="sub2">Day A — Legs &amp; core <span style="font-weight:400;color:var(--muted)">(quads · glutes · hamstrings · core)</span></div>
       <ul>
-        <li>Squat — 3 × 10</li>
-        <li>Lunges — 3 × 10 each leg</li>
-        <li>Plank — 3 × 30 seconds</li>
+        <li>Squat — 3 × 8–12 · rest 2–3 min</li>
+        <li>Lunges — 3 × 8–12 each leg · rest 90 s</li>
+        <li>Plank — 3 × 30–60 s · rest 60 s</li>
         <li>Treadmill incline walk — 15 min</li>
       </ul>
-      <div class="sub2">Day B — Push</div>
+      <div class="sub2">Day B — Push <span style="font-weight:400;color:var(--muted)">(chest · shoulders · triceps · core)</span></div>
       <ul>
-        <li>Bench press — 3 × 10</li>
-        <li>Overhead press — 3 × 10</li>
-        <li>Plank — 3 × 30 seconds</li>
+        <li>Bench press — 3 × 8–12 · rest 2–3 min</li>
+        <li>Overhead press — 3 × 8–12 · rest 2 min</li>
+        <li>Plank — 3 × 30–60 s · rest 60 s</li>
         <li>Treadmill easy jog — 10 min</li>
       </ul>
-      <div class="sub2">Day C — Pull</div>
+      <div class="sub2">Day C — Pull <span style="font-weight:400;color:var(--muted)">(back · biceps · hamstrings · glutes)</span></div>
       <ul>
-        <li>Deadlift — 3 × 8</li>
-        <li>Pull-ups (or lat pulldown) — 3 × as many as you can</li>
-        <li>One-arm dumbbell row — 3 × 10 each side</li>
+        <li>Deadlift — 3 × 5–8 · rest 3 min</li>
+        <li>Pull-ups (or lat pulldown) — 3 × as many as you can · rest 2 min</li>
+        <li>One-arm dumbbell row — 3 × 8–12 each side · rest 90 s</li>
         <li>Treadmill intervals — 10 min (1 min brisk / 1 min easy)</li>
       </ul>
-      <p class="note">Start light enough to finish every set with clean form. Progress by adding one rep per session; at 12 reps, add weight and drop back to 8–10. Log each session under "Strength training" on the Today tab.</p>
+      <p class="note">Warm up each main lift with 1–2 lighter sets (about half your working weight, 5–8 easy reps) before the 3 working sets. Log each session under "Strength training" on the Today tab.</p>
+    </div>
+
+    <div class="card">
+      <h2>How to progress — reps &amp; weight</h2>
+      <p><strong>Finding your starting weight:</strong> pick a weight you can lift for 10 clean reps while feeling you had <strong>2 more reps in the tank</strong>. Too light beats too heavy for week one — the progression rules below will catch you up fast.</p>
+
+      <div class="sub2">The rule: double progression</div>
+      <p>Work inside the rep range (8–12 for most lifts). Each session, try to add <strong>one rep per set</strong>. When you hit the top of the range on <em>all three sets</em>, add weight next session — <strong>+2.5 kg on upper-body lifts, +5 kg on squats and deadlifts</strong> (or the next dumbbell up) — and drop back to the bottom of the range.</p>
+      <table class="weights" style="margin:8px 0">
+        <tr><th>Week</th><th>Bench press</th><th>What happened</th></tr>
+        <tr><td>1</td><td class="num">30 kg — 3 × 8</td><td>starting point</td></tr>
+        <tr><td>2</td><td class="num">30 kg — 3 × 10</td><td>added reps</td></tr>
+        <tr><td>3</td><td class="num">30 kg — 3 × 12</td><td>topped the range ✓</td></tr>
+        <tr><td>4</td><td class="num">32.5 kg — 3 × 8</td><td>added weight, reps reset</td></tr>
+      </table>
+      <p>Deadlifts run a lower range (5–8): same rule, hit 3 × 8 → add 5 kg → back to 3 × 5.</p>
+
+      <div class="sub2">How hard each set should feel</div>
+      <ul>
+        <li>Finish every set with <strong>1–2 reps left in reserve</strong> — the last rep moves slowly but your form doesn't break.</li>
+        <li>If you'd fail the next rep, the weight is right. If you could do 5 more, it's too light — jump up.</li>
+        <li>Never grind a rep with bent back or flaring elbows to hit a number. A missed rep target is information; an injury is 6 weeks off.</li>
+      </ul>
+
+      <div class="sub2">Progressing in a calorie deficit</div>
+      <ul>
+        <li>The first 2–3 months you'll add weight almost every week or two (beginner gains work even in a deficit).</li>
+        <li>After that, <strong>holding the same weights while your body weight drops is winning</strong> — you're getting stronger per kilo. Don't force weight jumps at the cost of form.</li>
+        <li>If reps drop two sessions in a row: check sleep, protein (hit your bar!), and drop the weight 10% for a week, then rebuild.</li>
+      </ul>
+
+      <div class="sub2">Write your numbers down</div>
+      <p>Progression only works if you know last session's numbers. Keep a note on your phone per exercise — "Bench 30 kg 3×10" — and beat it next time. That one habit is most of what paid gym apps sell.</p>
     </div>
 
     <div class="card">
@@ -981,11 +1019,60 @@ function estimateBurn(met, mins) {
   return Math.round(met * w * (mins / 60));
 }
 
-/* quick-add food suggestions: [name, kcal, protein g] */
+/* quick-add food suggestions: [name, kcal, protein g, fiber g] */
 const QUICK_FOODS = [
-  ['Eggs (2)', 150, 12], ['Oatmeal bowl', 300, 10], ['Chicken & rice', 550, 35],
-  ['Salad + protein', 400, 30], ['Protein shake', 200, 25], ['Coffee w/ milk', 50, 1],
+  ['Eggs (2)', 150, 12, 0], ['Oatmeal bowl', 300, 10, 4], ['Chicken & rice', 550, 35, 2],
+  ['Salad + protein', 400, 30, 4], ['Protein shake', 200, 25, 1], ['Coffee w/ milk', 50, 1, 0],
 ];
+
+/* Fiber grams per FOOD_DB serving. Foods not listed are near-zero
+   (meat, fish, eggs, dairy, drinks, sweets). */
+const FIBER = {
+  'Jollof rice': 1, 'Fried rice (Nigerian)': 2, 'White rice (boiled)': 1, 'Rice & beans': 5,
+  'Rice & stew': 2, 'Ofada rice & sauce': 3, 'Eba (garri)': 2, 'Pounded yam': 2,
+  'Amala': 3, 'Fufu': 2, 'Egusi soup': 4, 'Ogbono soup': 4, 'Efo riro': 4, 'Okra soup': 4,
+  'Vegetable soup': 4, 'Banga soup': 3, 'Afang soup': 4, 'Oha soup': 4,
+  'Moi moi': 5, 'Akara': 2, 'Okpa': 6, 'Ewa agoyin & bread': 12, 'Beans porridge': 10,
+  'Yam porridge (asaro)': 4, 'Boiled yam': 3, 'Fried yam': 3, 'Fried plantain (dodo)': 3,
+  'Boiled plantain': 3, 'Boli (roasted plantain)': 2, 'Plantain chips': 2,
+  'Abacha (African salad)': 5, 'Indomie (1 pack, cooked)': 2, 'Indomie + egg': 2,
+  'Spaghetti jollof': 2, 'Bread & akara': 4, 'Sliced bread (white/wheat)': 1,
+  'Bread & butter': 2, 'Pap (ogi/akamu)': 1, 'Golden Morn': 2,
+  'Garri soakings (with sugar)': 3, 'Boiled beans (ewa)': 10, 'Coconut rice': 2,
+  'Eba + egusi (combo)': 6, 'Pounded yam + egusi (combo)': 6, 'Pap + akara (combo)': 3,
+  'Gizdodo (gizzard & plantain)': 3, 'Ayamase (ofada stew)': 3, 'Yamarita (egg-coated fried yam)': 3,
+  'Banana': 3, 'Apple': 4, 'Orange': 3, 'Mango': 5, 'Pineapple': 2, 'Watermelon': 1,
+  'Pawpaw (papaya)': 3, 'Grapes': 1, 'Avocado': 7, 'Guava': 5, 'Tangerine': 2,
+  'Agbalumo (African star apple)': 3, 'Soursop': 7, 'Pear': 6, 'Strawberries': 3,
+  'Blueberries': 4, 'Mixed berries': 4, 'Kiwi': 2, 'Peach': 2, 'Grapefruit': 2,
+  'Fruit salad': 3, 'Dates (medjool)': 2, 'Dates (deglet noor)': 1, 'Dried apricots': 3,
+  'Raisins': 1, 'Dried figs': 3, 'Prunes': 2, 'Dried mango': 2, 'Dried cranberries': 1,
+  'Banana chips': 2, 'Trail mix': 2, 'Almonds': 4, 'Walnuts': 2, 'Pistachios': 3,
+  'Mixed nuts': 3, 'Tiger nuts': 4, 'Kuli kuli': 2, 'Boiled groundnuts': 4,
+  'Groundnuts (peanuts)': 2, 'Cashew nuts': 1, 'Coconut': 2, 'Peanut butter': 1,
+  'Oatmeal (cooked)': 4, 'Cereal with milk': 3, 'Granola': 4, 'Weetabix with milk': 4,
+  'Overnight oats': 6, 'Chia pudding': 10, 'Avocado toast': 5, 'Quinoa (cooked)': 5,
+  'Quinoa salad': 6, 'Couscous (cooked)': 2, 'Brown rice (cooked)': 4, 'Baked potato': 4,
+  'Sweet potato (baked)': 4, 'Mashed potatoes': 3, 'Roast potatoes': 3, 'French fries': 4,
+  'Home fries / fried potatoes': 3, 'Hash browns': 2, 'Pasta with tomato sauce': 4,
+  'Spaghetti carbonara': 3, 'Lasagna': 3, 'Mac and cheese': 2, 'Spaghetti bolognese': 4,
+  'Pizza': 2, 'Burrito': 8, 'Tacos': 4, 'Quesadilla': 3, 'Hummus': 2, 'Falafel': 3,
+  'Falafel wrap': 8, 'Guacamole': 2, 'Lentil soup': 8, 'Minestrone': 4, 'Tomato soup': 2,
+  'Steamed broccoli': 5, 'Mixed vegetables (steamed)': 4, 'Grilled asparagus': 2,
+  'Green beans': 4, 'Sautéed spinach': 2, 'Side salad (no dressing)': 1,
+  'Garden salad (no dressing)': 2, 'Greek salad': 4, 'Cobb salad': 4, 'Niçoise salad': 4,
+  'Chicken salad (with mayo)': 2, 'Poke bowl': 4, 'Buddha bowl': 10, 'Tabbouleh': 3,
+  'Coleslaw': 2, 'Potato salad': 2, 'Cucumber': 1, 'Carrot': 2,
+  'Popcorn (buttered)': 2, 'Popcorn (plain)': 1, 'Dark chocolate': 2,
+  'Pad thai': 3, 'Ramen': 2, 'Pho': 2, 'Chicken teriyaki with rice': 2,
+  'Chicken & vegetable stir-fry': 4, 'Thai green curry (no rice)': 3,
+  'Chicken & chips': 5, 'Fish & chips': 4, 'Big Mac': 3, 'Whopper': 3,
+  'Cheeseburger': 2, 'Chicken burger': 2, 'McChicken': 2, 'Subway turkey sub (6-inch)': 3,
+  'Chicken wrap': 3, 'Club sandwich': 3, 'Tuna sandwich': 3, 'Sardine sandwich': 3,
+  'Shakshuka': 4, 'Full English breakfast': 4, 'Smoothie': 3, 'Butter chicken (no rice)': 3,
+  'Chicken curry': 3, 'Chinese fried rice': 2, 'Noodles (stir-fried)': 3, 'Risotto': 1,
+  'Shawarma (chicken)': 3, 'Shawarma (beef)': 3, 'Kebab wrap (doner)': 3,
+};
 
 /* Protein grams per FOOD_DB serving (same public nutrition sources).
    Foods not listed are low-protein (fruit, drinks, sweets) and show no figure. */
@@ -1366,6 +1453,13 @@ function renderToday() {
   pFill.style.width = Math.min(100, (proteinNow / proteinGoal) * 100) + '%';
   pFill.className = 'fill' + (proteinNow >= proteinGoal ? ' done' : '');
 
+  const FIBER_GOAL = 30;
+  const fiberNow = d.food.reduce((s, e) => s + (e.fiber || 0), 0);
+  $('fiber-now').textContent = fiberNow;
+  const fFill = $('fiber-meter');
+  fFill.style.width = Math.min(100, (fiberNow / FIBER_GOAL) * 100) + '%';
+  fFill.className = 'fill' + (fiberNow >= FIBER_GOAL ? ' done' : '');
+
   const banner = $('budget-banner');
   if (clamped) {
     banner.innerHTML = `<div class="banner warn">⚠️ <strong>Your goal pace needs a ${fmt(requiredDeficit)} kcal/day deficit</strong>, which would put your budget below a safe minimum. It has been capped at ${fmt(budget)} kcal/day (maintenance ≈ ${fmt(t)}). To close the gap safely: add more exercise, or move your target date later in Settings.</div>`;
@@ -1416,11 +1510,12 @@ function renderEntryList(elId, list, dayKey, kind) {
     const kcal = document.createElement('span');
     kcal.className = 'kcal';
     kcal.textContent = (kind === 'food' ? '' : '−') + fmt(e.kcal) + ' kcal';
-    if (kind === 'food' && e.protein) {
+    if (kind === 'food' && (e.protein || e.fiber)) {
       kcal.style.textAlign = 'right';
       const pr = document.createElement('span');
       pr.style.cssText = 'display:block;font-size:11px;color:var(--muted)';
-      pr.textContent = e.protein + ' g protein';
+      pr.textContent = [e.protein ? e.protein + ' g protein' : null, e.fiber ? e.fiber + ' g fiber' : null]
+        .filter(Boolean).join(' · ');
       kcal.appendChild(pr);
     }
     const del = document.createElement('button');
@@ -1437,12 +1532,12 @@ function renderEntryList(elId, list, dayKey, kind) {
 
 function initToday() {
   const chips = $('food-chips');
-  QUICK_FOODS.forEach(([name, kcal, protein]) => {
+  QUICK_FOODS.forEach(([name, kcal, protein, fiber]) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'chip';
     b.textContent = `${name} · ${kcal}`;
     b.addEventListener('click', () => {
-      day(todayKey()).food.push({ id: uid(), name, kcal, protein });
+      day(todayKey()).food.push({ id: uid(), name, kcal, protein, fiber: fiber || null });
       save(); renderToday();
     });
     chips.appendChild(b);
@@ -1452,6 +1547,7 @@ function initToday() {
   const acList = $('food-ac');
   const nameInput = $('food-name');
   let pendingProtein = null; // protein of the last-selected suggestion; cleared on manual typing
+  let pendingFiber = null;
   function closeAc() { acList.classList.remove('open'); acList.innerHTML = ''; }
   function searchFoods(q) {
     q = q.trim().toLowerCase();
@@ -1479,7 +1575,8 @@ function initToday() {
       nameInput.value = data.name;
       $('food-kcal').value = data.kcal;
       pendingProtein = Math.round(data.protein_g) || null;
-      status.textContent = `✓ ${data.name}: ${data.kcal} kcal · ${Math.round(data.protein_g)} g protein per ${data.serving}. Set the × quantity and tap Add.`;
+      pendingFiber = Math.round(data.fiber_g || 0) || null;
+      status.textContent = `✓ ${data.name}: ${data.kcal} kcal · ${Math.round(data.protein_g)} g protein · ${Math.round(data.fiber_g || 0)} g fiber per ${data.serving}. Set the × quantity and tap Add.`;
     } catch (err) {
       status.textContent = '⚠ ' + err.message;
     }
@@ -1487,6 +1584,7 @@ function initToday() {
 
   nameInput.addEventListener('input', () => {
     pendingProtein = null;
+    pendingFiber = null;
     const matches = searchFoods(nameInput.value);
     if (!matches.length) {
       const q = nameInput.value.trim();
@@ -1510,15 +1608,18 @@ function initToday() {
     acList.innerHTML = '';
     matches.forEach(([n, k, serv]) => {
       const pr = PROTEIN[n];
+      const fb = FIBER[n];
+      const sub = [pr ? `${pr} g protein` : null, fb ? `${fb} g fiber` : null].filter(Boolean).join(' · ');
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'ac-item';
       b.innerHTML = `<span class="fn">${n}<span class="fs">${serv}</span></span>` +
-        `<span class="fk">${k} kcal${pr ? `<span style="display:block;font-size:11px;color:var(--muted);text-align:right">${pr} g protein</span>` : ''}</span>`;
+        `<span class="fk">${k} kcal${sub ? `<span style="display:block;font-size:11px;color:var(--muted);text-align:right">${sub}</span>` : ''}</span>`;
       b.addEventListener('pointerdown', ev => {
         ev.preventDefault(); // fire before the input loses focus
         nameInput.value = n;
         $('food-kcal').value = k;
         pendingProtein = pr || null;
+        pendingFiber = fb || null;
         closeAc();
         $('food-kcal').focus();
       });
@@ -1548,7 +1649,9 @@ function initToday() {
       kcal: Math.round(kcal * qty),
     };
     if (pendingProtein) entry.protein = Math.round(pendingProtein * qty);
+    if (pendingFiber) entry.fiber = Math.round(pendingFiber * qty);
     pendingProtein = null;
+    pendingFiber = null;
     day(todayKey()).food.push(entry);
     $('food-name').value = ''; $('food-kcal').value = ''; $('food-qty').value = '1';
     save(); renderToday();
@@ -1687,6 +1790,19 @@ function renderWeeklyReview() {
     const avgP = Math.round(proteinSum / proteinDays);
     const pGoal = Math.round(state.profile.goalWeight * 1.6);
     html += row('Avg protein', avgP + ' / ' + pGoal + ' g', avgP >= pGoal * 0.9 ? 'var(--good-text)' : 'var(--warning-text)');
+  }
+  let fiberDays = 0, fiberSum = 0;
+  for (let i = 0; i < 7; i++) {
+    const d3 = new Date(); d3.setDate(d3.getDate() - i);
+    const k3 = d3.getFullYear() + '-' + String(d3.getMonth() + 1).padStart(2, '0') + '-' + String(d3.getDate()).padStart(2, '0');
+    const dd3 = state.days[k3];
+    if (!dd3 || !dd3.food.length) continue;
+    const ff = dd3.food.reduce((s3, e3) => s3 + (e3.fiber || 0), 0);
+    if (ff > 0) { fiberDays++; fiberSum += ff; }
+  }
+  if (fiberDays) {
+    const avgF = Math.round(fiberSum / fiberDays);
+    html += row('Avg fiber', avgF + ' / 30 g', avgF >= 27 ? 'var(--good-text)' : 'var(--warning-text)');
   }
   if (wChange !== null && older.length) html += row('Weight this week', (wChange > 0 ? '+' : '') + wChange.toFixed(1) + ' kg', wChange < 0 ? 'var(--good-text)' : 'var(--critical)');
   if (steps) html += row('Steps logged', steps.toLocaleString());
@@ -2100,16 +2216,18 @@ const PLATE_SCHEMA = {
           portion: { type: 'string' },
           kcal: { type: 'integer' },
           protein_g: { type: 'integer' },
+          fiber_g: { type: 'integer' },
         },
-        required: ['name', 'portion', 'kcal', 'protein_g'],
+        required: ['name', 'portion', 'kcal', 'protein_g', 'fiber_g'],
         additionalProperties: false,
       },
     },
     total_kcal: { type: 'integer' },
     total_protein_g: { type: 'integer' },
+    total_fiber_g: { type: 'integer' },
     confidence: { type: 'string', enum: ['low', 'medium', 'high'] },
   },
-  required: ['items', 'total_kcal', 'total_protein_g', 'confidence'],
+  required: ['items', 'total_kcal', 'total_protein_g', 'total_fiber_g', 'confidence'],
   additionalProperties: false,
 };
 
@@ -2120,9 +2238,10 @@ const LABEL_SCHEMA = {
     serving: { type: 'string' },
     kcal_per_serving: { type: 'integer' },
     protein_g_per_serving: { type: 'number' },
+    fiber_g_per_serving: { type: 'number' },
     confidence: { type: 'string', enum: ['low', 'medium', 'high'] },
   },
-  required: ['product_name', 'serving', 'kcal_per_serving', 'protein_g_per_serving', 'confidence'],
+  required: ['product_name', 'serving', 'kcal_per_serving', 'protein_g_per_serving', 'fiber_g_per_serving', 'confidence'],
   additionalProperties: false,
 };
 
@@ -2174,21 +2293,22 @@ const FOOD_LOOKUP_SCHEMA = {
     serving: { type: 'string' },
     kcal: { type: 'integer' },
     protein_g: { type: 'number' },
+    fiber_g: { type: 'number' },
   },
-  required: ['name', 'serving', 'kcal', 'protein_g'],
+  required: ['name', 'serving', 'kcal', 'protein_g', 'fiber_g'],
   additionalProperties: false,
 };
 
 async function lookupFoodByName(query) {
   return claudeJSON(
-    `Give typical nutrition for "${query}" as commonly eaten (cooked/prepared). Pick one natural serving unit — one patty, one egg, one slice, one cup, one piece — and return a short cleaned-up name, the serving description, and calories (kcal) and protein grams for that single serving. Typical preparation, average size.`,
+    `Give typical nutrition for "${query}" as commonly eaten (cooked/prepared). Pick one natural serving unit — one patty, one egg, one slice, one cup, one piece — and return a short cleaned-up name, the serving description, and calories (kcal), protein grams, and fiber grams for that single serving. Typical preparation, average size.`,
     FOOD_LOOKUP_SCHEMA,
   );
 }
 
-const PLATE_PROMPT = 'This is a photo of food someone is about to eat while tracking calories and protein for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories and protein grams per item. Dishes may be West African / Nigerian (jollof, eba, egusi, dodo, suya) or international (salads, fish, grills). Account for cooking oil in stews and fried foods. For calories, estimate slightly high when unsure; for protein, estimate realistically rather than optimistically.';
+const PLATE_PROMPT = 'This is a photo of food someone is about to eat while tracking calories, protein, and fiber for weight loss. Identify each distinct food or drink item, estimate the visible portion size, and estimate calories, protein grams, and fiber grams per item. Dishes may be West African / Nigerian (jollof, eba, egusi, dodo, suya) or international (salads, fish, grills). Account for cooking oil in stews and fried foods. For calories, estimate slightly high when unsure; for protein and fiber, estimate realistically rather than optimistically.';
 
-const LABEL_PROMPT = 'This is a photo of a packaged food product or its nutrition facts label. Read the label and extract: the product name (from the packaging if visible, otherwise describe it), the serving size as printed (e.g. "2 biscuits (25g)", "per 330ml can"), and the calories (kcal) and protein grams PER SERVING. If the label only gives per-100g/per-100ml values, use 100g/100ml as the serving. If both are shown, prefer the per-serving column. Convert kJ to kcal if only kJ is shown (divide by 4.184).';
+const LABEL_PROMPT = 'This is a photo of a packaged food product or its nutrition facts label. Read the label and extract: the product name (from the packaging if visible, otherwise describe it), the serving size as printed (e.g. "2 biscuits (25g)", "per 330ml can"), and the calories (kcal), protein grams, and fiber grams PER SERVING (fiber = 0 if not listed). If the label only gives per-100g/per-100ml values, use 100g/100ml as the serving. If both are shown, prefer the per-serving column. Convert kJ to kcal if only kJ is shown (divide by 4.184).';
 
 function analyzePlatePhoto(file) { return claudeVision(file, PLATE_PROMPT, PLATE_SCHEMA); }
 function analyzeLabelPhoto(file) { return claudeVision(file, LABEL_PROMPT, LABEL_SCHEMA); }
@@ -2201,7 +2321,7 @@ function renderLabelResult(data) {
   card.innerHTML =
     `<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px">` +
     `<b style="font-size:14px"></b><span class="note" style="margin:0">${data.confidence} confidence</span></div>` +
-    `<div class="note" style="margin:0 0 10px">Per serving (${data.serving}): ${fmt(data.kcal_per_serving)} kcal · ${data.protein_g_per_serving} g protein</div>`;
+    `<div class="note" style="margin:0 0 10px">Per serving (${data.serving}): ${fmt(data.kcal_per_serving)} kcal · ${data.protein_g_per_serving} g protein${data.fiber_g_per_serving ? ` · ${data.fiber_g_per_serving} g fiber` : ''}</div>`;
   card.querySelector('b').textContent = data.product_name;
   const row = document.createElement('div');
   row.style.cssText = 'display:flex;gap:8px;align-items:center;flex-wrap:wrap';
@@ -2230,6 +2350,7 @@ function renderLabelResult(data) {
       name: q !== 1 ? `${data.product_name} × ${q}` : data.product_name,
       kcal: Math.round(data.kcal_per_serving * q),
       protein: Math.round(data.protein_g_per_serving * q) || null,
+      fiber: Math.round((data.fiber_g_per_serving || 0) * q) || null,
     });
     box.innerHTML = '';
     save(); renderToday();
@@ -2264,7 +2385,7 @@ function renderPhotoResults(data) {
     const li = document.createElement('li');
     const name = document.createElement('span');
     name.className = 'name';
-    name.innerHTML = `${item.name}<span style="display:block;font-size:12px;color:var(--muted)">${item.portion}${item.protein_g ? ` · ${item.protein_g} g protein` : ''}</span>`;
+    name.innerHTML = `${item.name}<span style="display:block;font-size:12px;color:var(--muted)">${item.portion}${item.protein_g ? ` · ${item.protein_g} g protein` : ''}${item.fiber_g ? ` · ${item.fiber_g} g fiber` : ''}</span>`;
     const kcal = document.createElement('span');
     kcal.className = 'kcal';
     kcal.textContent = fmt(item.kcal) + ' kcal';
@@ -2273,7 +2394,7 @@ function renderPhotoResults(data) {
     add.style.cssText = 'padding:5px 12px;font-size:13px';
     add.textContent = 'Add';
     add.addEventListener('click', () => {
-      day(todayKey()).food.push({ id: uid(), name: item.name, kcal: item.kcal, protein: item.protein_g || null });
+      day(todayKey()).food.push({ id: uid(), name: item.name, kcal: item.kcal, protein: item.protein_g || null, fiber: item.fiber_g || null });
       remaining.splice(remaining.indexOf(item), 1);
       save(); renderToday();
       li.remove();
@@ -2291,7 +2412,7 @@ function renderPhotoResults(data) {
   addAll.textContent = 'Add all';
   addAll.addEventListener('click', () => {
     const d = day(todayKey());
-    remaining.forEach(item => d.food.push({ id: uid(), name: item.name, kcal: item.kcal, protein: item.protein_g || null }));
+    remaining.forEach(item => d.food.push({ id: uid(), name: item.name, kcal: item.kcal, protein: item.protein_g || null, fiber: item.fiber_g || null }));
     box.innerHTML = '';
     save(); renderToday();
   });

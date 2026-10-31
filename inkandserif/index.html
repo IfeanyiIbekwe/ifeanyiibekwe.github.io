@@ -122,6 +122,7 @@ img { display: block; max-width: 100%; height: auto; }
 .tile p { color: var(--muted); max-width: 560px; margin: 0 0 30px; }
 .tile img { border-radius: 12px; box-shadow: 0 0 0 1px var(--edge); }
 .tile img.cutout { border-radius: 0; box-shadow: none; }
+.tile video.film { display: block; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px var(--edge); background: #000000; }
 .tile .email-shot { max-width: min(100%, 600px); margin-inline: auto; }
 .credit { display: block; margin-top: 8px; font-size: 12px; }
 @media (max-width: 600px) { .tile { padding: 30px 22px 32px; border-radius: 22px; } .tile h3 { font-size: 24px; } }
@@ -212,6 +213,11 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 			<img class="cutout" src="images/sable-phones-1600.webp" srcset="images/sable-phones-800.webp 800w, images/sable-phones-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="Sable on three phones: the Light home, the Dark menus and the reservations page" loading="lazy" decoding="async">
 		</figure>
 		<figure class="tile wide">
+			<h3>Any palette, any pairing.</h3>
+			<p>Three palettes and four type pairings, chosen in WordPress's own Styles: Ivory with the theme's own pairing, Terracotta with Classic, Stone with Pure, and the Dark version with Couture. <span class="credit">Film made with Higgsfield (AI).</span></p>
+			<img class="cutout" src="images/maison-looks-1600.webp" srcset="images/maison-looks-800.webp 800w, images/maison-looks-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1043" alt="Sable's home page in four looks: Ivory, Terracotta with Caslon type, Stone with Host Grotesk, and the Dark version with Bodoni" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
 			<h3>Linnet.</h3>
 			<p>The second demo: an all-day bakery and kitchen, built from the same patterns in the Terracotta palette and the Classic type pairing.</p>
 			<img src="images/linnet-home-1600.jpg" srcset="images/linnet-home-800.jpg 800w, images/linnet-home-1600.jpg 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1000" alt="Linnet home page: the headline Baked at dawn, served all day beside a photo of coffee and a croissant" loading="lazy" decoding="async">
@@ -236,6 +242,19 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 			<p>Each dish is a block in the WordPress editor, with its prices, dietary tags and allergens in the sidebar.</p>
 			<img src="images/maison-admin-editor-1600.jpg" srcset="images/maison-admin-editor-800.jpg 800w, images/maison-admin-editor-1600.jpg 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1000" alt="The WordPress editor with a dish selected on the menus page, its prices in the sidebar" loading="lazy" decoding="async">
 		</figure>
+		<figure class="tile wide">
+			<h3>Set up in two clicks.</h3>
+			<p>Get started installs the plugin in one click and a demo in another, then points to where every part changes. A built-in guide explains each step, and each font role takes any font, the buyer's own included.</p>
+			<img class="cutout" src="images/maison-setup-1600.webp" srcset="images/maison-setup-800.webp 800w, images/maison-setup-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="880" alt="Maison's Get started page with both steps done, in front of the settings page where Display, Text and Body each take a font" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>Maison in 52 seconds.</h3>
+			<p>The Sable demo: the home page, the menus, private dining and the Dark version. Silent. <span class="credit">Includes Sable's opener film, made with Higgsfield (AI).</span></p>
+			<video class="film" controls playsinline preload="none" poster="video/maison-walkthrough-poster.jpg" width="1280" height="720" aria-label="Maison walkthrough film, 52 seconds, silent">
+				<source src="video/maison-walkthrough.webm" type="video/webm">
+				<source src="video/maison-walkthrough.mp4" type="video/mp4">
+			</video>
+		</figure>
 	</div>
 </section>
 
@@ -246,6 +265,11 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 		<p>Emails, product pages and a concierge chat for Business of Preloved Fashion, a luxury preloved boutique in Dubai.</p>
 	</div>
 	<div class="tiles">
+		<figure class="tile wide">
+			<h3>Campaign art.</h3>
+			<p>Covers for the editorial emails and the store: the Festive Gift Guide, Chanel and Louis Vuitton. <span class="credit">Made with AI.</span></p>
+			<img class="cutout" src="images/bopf-campaigns-1600.webp" srcset="images/bopf-campaigns-800.webp 800w, images/bopf-campaigns-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="727" alt="Three campaign images: a woman in red velvet holding a black Hermes bag, a woman in a cream jacket with a Chanel bag on a Paris rooftop at dusk, and a woman with a red Louis Vuitton bag in the dunes" loading="lazy" decoding="async">
+		</figure>
 		<figure class="tile wide">
 			<h3>The product page.</h3>
 			<p>Every piece measured by hand, with a studio viewing, a heart to save it and its specifications, set in Fraunces with a terracotta hand.</p>
@@ -280,7 +304,7 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 	<div class="foot">
 		<p><a class="wordmark" href="#top">Ink &amp; Serif</a></p>
 		<p>Ify's studio for WordPress themes. Contact: <a href="mailto:ify@thebopf.com">ify@thebopf.com</a></p>
-		<p>Images are screenshots of the work. Sable's opener films were made with Higgsfield (AI); the Maison demo photos are from Pexels; the BOPF product photos are BOPF's own.</p>
+		<p>Images are screenshots of the work. Sable's opener films were made with Higgsfield (AI), and BOPF's campaign art with AI; the Maison demo photos are from Pexels; the BOPF product photos are BOPF's own.</p>
 	</div>
 </footer>
 

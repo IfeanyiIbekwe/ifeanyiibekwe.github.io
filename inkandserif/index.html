@@ -141,6 +141,11 @@ img { display: block; max-width: 100%; height: auto; }
 	.code-card::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 32px; border-radius: 0 14px 14px 0; background: linear-gradient(90deg, rgba(10, 10, 10, 0), #0a0a0a); pointer-events: none; }
 }
 
+/* App store screens in a row; two by two on phones. */
+.app-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.tile .app-row img { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 0 0 1px var(--edge), 0 24px 48px -24px rgba(0, 0, 0, 0.6); }
+@media (max-width: 699px) { .app-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .tile .app-row img { border-radius: 12px; } }
+
 /* A film playing in the middle phone of three; on small screens, alone. */
 .live { position: relative; }
 .live > img { display: block; width: 100%; height: auto; }
@@ -256,11 +261,6 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 			<img src="images/linnet-home-1600.jpg" srcset="images/linnet-home-800.jpg 800w, images/linnet-home-1600.jpg 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1000" alt="Linnet home page: the headline Baked at dawn, served all day beside a photo of coffee and a croissant" loading="lazy" decoding="async">
 		</figure>
 		<figure class="tile wide">
-			<h3>Linnet on phones.</h3>
-			<p>The home page, the menus and the Journal.</p>
-			<img class="cutout" src="images/linnet-phones-1600.webp" srcset="images/linnet-phones-800.webp 800w, images/linnet-phones-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="Linnet on three phones: the home page, the menus and the Journal" loading="lazy" decoding="async">
-		</figure>
-		<figure class="tile wide">
 			<h3>Set up in two clicks.</h3>
 			<p>Get started installs the plugin in one click and a demo in another, then points to where every part changes. A built-in guide explains each step, and each font role takes any font, the buyer's own included.</p>
 			<img class="cutout" src="images/maison-setup-1600.webp" srcset="images/maison-setup-800.webp 800w, images/maison-setup-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="880" alt="Maison's Get started page with both steps done, in front of the settings page where Display, Text and Body each take a font" loading="lazy" decoding="async">
@@ -343,13 +343,23 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 	<div class="head">
 		<p class="eyebrow">BOPF</p>
 		<h2 id="bopf-title">Luxury, preloved.</h2>
-		<p>Emails, product pages and a concierge chat for Business of Preloved Fashion, a luxury preloved boutique in Dubai.</p>
+		<p>An app for iOS and Android, product pages, a concierge chat, campaign art and emails for Business of Preloved Fashion, a luxury preloved boutique in Dubai.</p>
 	</div>
 	<div class="tiles">
 		<figure class="tile wide">
 			<h3>Campaign art.</h3>
 			<p>Covers for the editorial emails and the store: the Festive Gift Guide, Chanel and Louis Vuitton. <span class="credit">Made with AI.</span></p>
 			<img class="cutout" src="images/bopf-campaigns-1600.webp" srcset="images/bopf-campaigns-800.webp 800w, images/bopf-campaigns-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="727" alt="Three campaign images: a woman in red velvet holding a black Hermes bag, a woman in a cream jacket with a Chanel bag on a Paris rooftop at dusk, and a woman with a red Louis Vuitton bag in the dunes" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>The app.</h3>
+			<p>BOPF on iOS and Android: a daily edit from the houses you follow, the whole boutique to filter, every piece authenticated, and an alert the moment a watched piece drops in price or comes back. Shown: its Google Play screens.</p>
+			<div class="app-row">
+				<img src="images/bopf-app-edit-800.jpg" srcset="images/bopf-app-edit-400.jpg 400w, images/bopf-app-edit-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="BOPF's store screen Your edit, every day: the home feed, with search, house filters and a Christian Dior bag" loading="lazy" decoding="async">
+				<img src="images/bopf-app-filter-800.jpg" srcset="images/bopf-app-filter-400.jpg 400w, images/bopf-app-filter-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="Store screen Filter the whole boutique: Hermes pieces in a grid, with filters and a price drop marked" loading="lazy" decoding="async">
+				<img src="images/bopf-app-authenticated-800.jpg" srcset="images/bopf-app-authenticated-400.jpg 400w, images/bopf-app-authenticated-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="Store screen Every piece authenticated: the product page of a Christian Dior Book Tote at AED 6,660" loading="lazy" decoding="async">
+				<img src="images/bopf-app-watch-800.jpg" srcset="images/bopf-app-watch-400.jpg 400w, images/bopf-app-watch-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="Store screen Watch a piece: the Vault, the pieces a customer watches for a price drop or a restock" loading="lazy" decoding="async">
+			</div>
 		</figure>
 		<figure class="tile wide">
 			<h3>The product page.</h3>

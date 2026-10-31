@@ -123,6 +123,22 @@ img { display: block; max-width: 100%; height: auto; }
 .tile img { border-radius: 12px; box-shadow: 0 0 0 1px var(--edge); }
 .tile img.cutout { border-radius: 0; box-shadow: none; }
 .tile video.film { display: block; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px var(--edge); background: #000000; }
+
+/* A film playing in the middle phone of three; on small screens, alone. */
+.live { position: relative; }
+.live > img { display: block; width: 100%; height: auto; }
+.live-phone { position: absolute; left: 36.023%; top: 6.395%; width: 27.955%; height: 87.209%; }
+.live-phone video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8.658% / 4%; background: #111111; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.45); }
+.live-toggle { position: absolute; right: 10px; bottom: 10px; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.22); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #ffffff; cursor: pointer; }
+.live-toggle:hover { background: rgba(255, 255, 255, 0.34); }
+.live-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.live-toggle .play, .live-toggle.is-paused .pause { display: none; }
+.live-toggle.is-paused .play { display: block; }
+@media (max-width: 699px) {
+	.live > img { display: none; }
+	.live-phone { position: relative; left: auto; top: auto; width: min(86%, 340px); height: auto; margin: 0 auto; }
+	.live-phone video { height: auto; aspect-ratio: 390 / 844; }
+}
 .tile .email-shot { max-width: min(100%, 600px); margin-inline: auto; }
 .credit { display: block; margin-top: 8px; font-size: 12px; }
 @media (max-width: 600px) { .tile { padding: 30px 22px 32px; border-radius: 22px; } .tile h3 { font-size: 24px; } }
@@ -209,8 +225,17 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 		</figure>
 		<figure class="tile wide">
 			<h3>Made for phones.</h3>
-			<p>The Light home, the Dark menus and reservations, with a Reserve bar on every page. <span class="credit">Film made with Higgsfield (AI).</span></p>
-			<img class="cutout" src="images/sable-phones-1600.webp" srcset="images/sable-phones-800.webp 800w, images/sable-phones-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="Sable on three phones: the Light home, the Dark menus and the reservations page" loading="lazy" decoding="async">
+			<p>Sable in a hand: the home page, the menu, the menus with their dietary notes and reservations, then the Dark version, with a Reserve bar on every page. Either side, the Dark menus and private dining. <span class="credit">Includes Sable's opener film, made with Higgsfield (AI).</span></p>
+			<div class="live">
+				<img class="cutout" src="images/sable-phones-live-1600.webp" srcset="images/sable-phones-live-800.webp 800w, images/sable-phones-live-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="Sable's Dark menus and private dining on two phones, either side of the film" loading="lazy" decoding="async">
+				<div class="live-phone">
+					<video data-live="video/maison-phone" muted loop playsinline preload="none" poster="video/maison-phone-poster.jpg" width="780" height="1688" aria-label="Sable on a phone, a silent film of about 40 seconds: the home page, the menu, the menus and reservations, then the Dark version"></video>
+					<button class="live-toggle is-paused" type="button" aria-label="Play the film">
+						<svg class="pause" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="currentColor"/></svg>
+						<svg class="play" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8c0 .5.5.8.9.5l8.6-5.4c.4-.2.4-.8 0-1L3.9 1.1c-.4-.3-.9 0-.9.5z" fill="currentColor"/></svg>
+					</button>
+				</div>
+			</div>
 		</figure>
 		<figure class="tile wide">
 			<h3>Any palette, any pairing.</h3>
@@ -340,6 +365,36 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 		if (pause) video.pause(); else video.play();
 		button.classList.toggle('is-paused', pause);
 		button.setAttribute('aria-label', pause ? 'Play the film' : 'Pause the film');
+	});
+})();
+
+/* The phone film plays where it stands: it loads and starts when it comes into
+   view and stops when it leaves. Visitors who ask for less motion or to save
+   data, and anyone who pauses it, start it with its button instead. */
+(function () {
+	var calm = matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData);
+	[].forEach.call(document.querySelectorAll('video[data-live]'), function (video) {
+		var button = video.parentNode.querySelector('.live-toggle');
+		var held = false;
+		function play() {
+			if (!video.getAttribute('src')) video.src = video.getAttribute('data-live') + (video.canPlayType('video/webm; codecs="vp9"') ? '.webm' : '.mp4');
+			video.muted = true;
+			var playing = video.play();
+			if (playing && playing.catch) playing.catch(function () {});
+		}
+		function show(paused) {
+			button.classList.toggle('is-paused', paused);
+			button.setAttribute('aria-label', paused ? 'Play the film' : 'Pause the film');
+		}
+		video.addEventListener('play', function () { show(false); });
+		video.addEventListener('pause', function () { show(true); });
+		button.addEventListener('click', function () {
+			if (video.paused) { held = false; play(); } else { held = true; video.pause(); }
+		});
+		if (calm || !('IntersectionObserver' in window)) return;
+		new IntersectionObserver(function (entries) {
+			if (entries[0].isIntersecting) { if (!held) play(); } else if (!video.paused) video.pause();
+		}, { threshold: 0.35 }).observe(video);
 	});
 })();
 </script>

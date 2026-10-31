@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ink &amp; Serif: WordPress themes</title>
+<meta name="description" content="Ink &amp; Serif designs and builds WordPress block themes. Maison, a restaurant theme, and work for BOPF, a luxury preloved boutique in Dubai.">
+<link rel="canonical" href="https://ifeanyiibekwe.github.io/inkandserif/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ink &amp; Serif: WordPress themes">
+<meta property="og:description" content="Block themes for restaurants and independent businesses: Maison, and work for BOPF.">
+<meta property="og:url" content="https://ifeanyiibekwe.github.io/inkandserif/">
+<meta property="og:image" content="https://ifeanyiibekwe.github.io/inkandserif/video/sable-opener-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face { font-family: "Schibsted Grotesk"; font-style: normal; font-weight: 400 900; font-display: swap; src: url("fonts/schibsted-grotesk-latin-wght-normal.woff2") format("woff2"); }
+
+:root {
+	--bg: #ffffff;
+	--band: #f4f4f4;
+	--tile: #f4f4f4;
+	--ink: #0a0a0a;
+	--muted: #666666;
+	--link: #0a0a0a;
+	--button: #0a0a0a;
+	--button-ink: #ffffff;
+	--bar: rgba(255, 255, 255, 0.8);
+	--bar-ink: #0a0a0a;
+	--edge: rgba(0, 0, 0, 0.08);
+	--text: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--display: var(--text);
+	color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #000000;
+		--band: #0d0d0d;
+		--tile: #161616;
+		--ink: #f5f5f5;
+		--muted: #9a9a9a;
+		--link: #f5f5f5;
+		--button: #f5f5f5;
+		--button-ink: #0a0a0a;
+		--bar: rgba(10, 10, 10, 0.8);
+		--bar-ink: #f5f5f5;
+		--edge: rgba(255, 255, 255, 0.1);
+	}
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 48px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--text); letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+.wordmark, .bar nav a, .button, .more { text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 4px; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* The bar along the top. */
+.bar { position: sticky; top: 0; z-index: 10; background: var(--bar); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--edge); transition: background-color 0.4s ease, border-color 0.4s ease; }
+.bar.on-film { --bar: rgba(0, 0, 0, 0.32); --bar-ink: #ffffff; --edge: rgba(255, 255, 255, 0.14); }
+.bar-inner { max-width: 1024px; height: 48px; margin: 0 auto; padding: 0 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.wordmark { font: 700 17px/1 var(--display); letter-spacing: -0.02em; color: var(--bar-ink); transition: color 0.4s ease; }
+.wordmark:hover { text-decoration: none; }
+.bar nav { display: flex; gap: 28px; font-size: 13px; font-weight: 500; }
+.bar nav a { color: var(--bar-ink); opacity: 0.85; transition: color 0.4s ease; }
+.bar nav a:hover { opacity: 1; text-decoration: none; }
+@media (max-width: 480px) { .bar nav { gap: 18px; } }
+
+/* Bands of the page, each centred. */
+.band { padding: 104px 22px; }
+.band.grey { background: var(--band); }
+.band.black { background: #000000; color: #f5f5f5; --ink: #f5f5f5; --muted: #9a9a9a; --link: #f5f5f5; --tile: #161616; --edge: rgba(255, 255, 255, 0.1); }
+@media (max-width: 600px) { .band { padding: 72px 16px; } }
+
+/* The opener: Sable's film, full screen, under the bar. */
+.opener { position: relative; display: grid; place-items: center; min-height: 100vh; min-height: 100svh; margin-top: -49px; padding: 120px 22px 112px; overflow: hidden; background: #0a0a0a; color: #ffffff; text-align: center; }
+.opener-media, .opener-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.opener video { opacity: 0; transition: opacity 1.2s ease; }
+.opener video.is-playing { opacity: 1; }
+.opener-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.18) 45%, rgba(0, 0, 0, 0.6) 100%); }
+.opener-text { position: relative; max-width: 960px; }
+.opener h1 { font: 650 clamp(52px, 9vw, 112px)/0.96 var(--display); letter-spacing: -0.045em; margin: 0 0 24px; }
+.opener .lead { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.4; color: rgba(255, 255, 255, 0.84); max-width: 620px; margin: 0 auto 36px; }
+.opener .more { color: #ffffff; }
+.opener .email { color: rgba(255, 255, 255, 0.72); }
+.opener-pause { position: absolute; right: 24px; bottom: 24px; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #ffffff; cursor: pointer; }
+.opener-pause[hidden] { display: none; }
+.opener-pause:hover { background: rgba(255, 255, 255, 0.28); }
+.opener-pause:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+.opener-pause .play, .opener-pause.is-paused .pause { display: none; }
+.opener-pause.is-paused .play { display: block; }
+.opener-credit { position: absolute; left: 24px; bottom: 36px; margin: 0; font-size: 12px; color: rgba(255, 255, 255, 0.62); }
+@media (max-width: 600px) { .opener { padding: 104px 16px 120px; } .opener-credit { left: 16px; right: 76px; bottom: 30px; text-align: left; } .opener-pause { right: 16px; bottom: 16px; } }
+
+.actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 30px; }
+.button { display: inline-block; padding: 13px 26px; border-radius: 980px; background: var(--button); color: var(--button-ink); font-size: 17px; font-weight: 500; transition: opacity 0.2s ease; }
+.button:hover { opacity: 0.86; }
+.opener .button { background: #ffffff; color: #0a0a0a; }
+.more:hover { text-decoration: underline; }
+.more::after { content: ""; display: inline-block; width: 0.42em; height: 0.42em; margin-left: 0.32em; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: translateY(-0.08em) rotate(45deg); }
+.email { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
+
+.head { text-align: center; max-width: 820px; margin: 0 auto 60px; }
+.eyebrow { font: 600 19px/1.2 var(--display); letter-spacing: -0.01em; margin: 0 0 8px; }
+.head h2 { font: 650 clamp(40px, 6vw, 68px)/1.02 var(--display); letter-spacing: -0.04em; margin: 0 0 20px; }
+.head p { font-size: clamp(19px, 2vw, 21px); line-height: 1.4; color: var(--muted); max-width: 640px; margin: 0 auto; }
+.head .eyebrow { color: var(--ink); font-size: 19px; margin-bottom: 8px; }
+
+/* One large picture under a heading. */
+.feature { max-width: 1120px; margin: 0 auto; }
+.shot { border-radius: 18px; box-shadow: 0 0 0 1px var(--edge), 0 40px 80px -40px rgba(0, 0, 0, 0.35); }
+.caption { text-align: center; font-size: 14px; color: var(--muted); max-width: 640px; margin: 22px auto 0; }
+
+/* Tiles, two to a row on wide screens. */
+.tiles { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+@media (min-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tile.wide { grid-column: 1 / -1; } }
+.tile { margin: 0; padding: 44px 44px 48px; border-radius: 28px; background: var(--tile); overflow: hidden; }
+.grey .tile { background: var(--bg); }
+.tile h3 { font: 650 28px/1.1 var(--display); letter-spacing: -0.03em; margin: 0 0 10px; }
+.tile p { color: var(--muted); max-width: 560px; margin: 0 0 30px; }
+.tile img { border-radius: 12px; box-shadow: 0 0 0 1px var(--edge); }
+.tile img.cutout { border-radius: 0; box-shadow: none; }
+.tile .email-shot { max-width: min(100%, 600px); margin-inline: auto; }
+.credit { display: block; margin-top: 8px; font-size: 12px; }
+@media (max-width: 600px) { .tile { padding: 30px 22px 32px; border-radius: 22px; } .tile h3 { font-size: 24px; } }
+
+
+footer { background: var(--band); color: var(--muted); font-size: 12px; line-height: 1.5; padding: 28px 22px 44px; }
+.foot { max-width: 1024px; margin: 0 auto; }
+.foot p { margin: 0 0 8px; }
+.foot .wordmark { font-size: 14px; }
+.foot p:first-child { padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--edge); }
+</style>
+</head>
+<body>
+
+<header class="bar on-film">
+	<div class="bar-inner">
+		<a class="wordmark" href="#top">Ink &amp; Serif</a>
+		<nav aria-label="Sections">
+			<a href="#maison">Maison</a>
+			<a href="#bopf">BOPF</a>
+			<a href="#contact">Contact</a>
+		</nav>
+	</div>
+</header>
+
+<main id="top">
+
+<section class="opener" aria-labelledby="hero-title">
+	<picture class="opener-media">
+		<source media="(max-aspect-ratio: 4/5)" srcset="video/sable-opener-phone-poster.jpg" width="432" height="768">
+		<img src="video/sable-opener-poster.jpg" width="1176" height="784" alt="" fetchpriority="high">
+	</picture>
+	<video class="opener-media" muted loop playsinline preload="none" aria-hidden="true" data-wide="video/sable-opener" data-tall="video/sable-opener-phone"></video>
+	<div class="opener-shade"></div>
+	<div class="opener-text">
+		<h1 id="hero-title">Made for WordPress.</h1>
+		<p class="lead">Block themes for restaurants and independent businesses, designed and built by Ink &amp; Serif.</p>
+		<div class="actions">
+			<a class="button" href="mailto:ify@thebopf.com">Get in touch</a>
+			<a class="more" href="#maison">See the work</a>
+		</div>
+		<p class="email">ify@thebopf.com</p>
+	</div>
+	<button class="opener-pause" type="button" aria-label="Pause the film" hidden>
+		<svg class="pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="currentColor"/></svg>
+		<svg class="play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8c0 .5.5.8.9.5l8.6-5.4c.4-.2.4-.8 0-1L3.9 1.1c-.4-.3-.9 0-.9.5z" fill="currentColor"/></svg>
+	</button>
+	<p class="opener-credit">Sable's opener film, made with Higgsfield (AI).</p>
+</section>
+
+<section class="band" id="maison" aria-labelledby="maison-title">
+	<div class="head">
+		<p class="eyebrow">Maison</p>
+		<h2 id="maison-title">A theme for restaurants.</h2>
+		<p>Menus with allergens, booking with any provider and opening hours typed once. Built on core WordPress blocks, with two demos to start from, Sable and Linnet.</p>
+	</div>
+	<figure class="feature">
+		<img class="shot" src="images/sable-home-light-1600.jpg" srcset="images/sable-home-light-800.jpg 800w, images/sable-home-light-1600.jpg 1600w" sizes="(min-width: 1164px) 1120px, 100vw" width="1600" height="1000" alt="Sable home page in the Light version: the headline Fire, salt and patience beside a framed film of the kitchen">
+		<figcaption class="caption">Sable, the fine-dining demo. Its opener film was made with Higgsfield (AI).</figcaption>
+	</figure>
+</section>
+
+<section class="band grey" aria-label="Maison in detail">
+	<div class="tiles">
+		<figure class="tile">
+			<h3>Light and dark.</h3>
+			<p>Every page in two versions. Dark runs the opener full-bleed; the owner picks Light, Dark or the visitor's own setting. <span class="credit">Film made with Higgsfield (AI).</span></p>
+			<img src="images/sable-home-dark-1600.jpg" srcset="images/sable-home-dark-800.jpg 800w, images/sable-home-dark-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Sable home page in the Dark version, the film running full-bleed behind the headline" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile">
+			<h3>Menus, with allergens.</h3>
+			<p>Menus as tabs, allergens for the EU and UK 14, the US 9 or the restaurant's own list, and printing that matches the screen.</p>
+			<img src="images/sable-menus-1600.jpg" srcset="images/sable-menus-800.jpg 800w, images/sable-menus-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Sable menus page with three menu tabs, an allergen switch and a print button" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile">
+			<h3>Book with anyone.</h3>
+			<p>SevenRooms, OpenTable, Resy, Tock or any link. No online booking? Telephone, WhatsApp and email instead.</p>
+			<img src="images/sable-reservations-1600.jpg" srcset="images/sable-reservations-800.jpg 800w, images/sable-reservations-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Sable reservations page with buttons to reserve, call, WhatsApp or email" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile">
+			<h3>Private dining.</h3>
+			<p>Ready-made sections, all core blocks: the room, the menus, the chef, galleries and quotes.</p>
+			<img src="images/sable-private-dining-1600.jpg" srcset="images/sable-private-dining-800.jpg 800w, images/sable-private-dining-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Sable private dining page" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>Made for phones.</h3>
+			<p>The Light home, the Dark menus and reservations, with a Reserve bar on every page. <span class="credit">Film made with Higgsfield (AI).</span></p>
+			<img class="cutout" src="images/sable-phones-1600.webp" srcset="images/sable-phones-800.webp 800w, images/sable-phones-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="Sable on three phones: the Light home, the Dark menus and the reservations page" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>Linnet.</h3>
+			<p>The second demo: an all-day bakery and kitchen, built from the same patterns in the Terracotta palette and the Classic type pairing.</p>
+			<img src="images/linnet-home-1600.jpg" srcset="images/linnet-home-800.jpg 800w, images/linnet-home-1600.jpg 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1000" alt="Linnet home page: the headline Baked at dawn, served all day beside a photo of coffee and a croissant" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile">
+			<h3>Breakfast to dinner.</h3>
+			<p>Linnet's menus, with allergen lines always shown and prices in pounds.</p>
+			<img src="images/linnet-menus-1600.jpg" srcset="images/linnet-menus-800.jpg 800w, images/linnet-menus-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Linnet menus page with breakfast, lunch and bakery tabs" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile">
+			<h3>Settings, simply.</h3>
+			<p>Opening hours with up to three services a day, last orders and closures, typed once and shown everywhere.</p>
+			<img src="images/maison-admin-hours-1600.jpg" srcset="images/maison-admin-hours-800.jpg 800w, images/maison-admin-hours-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Restaurant settings in the WordPress admin, on the Hours tab" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>Linnet on phones.</h3>
+			<p>The home page, the menus and the Journal.</p>
+			<img class="cutout" src="images/linnet-phones-1600.webp" srcset="images/linnet-phones-800.webp 800w, images/linnet-phones-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="Linnet on three phones: the home page, the menus and the Journal" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>Dishes are blocks.</h3>
+			<p>Each dish is a block in the WordPress editor, with its prices, dietary tags and allergens in the sidebar.</p>
+			<img src="images/maison-admin-editor-1600.jpg" srcset="images/maison-admin-editor-800.jpg 800w, images/maison-admin-editor-1600.jpg 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1000" alt="The WordPress editor with a dish selected on the menus page, its prices in the sidebar" loading="lazy" decoding="async">
+		</figure>
+	</div>
+</section>
+
+<section class="band black" id="bopf" aria-labelledby="bopf-title">
+	<div class="head">
+		<p class="eyebrow">BOPF</p>
+		<h2 id="bopf-title">Luxury, preloved.</h2>
+		<p>Emails, product pages and a concierge chat for Business of Preloved Fashion, a luxury preloved boutique in Dubai.</p>
+	</div>
+	<div class="tiles">
+		<figure class="tile wide">
+			<h3>The welcome email.</h3>
+			<p>The founder's note in the house template, in table-based HTML that holds up in every mail client.</p>
+			<img class="email-shot" src="images/bopf-welcome-email-1600.jpg" srcset="images/bopf-welcome-email-800.jpg 800w, images/bopf-welcome-email-1600.jpg 1600w" sizes="(min-width: 700px) 600px, 100vw" width="1600" height="1571" alt="BOPF welcome email: A note from Hadiza, the italic headline Welcome, a personal note and the founder's signature" loading="lazy" decoding="async">
+		</figure>
+	</div>
+</section>
+
+</main>
+
+<footer id="contact">
+	<div class="foot">
+		<p><a class="wordmark" href="#top">Ink &amp; Serif</a></p>
+		<p>Contact: <a href="mailto:ify@thebopf.com">ify@thebopf.com</a></p>
+		<p>Images are screenshots of the work. Sable's opener films were made with Higgsfield (AI); the demo photos are from Pexels.</p>
+	</div>
+</footer>
+
+<script>
+/* The bar turns dark over the opener, and the film starts once the page has
+   loaded, unless the visitor asks for less motion or to save data. */
+(function () {
+	var bar = document.querySelector('.bar');
+	var opener = document.querySelector('.opener');
+	var video = opener && opener.querySelector('video');
+	var button = opener && opener.querySelector('.opener-pause');
+	if (!opener) return;
+	if ('IntersectionObserver' in window) {
+		new IntersectionObserver(function (entries) {
+			bar.classList.toggle('on-film', entries[0].isIntersecting);
+		}, { rootMargin: '-48px 0px 0px 0px' }).observe(opener);
+	}
+	if (matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData)) return;
+	function start() {
+		// WebM where the browser plays it (half the size), MP4 everywhere else.
+		var file = matchMedia('(max-aspect-ratio: 4/5)').matches ? video.getAttribute('data-tall') : video.getAttribute('data-wide');
+		video.src = file + (video.canPlayType('video/webm; codecs="vp9"') ? '.webm' : '.mp4');
+		video.addEventListener('playing', function () {
+			video.classList.add('is-playing');
+			button.hidden = false;
+		}, { once: true });
+		var playing = video.play();
+		if (playing && playing.catch) playing.catch(function () {});
+	}
+	if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
+	button.addEventListener('click', function () {
+		var pause = !video.paused;
+		if (pause) video.pause(); else video.play();
+		button.classList.toggle('is-paused', pause);
+		button.setAttribute('aria-label', pause ? 'Play the film' : 'Pause the film');
+	});
+})();
+</script>
+</body>
+</html>

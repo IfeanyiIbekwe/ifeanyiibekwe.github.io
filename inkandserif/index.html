@@ -147,6 +147,19 @@ img { display: block; max-width: 100%; height: auto; }
 .tile .app-row img { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 0 0 1px var(--edge), 0 24px 48px -24px rgba(0, 0, 0, 0.6); }
 @media (max-width: 699px) { .app-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .tile .app-row img { border-radius: 12px; } }
 
+/* A half tile beside a taller one: a portrait crop of its picture fills the
+   height, kept to the top left, where the subject is. */
+@media (min-width: 900px) {
+	.tile.fill { display: flex; flex-direction: column; }
+	.tile.fill picture { display: block; flex: 1 1 0; min-height: 0; }
+	.tile.fill picture img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+}
+
+/* Two phones playing in step, one button for both. */
+.app-film { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 16px; max-width: 480px; margin: 0 auto; }
+.app-film video { display: block; flex: 0 1 232px; min-width: 0; width: 232px; height: auto; border-radius: 16px; background: #111111; box-shadow: 0 0 0 1px var(--edge), 0 24px 48px -24px rgba(0, 0, 0, 0.6); }
+@media (max-width: 699px) { .app-film { gap: 12px; } .app-film video { border-radius: 12px; } }
+
 /* A film playing in the middle phone of three; on small screens, alone. */
 .live { position: relative; }
 .live > img { display: block; width: 100%; height: auto; }
@@ -375,15 +388,25 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 			<p>Every piece measured by hand, with a studio viewing, a heart to save it and its specifications, set in Fraunces with a terracotta hand.</p>
 			<img src="images/bopf-product-1600.jpg" srcset="images/bopf-product-800.jpg 800w, images/bopf-product-1600.jpg 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1000" alt="BOPF product page for a Hermes Picotin 22 bag: its photos, the price, a card with its measurements and a button to view it at the studio" loading="lazy" decoding="async">
 		</figure>
-		<figure class="tile">
+		<figure class="tile fill">
 			<h3>Zaya, the concierge.</h3>
 			<p>A shopping concierge that knows the piece you are looking at and suggests where to go next. <span class="credit">Its replies are written by an AI model.</span></p>
-			<img src="images/bopf-zaya-1600.jpg" srcset="images/bopf-zaya-800.jpg 800w, images/bopf-zaya-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Zaya, the BOPF concierge, open on a product page: a greeting about the bag on screen and suggestion chips" loading="lazy" decoding="async">
+			<picture>
+				<source media="(min-width: 900px)" srcset="images/bopf-zaya-tall-720.jpg 720w, images/bopf-zaya-tall-1440.jpg 1440w" sizes="(min-width: 1164px) 460px, 40vw" width="1440" height="1800">
+				<img src="images/bopf-zaya-1600.jpg" srcset="images/bopf-zaya-800.jpg 800w, images/bopf-zaya-1600.jpg 1600w" sizes="100vw" width="1600" height="1000" alt="Zaya, the BOPF concierge, open on a product page: a greeting about the bag on screen and suggestion chips" loading="lazy" decoding="async">
+			</picture>
 		</figure>
 		<figure class="tile">
-			<h3>Specifications, set.</h3>
-			<p>Material, colour, condition and what comes in the box, in a quiet table beside the close-ups.</p>
-			<img src="images/bopf-specs-1600.jpg" srcset="images/bopf-specs-800.jpg 800w, images/bopf-specs-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="The details of the bag beside close-up photos: material, colour, size, condition, inclusions and measurements" loading="lazy" decoding="async">
+			<h3>iOS and Android.</h3>
+			<p>One app on two phones, in step: choosing houses, Three Looks, the daily edit, a piece up close, Zaya on how it wears, the Hermes Room, consigning and the Vault. <span class="credit">Zaya's reply is written by an AI model, and the Hermes Room's cover image is made with AI.</span></p>
+			<div class="app-film">
+				<video data-live="video/bopf-app-ios" muted loop playsinline preload="none" poster="video/bopf-app-ios-poster.jpg" width="480" height="1044" aria-label="BOPF on an iPhone, a silent film of 25 seconds, recorded from the app"></video>
+				<video data-live="video/bopf-app-android" muted loop playsinline preload="none" poster="video/bopf-app-android-poster.jpg" width="480" height="1066" aria-label="BOPF on an Android phone, the same 25 seconds, recorded from the app"></video>
+				<button class="live-toggle is-paused" type="button" aria-label="Play the film">
+					<svg class="pause" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="currentColor"/></svg>
+					<svg class="play" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8c0 .5.5.8.9.5l8.6-5.4c.4-.2.4-.8 0-1L3.9 1.1c-.4-.3-.9 0-.9.5z" fill="currentColor"/></svg>
+				</button>
+			</div>
 		</figure>
 		<figure class="tile wide">
 			<h3>On the phone.</h3>
@@ -458,9 +481,10 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 	});
 })();
 
-/* The phone film plays where it stands: it loads and starts when it comes into
-   view and stops when it leaves. Visitors who ask for less motion or to save
-   data, and anyone who pauses it, start it with its button instead. */
+/* The phone films play where they stand: each loads and starts when it comes
+   into view and stops when it leaves. Visitors who ask for less motion or to
+   save data, and anyone who pauses one, start it with its button instead.
+   Phones that share a button play in step with the first of them. */
 (function () {
 	var calm = matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData);
 	[].forEach.call(document.querySelectorAll('video[data-live]'), function (video) {
@@ -475,6 +499,12 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 		function show(paused) {
 			button.classList.toggle('is-paused', paused);
 			button.setAttribute('aria-label', paused ? 'Play the film' : 'Pause the film');
+		}
+		var lead = video.parentNode.querySelector('video[data-live]');
+		if (lead !== video) {
+			lead.addEventListener('timeupdate', function () {
+				if (!video.paused && Math.abs(video.currentTime - lead.currentTime) > 0.25) video.currentTime = lead.currentTime;
+			});
 		}
 		video.addEventListener('play', function () { show(false); });
 		video.addEventListener('pause', function () { show(true); });

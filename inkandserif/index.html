@@ -66,7 +66,8 @@ img { display: block; max-width: 100%; height: auto; }
 .bar nav { display: flex; gap: 28px; font-size: 13px; font-weight: 500; }
 .bar nav a { color: var(--bar-ink); opacity: 0.85; transition: color 0.4s ease; }
 .bar nav a:hover { opacity: 1; text-decoration: none; }
-@media (max-width: 480px) { .bar nav { gap: 18px; } }
+@media (max-width: 480px) { .bar nav { gap: 18px; } .bar nav .wide-only, .bar nav a[href="#contact"] { display: none; } }
+.wordmark, .bar nav a { white-space: nowrap; }
 
 /* Bands of the page, each centred. */
 .band { padding: 104px 22px; }
@@ -166,6 +167,13 @@ img { display: block; max-width: 100%; height: auto; }
 @media (max-width: 600px) { .tile { padding: 30px 22px 32px; border-radius: 22px; } .tile h3 { font-size: 24px; } }
 
 
+/* About: who makes the work, in four facts, two by two. */
+.facts { list-style: none; max-width: 1024px; margin: 0 auto; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.facts li { padding: 32px 30px 34px; border-radius: 28px; background: var(--tile); color: var(--muted); font-size: 17px; line-height: 1.4; }
+.facts strong { display: block; margin: 0 0 10px; color: var(--ink); font: 650 40px/1 var(--display); letter-spacing: -0.04em; }
+.about-more { text-align: center; margin: 44px 0 0; font-size: 17px; }
+@media (max-width: 760px) { .facts { grid-template-columns: minmax(0, 1fr); } .facts li { padding: 26px 24px 28px; border-radius: 22px; } }
+
 footer { background: var(--band); color: var(--muted); font-size: 12px; line-height: 1.5; padding: 28px 22px 44px; }
 .foot { max-width: 1024px; margin: 0 auto; }
 .foot p { margin: 0 0 8px; }
@@ -182,6 +190,7 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 			<a href="#maison">Maison</a>
 			<a href="#maison-core">Maison Core</a>
 			<a href="#bopf">BOPF</a>
+			<a class="wide-only" href="#about">About</a>
 			<a href="#contact">Contact</a>
 		</nav>
 	</div>
@@ -387,6 +396,21 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 			<img class="email-shot" src="images/bopf-welcome-email-1600.jpg" srcset="images/bopf-welcome-email-800.jpg 800w, images/bopf-welcome-email-1600.jpg 1600w" sizes="(min-width: 700px) 600px, 100vw" width="1600" height="1571" alt="BOPF welcome email: A note from Hadiza, the italic headline Welcome, a personal note and the founder's signature" loading="lazy" decoding="async">
 		</figure>
 	</div>
+</section>
+
+<section class="band" id="about" aria-labelledby="about-title">
+	<div class="head">
+		<p class="eyebrow">About</p>
+		<h2 id="about-title">From the restaurant side.</h2>
+		<p>I'm Ify (Ifeanyi Ibekwe), in Dubai. I lead marketing at Jumeirah Marsa Al Arab, and before that I was digital lead for more than twenty luxury dining venues at Madinat Jumeirah. I also co-founded BOPF and built its platform myself. Maison puts what I learned filling tables into a theme: fast pages, clear menus and a booking button that never gets in the way.</p>
+	</div>
+	<ul class="facts">
+		<li><strong>20+</strong>luxury dining venues as digital lead at Madinat Jumeirah, with 15% revenue growth year on year.</li>
+		<li><strong>50 Best</strong>Marketing manager at Jumeirah Marsa Al Arab, one of The World's 50 Best Hotels 2025.</li>
+		<li><strong>Built solo</strong>BOPF's storefront, app and AI concierge, on about a dozen systems working as one.</li>
+		<li><strong>WordPress</strong>Full builds for independent businesses, from the site's architecture to a working checkout with payments and buy now, pay later.</li>
+	</ul>
+	<p class="about-more"><a href="https://ifeanyiibekwe.github.io/">More about my work</a></p>
 </section>
 
 </main>

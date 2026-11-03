@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ink &amp; Serif: WordPress themes</title>
-<meta name="description" content="Ink &amp; Serif is Ify's studio for WordPress block themes. Maison, a restaurant theme, and work for BOPF, a luxury preloved boutique in Dubai.">
+<title>Ink &amp; Serif: WordPress and Shopify themes</title>
+<meta name="description" content="Ink &amp; Serif is Ify's studio for WordPress and Shopify themes: Maison, a restaurant theme; Barathea, a theme for fashion houses; and work for BOPF, a luxury preloved boutique in Dubai.">
 <link rel="canonical" href="https://ifeanyiibekwe.github.io/inkandserif/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ink &amp; Serif: WordPress themes">
-<meta property="og:description" content="Ify's studio for WordPress block themes: Maison, and work for BOPF.">
+<meta property="og:title" content="Ink &amp; Serif: WordPress and Shopify themes">
+<meta property="og:description" content="Ify's studio for WordPress and Shopify themes: Maison, Barathea, and work for BOPF.">
 <meta property="og:url" content="https://ifeanyiibekwe.github.io/inkandserif/">
 <meta property="og:image" content="https://ifeanyiibekwe.github.io/inkandserif/video/sable-opener-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -66,7 +66,9 @@ img { display: block; max-width: 100%; height: auto; }
 .bar nav { display: flex; gap: 28px; font-size: 13px; font-weight: 500; }
 .bar nav a { color: var(--bar-ink); opacity: 0.85; transition: color 0.4s ease; }
 .bar nav a:hover { opacity: 1; text-decoration: none; }
-@media (max-width: 480px) { .bar nav { gap: 18px; } .bar nav .wide-only, .bar nav a[href="#contact"] { display: none; } }
+@media (max-width: 600px) { .bar nav .wide-only, .bar nav a[href="#contact"] { display: none; } }
+@media (max-width: 480px) { .bar nav { gap: 18px; } }
+@media (max-width: 389px) { .bar nav a[href="#maison-core"] { display: none; } }
 .wordmark, .bar nav a { white-space: nowrap; }
 
 /* Bands of the page, each centred. */
@@ -113,6 +115,7 @@ img { display: block; max-width: 100%; height: auto; }
 .feature { max-width: 1120px; margin: 0 auto; }
 .shot { border-radius: 18px; box-shadow: 0 0 0 1px var(--edge), 0 40px 80px -40px rgba(0, 0, 0, 0.35); }
 .caption { text-align: center; font-size: 14px; color: var(--muted); max-width: 640px; margin: 22px auto 0; }
+.feature + .tiles { margin-top: 56px; }
 
 /* Tiles, two to a row on wide screens. */
 .tiles { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
@@ -143,9 +146,6 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* App store screens in a row; two by two on phones. */
-.app-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.tile .app-row img { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 0 0 1px var(--edge), 0 24px 48px -24px rgba(0, 0, 0, 0.6); }
-@media (max-width: 699px) { .app-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .tile .app-row img { border-radius: 12px; } }
 
 /* A half tile beside a taller one: a portrait crop of its picture fills the
    height, kept to the top left, where the subject is. */
@@ -175,16 +175,20 @@ img { display: block; max-width: 100%; height: auto; }
 	.live-phone { position: relative; left: auto; top: auto; width: min(86%, 340px); height: auto; margin: 0 auto; }
 	.live-phone video { height: auto; aspect-ratio: 390 / 844; }
 }
-.tile .email-shot { max-width: min(100%, 600px); margin-inline: auto; }
 .credit { display: block; margin-top: 8px; font-size: 12px; }
 @media (max-width: 600px) { .tile { padding: 30px 22px 32px; border-radius: 22px; } .tile h3 { font-size: 24px; } }
 
 
 /* About: who makes the work, in four facts, two by two. */
+.stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.stats li { color: var(--muted); font-size: 15px; line-height: 1.4; }
+.stats strong { display: block; margin: 0 0 10px; color: var(--ink); font: 650 40px/1 var(--display); letter-spacing: -0.04em; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; } }
 .facts { list-style: none; max-width: 1024px; margin: 0 auto; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .facts li { padding: 32px 30px 34px; border-radius: 28px; background: var(--tile); color: var(--muted); font-size: 17px; line-height: 1.4; }
 .facts strong { display: block; margin: 0 0 10px; color: var(--ink); font: 650 40px/1 var(--display); letter-spacing: -0.04em; }
 .about-more { text-align: center; margin: 44px 0 0; font-size: 17px; }
+.head-actions { margin-top: 24px; font-size: 19px; }
 @media (max-width: 760px) { .facts { grid-template-columns: minmax(0, 1fr); } .facts li { padding: 26px 24px 28px; border-radius: 22px; } }
 
 footer { background: var(--band); color: var(--muted); font-size: 12px; line-height: 1.5; padding: 28px 22px 44px; }
@@ -202,6 +206,7 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 		<nav aria-label="Sections">
 			<a href="#maison">Maison</a>
 			<a href="#maison-core">Maison Core</a>
+			<a href="#barathea">Barathea</a>
 			<a href="#bopf">BOPF</a>
 			<a class="wide-only" href="#about">About</a>
 			<a href="#contact">Contact</a>
@@ -219,8 +224,8 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 	<video class="opener-media" muted loop playsinline preload="none" aria-hidden="true" data-wide="video/sable-opener" data-tall="video/sable-opener-phone"></video>
 	<div class="opener-shade"></div>
 	<div class="opener-text">
-		<h1 id="hero-title">Made for WordPress.</h1>
-		<p class="lead">Block themes for restaurants and independent businesses, designed and built by Ify at Ink &amp; Serif.</p>
+		<h1 id="hero-title">Made for WordPress and Shopify.</h1>
+		<p class="lead">Themes for restaurants, fashion houses and independent businesses, designed and built by Ify at Ink &amp; Serif.</p>
 		<div class="actions">
 			<a class="button" href="mailto:ify@thebopf.com">Get in touch</a>
 			<a class="more" href="#maison">See the work</a>
@@ -239,6 +244,10 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 		<p class="eyebrow">Maison</p>
 		<h2 id="maison-title">A theme for restaurants.</h2>
 		<p>A block theme for restaurants, built on core WordPress blocks: Light and Dark versions, palettes and type pairings chosen in WordPress's own Styles, and two demos to start from, Sable and Linnet.</p>
+		<div class="actions head-actions">
+			<a class="more" href="https://maison-demo-yzgk.onrender.com/sable/">Visit the Sable demo</a>
+			<a class="more" href="https://maison-demo-yzgk.onrender.com/linnet/">Visit the Linnet demo</a>
+		</div>
 	</div>
 	<figure class="feature">
 		<img class="shot" src="images/sable-home-light-1600.jpg" srcset="images/sable-home-light-800.jpg 800w, images/sable-home-light-1600.jpg 1600w" sizes="(min-width: 1164px) 1120px, 100vw" width="1600" height="1000" alt="Sable home page in the Light version: the headline Fire, salt and patience beside a framed film of the kitchen">
@@ -361,28 +370,47 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 	</div>
 </section>
 
+<section class="band grey" id="barathea" aria-labelledby="barathea-title">
+	<div class="head">
+		<p class="eyebrow">Barathea</p>
+		<h2 id="barathea-title">A theme for fashion houses.</h2>
+		<p>An original Shopify theme for fashion houses and multi-designer boutiques, coming to the Shopify Theme Store. Two looks: Barathea, white pages with dark ink sections, and Plaster, square-cut for shops of many designers.</p>
+	</div>
+	<figure class="feature">
+		<img src="images/barathea-ostrel-home-1600.webp" srcset="images/barathea-ostrel-home-800.webp 800w, images/barathea-ostrel-home-1600.webp 1600w" sizes="(min-width: 1164px) 1120px, 100vw" width="1600" height="1070" alt="Ostrel, a demo shop in the Plaster look, on a desktop and a phone: Bags and shoes, chosen designer by designer, beside a seated figure with a black bag" loading="lazy" decoding="async">
+		<figcaption class="caption">Plaster, on Ostrel, an invented bags and shoes shop. Its photography was made with Higgsfield (AI).</figcaption>
+	</figure>
+	<div class="tiles">
+		<figure class="tile">
+			<h3>The index.</h3>
+			<p>Designers, lines and menus as a list of names, with one picture that follows the pointer or keyboard focus.</p>
+			<img src="images/barathea-index-1600.jpg" srcset="images/barathea-index-800.jpg 800w, images/barathea-index-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="Ostrel's designers as an index of names, Odrane pointed at and its cream shoulder bag shown beside the list" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile">
+			<h3>Client care, in context.</h3>
+			<p>One panel for a person, from the header, the product, a sold-out size, a card or the bag, already naming the product, size and style code.</p>
+			<img src="images/barathea-care-1600.jpg" srcset="images/barathea-care-800.jpg 800w, images/barathea-care-1600.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1600" height="1000" alt="An Ostrel product page, Sandal 90, with Client care open: About: Sandal 90, EU 38, Style TS-3012-BLK-38, then call, email and the size guide" loading="lazy" decoding="async">
+		</figure>
+		<figure class="tile wide">
+			<h3>Original code.</h3>
+			<p>The first version read as a resale site, so I rebuilt every page from zero, with a jewelry house's website as a reference for pacing only. No code from Dawn, Horizon or any other theme.</p>
+			<ul class="stats">
+				<li><strong>65</strong>sections, with 16 theme blocks and 28 templates</li>
+				<li><strong>105</strong>theme settings, across two looks</li>
+				<li><strong>22</strong>steps checked before every commit; Shopify's Theme Check finds no problems in 226 files</li>
+				<li><strong>22.3 KB</strong>of CSS and 17.7 KB of JavaScript on the home page</li>
+			</ul>
+		</figure>
+	</div>
+</section>
+
 <section class="band black" id="bopf" aria-labelledby="bopf-title">
 	<div class="head">
 		<p class="eyebrow">BOPF</p>
 		<h2 id="bopf-title">Luxury, preloved.</h2>
-		<p>An app for iOS and Android, product pages, a concierge chat, campaign art and emails for Business of Preloved Fashion, a luxury preloved boutique in Dubai.</p>
+		<p>An app for iOS and Android, product pages and a concierge chat for Business of Preloved Fashion, a luxury preloved boutique in Dubai.</p>
 	</div>
 	<div class="tiles">
-		<figure class="tile wide">
-			<h3>Campaign art.</h3>
-			<p>Covers for the editorial emails and the store: the Festive Gift Guide, Chanel and Louis Vuitton. <span class="credit">Made with AI.</span></p>
-			<img class="cutout" src="images/bopf-campaigns-1600.webp" srcset="images/bopf-campaigns-800.webp 800w, images/bopf-campaigns-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="727" alt="Three campaign images: a woman in red velvet holding a black Hermes bag, a woman in a cream jacket with a Chanel bag on a Paris rooftop at dusk, and a woman with a red Louis Vuitton bag in the dunes" loading="lazy" decoding="async">
-		</figure>
-		<figure class="tile wide">
-			<h3>The app.</h3>
-			<p>BOPF on iOS and Android: a daily edit from the houses you follow, the whole boutique to filter, every piece authenticated, and an alert the moment a watched piece drops in price or comes back. Shown: its Google Play screens.</p>
-			<div class="app-row">
-				<img src="images/bopf-app-edit-800.jpg" srcset="images/bopf-app-edit-400.jpg 400w, images/bopf-app-edit-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="BOPF's store screen Your edit, every day: the home feed, with search, house filters and a Christian Dior bag" loading="lazy" decoding="async">
-				<img src="images/bopf-app-filter-800.jpg" srcset="images/bopf-app-filter-400.jpg 400w, images/bopf-app-filter-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="Store screen Filter the whole boutique: Hermes pieces in a grid, with filters and a price drop marked" loading="lazy" decoding="async">
-				<img src="images/bopf-app-authenticated-800.jpg" srcset="images/bopf-app-authenticated-400.jpg 400w, images/bopf-app-authenticated-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="Store screen Every piece authenticated: the product page of a Christian Dior Book Tote at AED 6,660" loading="lazy" decoding="async">
-				<img src="images/bopf-app-watch-800.jpg" srcset="images/bopf-app-watch-400.jpg 400w, images/bopf-app-watch-800.jpg 800w" sizes="(min-width: 1164px) 245px, (min-width: 700px) 22vw, 44vw" width="800" height="1422" alt="Store screen Watch a piece: the Vault, the pieces a customer watches for a price drop or a restock" loading="lazy" decoding="async">
-			</div>
-		</figure>
 		<figure class="tile wide">
 			<h3>The product page.</h3>
 			<p>Every piece measured by hand, with a studio viewing, a heart to save it and its specifications, set in Fraunces with a terracotta hand.</p>
@@ -408,16 +436,6 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 				</button>
 			</div>
 		</figure>
-		<figure class="tile wide">
-			<h3>On the phone.</h3>
-			<p>The product page, its specifications and Zaya, made for one hand.</p>
-			<img class="cutout" src="images/bopf-phones-1600.webp" srcset="images/bopf-phones-800.webp 800w, images/bopf-phones-1600.webp 1600w" sizes="(min-width: 1164px) 1032px, 100vw" width="1600" height="1110" alt="BOPF on three phones: the product page, its specifications and Zaya" loading="lazy" decoding="async">
-		</figure>
-		<figure class="tile wide">
-			<h3>The welcome email.</h3>
-			<p>The founder's note in the house template, in table-based HTML that holds up in every mail client.</p>
-			<img class="email-shot" src="images/bopf-welcome-email-1600.jpg" srcset="images/bopf-welcome-email-800.jpg 800w, images/bopf-welcome-email-1600.jpg 1600w" sizes="(min-width: 700px) 600px, 100vw" width="1600" height="1571" alt="BOPF welcome email: A note from Hadiza, the italic headline Welcome, a personal note and the founder's signature" loading="lazy" decoding="async">
-		</figure>
 	</div>
 </section>
 
@@ -441,8 +459,8 @@ footer { background: var(--band); color: var(--muted); font-size: 12px; line-hei
 <footer id="contact">
 	<div class="foot">
 		<p><a class="wordmark" href="#top">Ink &amp; Serif</a></p>
-		<p>Ify's studio for WordPress themes. Contact: <a href="mailto:ify@thebopf.com">ify@thebopf.com</a></p>
-		<p>Images are screenshots of the work. Sable's opener films were made with Higgsfield (AI), and BOPF's campaign art with AI; the Maison demo photos are from Pexels; the BOPF product photos are BOPF's own.</p>
+		<p>Ify's studio for WordPress and Shopify themes. Contact: <a href="mailto:ify@thebopf.com">ify@thebopf.com</a></p>
+		<p>Images are screenshots of the work. Sable's opener films and Barathea's demo photography were made with Higgsfield (AI); the Maison demo photos are from Pexels; the BOPF product photos are BOPF's own.</p>
 	</div>
 </footer>
 
